@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Cadastro de Garanhão</title>
+    <style>
+		body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        /* Estilos para o container do formulário */
+        .form-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			margin-top: 10px;
+			margin-bottom: 10px;
+            max-width: 900px;
+            width: 100%;
+            border-top: 4px solid #C0C0C0;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #343a40;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+
+        .form-row {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .saldo-info {
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 2.2;
+        }
+
+        .form-control {
+            border-radius: 8px;
+        }
+
+        .btn {
+            border-radius: 50px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+        }
+
+        .btn-sm {
+            font-size: 14px;
+            padding: 10px 20px;
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .text-muted {
+            color: #6c757d !important;
+        }
+
+        .label-info {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .custom-divider {
+            margin: 10px 0;
+            border-top: 1px solid #e1e1e1;
+        }
+		/* Ajuste para o Navbar */
+        .navbar {
+            font-size: 1rem; /* Define o tamanho da fonte */
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            font-size: 1.2rem; /* Define o tamanho da fonte dos itens do menu */
+            padding: 0.5rem 1rem; /* Ajusta o espaçamento dos itens */
+        }
+
+        .navbar-toggler {
+            border: none;
+        }
+
+        .navbar-brand img {
+            width: 250px;
+            height: 80px; /* Ajuste o tamanho do logo */
+        }
+
+        .navbar-nav {
+            margin-left: auto; /* Alinha os itens à direita para centralizar */
+        }
+
+        .navbar-collapse {
+            justify-content: center; /* Centraliza o conteúdo do menu */
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: #fff; /* Cor dos itens de navegação */
+        }
+
+        /* Ajuste no campo de pesquisa */
+        .form-inline .form-control {
+            font-size: 1rem; /* Tamanho da fonte do campo de pesquisa */
+        }
+
+        .form-inline .btn {
+            font-size: 1rem; /* Tamanho da fonte do botão */
+        }
+
+    </style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	    <div class="container">
+	        <!-- Logo à esquerda -->
+	        <a class="navbar-brand" href="#">
+	            <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png" width="250" height="80" class="d-inline-block align-top" alt="">
+	        </a>
+
+	        <!-- Botão do menu responsivo -->
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
+
+	        <!-- Div vazia para centralizar o menu de navegação -->
+	        <div class="d-none d-lg-flex flex-grow-1"></div>
+
+	        <!-- Conteúdo centralizado -->
+	        <div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
+	            <ul class="navbar-nav">
+	                <li class="nav-item active">
+	                    <a class="nav-link" href="/administrativo">Home <span class="sr-only">(página atual)</span></a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="#">Link</a>
+	                </li>
+	                <li class="nav-item dropdown">
+	                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                        Dropdown
+	                    </a>
+	                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	                        <a class="dropdown-item" href="#">Ação</a>
+	                        <a class="dropdown-item" href="#">Outra ação</a>
+	                        <div class="dropdown-divider"></div>
+	                        <a class="dropdown-item" href="#">Algo mais aqui</a>
+	                    </div>
+	                </li>
+	            </ul>
+	        </div>
+
+	        <!-- Campo de pesquisa à direita -->
+	        <form class="form-inline my-2 my-lg-0">
+	            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+	            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
+	        </form>
+	    </div>
+	</nav>
+    <div class="col-12 d-flex justify-content-center">  
+        <div class="form-container" style="width: 100%; max-width: 900px;">
+            <form action="/administrativo/garanhoes/salvar" th:object="${garanhao}" method="POST">
+                <h2 class="text-center">Cadastro de Sêmen</h2>
+				<div class="custom-divider"></div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label>Nome do Garanhão</label>
+                        <input type="text" required th:field="*{nome_garanhao}" class="form-control"/>
+                    </div>
+					<div class="col-md-6 mb-3">
+					    <label>Cor da Palheta</label>
+					    <select required th:field="*{cor_palheta}" class="form-control">
+					        <option value="" disabled selected>Escolha uma cor</option>
+					        <option value="Azul">Azul</option>
+					        <option value="Vermelho">Vermelho</option>
+					        <option value="Verde">Verde</option>
+					        <option value="Amarelo">Amarelo</option>
+					        <option value="Preto">Preto</option>
+					        <option value="Branco">Branco</option>
+					        <option value="Cinza">Cinza</option>
+					        <option value="Laranja">Laranja</option>
+					    </select>
+					</div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Botijão</label>
+                        <input type="number" required th:field="*{botijao}" class="form-control"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Data da Contagem Inicial</label>
+                        <input type="date" required th:field="*{data_contagem_inicial}" class="form-control"/> 
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Caneca</label>
+                        <input type="number" required th:field="*{caneca}" class="form-control"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Saldo Atual de Palhetas</label>
+                        <input type="number " required readonly="true" th:field="*{saldo_atual_palhetas}" class="form-control"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Saldo Inicial de Palhetas</label>
+                        <input type="number" required th:field="*{saldo_inicial_palhetas}" class="form-control"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="hidden" required readonly="true" th:field="*{data_cadastro}" th:value="${#dates.format(data_cadastro, 'dd/MM/yyyy HH:mm:ss')}" class="form-control"/>
+                    </div>
+                </div>
+                <input type="hidden" th:field="*{id_garanhao}"/>
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="/administrativo" class="btn btn-danger btn-sm"> <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i> Voltar</a>
+                    <a href="/administrativo/garanhoes/listar" class="btn btn-primary btn-sm"> <i class="fa-solid fa-bars-staggered" style="color: #ffffff;"></i> Listar</a>
+                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa-solid fa-plus" style="color: #ffffff;"></i> <i class="fa-solid fa-horse-head" style="color: #ffffff;"></i> Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="watermark">LucasSales@2024</div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYQk3l0Uks7txk2NlXXaw58+3bh" crossorigin="anonymous"></script>
+</body>
+</html>
