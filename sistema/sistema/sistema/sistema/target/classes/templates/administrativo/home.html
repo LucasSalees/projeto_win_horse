@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>HOME#</title>
+	
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .text-center {
+            color: #333;
+        }
+
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-header {
+            font-size: 1.5rem;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .list-group-item {
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .list-group-item:hover {
+            background-color: #D3D3D3;
+            cursor: pointer;
+        }
+
+        .list-group-item i {
+            margin-right: 8px;
+        }
+
+        .card-header.bg-primary {
+            background-color: #007bff !important;
+        }
+
+        .card-header.bg-success {
+            background-color: #28a745 !important;
+        }
+
+        h1.display-4 {
+            font-weight: 700;
+            color: #343a40;
+        }
+
+        h4 {
+            font-weight: 600;
+        }
+
+        .mb-4 {
+            margin-bottom: 30px;
+        }
+		.form-control {
+            border-radius: 8px;
+        }
+		.btn {
+            border-radius: 50px;
+        }
+
+        /* Ajuste para o Navbar */
+        .navbar {
+            font-size: 1rem; /* Define o tamanho da fonte */
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            font-size: 1.2rem; /* Define o tamanho da fonte dos itens do menu */
+            padding: 0.5rem 1rem; /* Ajusta o espaçamento dos itens */
+        }
+
+        .navbar-toggler {
+            border: none;
+        }
+
+        .navbar-brand img {
+            width: 250px;
+            height: 80px; /* Ajuste o tamanho do logo */
+        }
+
+        .navbar-nav {
+            margin-left: auto; /* Alinha os itens à direita para centralizar */
+        }
+
+        .navbar-collapse {
+            justify-content: center; /* Centraliza o conteúdo do menu */
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: #fff; /* Cor dos itens de navegação */
+        }
+
+        /* Ajuste no campo de pesquisa */
+        .form-inline .form-control {
+            font-size: 1rem; /* Tamanho da fonte do campo de pesquisa */
+        }
+
+        .form-inline .btn {
+            font-size: 1rem; /* Tamanho da fonte do botão */
+        }
+		
+		.watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+		.container-fluid {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+			margin-bottom: 10px;
+            max-width: 1030px;
+            width: 100%;
+            border-top: 4px solid #C0C0C0;
+        }
+		
+		.row {
+		    display: -ms-flexbox;
+		    display: flex;
+		    -ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
+		    margin-right: -60px;
+		    margin-left: -60px;
+		}
+
+        /* Responsividade */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                justify-content: flex-start; /* Ajusta a posição para dispositivos menores */
+            }
+        }
+    </style>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		    <div class="container">
+		        <!-- Logo à esquerda -->
+		        <a class="navbar-brand" href="#">
+		            <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png" width="250" height="80" class="d-inline-block align-top" alt="">
+		        </a>
+
+		        <!-- Botão do menu responsivo -->
+		        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+		            <span class="navbar-toggler-icon"></span>
+		        </button>
+
+		        <!-- Div vazia para centralizar o menu de navegação -->
+		        <div class="d-none d-lg-flex flex-grow-1"></div>
+
+		        <!-- Conteúdo centralizado -->
+		        <div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
+		            <ul class="navbar-nav">
+		                <li class="nav-item active">
+		                    <a class="nav-link" href="/administrativo">Home <span class="sr-only">(página atual)</span></a>
+		                </li>
+		                <li class="nav-item">
+		                    <a class="nav-link" href="#">Link</a>
+		                </li>
+		                <li class="nav-item dropdown">
+		                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                        Dropdown
+		                    </a>
+		                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		                        <a class="dropdown-item" href="#">Ação</a>
+		                        <a class="dropdown-item" href="#">Outra ação</a>
+		                        <div class="dropdown-divider"></div>
+		                        <a class="dropdown-item" href="#">Algo mais aqui</a>
+		                    </div>
+		                </li>
+		            </ul>
+		        </div>
+
+		        <!-- Campo de pesquisa à direita -->
+		        <form class="form-inline my-2 my-lg-0">
+		            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+		            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
+		        </form>
+		    </div>
+		</nav>
+		
+
+<div class="container-fluid" style="width: 100%; max-width: 1000px;">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8"> 
+            <!-- Cabeçalho de boas-vindas -->
+            <div class="text-center mb-4">
+                <h1 class="display-4 font-weight-bold">Bem-vindo ao Sistema de Controle de Sêmen</h1>
+                <p class="lead">Acesse os cadastros e listas abaixo para gerenciar os registros.</p>
+            </div>
+
+            <!-- Seção de Cadastros e Listas -->
+            <div class="row">
+                <!-- Box de Cadastros -->
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header text-center bg-primary text-white">
+                            <h4>Cadastros</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                
+                                <a href="/administrativo/garanhoes/cadastro" class="list-group-item list-group-item-action">
+                                    <i class="fa-solid fa-arrow-right"></i> Efetuar Cadastro de Sêmen
+                                </a>
+								
+								<a href="/administrativo/movimentacoes/cadastro" class="list-group-item list-group-item-action">
+                                    <i class="fa-solid fa-arrow-right"></i> Efetuar Movimentação
+                                </a>
+								
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Box de Listas -->
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header text-center bg-success text-white">
+                            <h4>Listas</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <a href="/administrativo/garanhoes/listar" class="list-group-item list-group-item-action">
+                                    <i class="fa-solid fa-list"></i> Listas de Sêmen de Cavalos
+                                </a>
+                                <a href="/administrativo/movimentacoes/listar" class="list-group-item list-group-item-action">
+                                    <i class="fa-solid fa-list"></i> Listar Movimentações de Sêmen
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer com copyright -->
+<div class="watermark">LucasSales@2024</div>
+
+<!-- Scripts do Bootstrap e FontAwesome -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-oP6nL7y/x2f3WzZJX4h8epM/6FLreOpAZmEzGdbmkTbfa9w8TwgFQem1mZZa5AGd" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-mlHdxHpx0Q0XJjPvWVxIlhtZ7lTzZTjlO/mxJdA+EzUn0wmbpCRzz6j41PshzMgs" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-WyU9OitIRo+aZmNvh6g06HgjtOVtDeQ7/hpr2NSgi86+PO5wQOR25HttBlpa++CTBxdsL1Bb0G99jtpESprmnA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
