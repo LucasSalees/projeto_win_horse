@@ -205,22 +205,22 @@
                     </div>
 					<div class="col-md-6 mb-3">
 					    <label>Cor da Palheta</label>
-					    <select required th:field="*{cor_palheta}" class="form-control">
-					        <option value="" disabled selected>Escolha uma cor</option>
-					        <option value="Azul">Azul</option>
-					        <option value="Vermelho">Vermelho</option>
-					        <option value="Verde">Verde</option>
-					        <option value="Amarelo">Amarelo</option>
-					        <option value="Preto">Preto</option>
-					        <option value="Branco">Branco</option>
-					        <option value="Cinza">Cinza</option>
-					        <option value="Laranja">Laranja</option>
-					    </select>
+						<select required th:field="*{cor_palheta}" class="form-control">
+						    <option value="">Escolha uma cor</option>
+						    <option value="Azul">Azul</option>
+						    <option value="Vermelho">Vermelho</option>
+						    <option value="Verde">Verde</option>
+						    <option value="Amarelo">Amarelo</option>
+						    <option value="Preto">Preto</option>
+						    <option value="Branco">Branco</option>
+						    <option value="Cinza">Cinza</option>
+						    <option value="Laranja">Laranja</option>
+						</select>
 					</div>
 
                     <div class="col-md-6 mb-3">
                         <label>Botijão</label>
-                        <input type="number" required th:field="*{botijao}" class="form-control"/>
+                        <input type="number" required th:field="*{botijao}" class="form-control" />
                     </div>
                     <div class="col-md-6 mb-3">
                         <label>Data da Contagem Inicial</label>
@@ -242,6 +242,7 @@
                         <input type="hidden" required readonly="true" th:field="*{data_cadastro}" th:value="${#dates.format(data_cadastro, 'dd/MM/yyyy HH:mm:ss')}" class="form-control"/>
                     </div>
                 </div>
+				<div class="custom-divider"></div>
                 <input type="hidden" th:field="*{id_garanhao}"/>
                 <div class="d-flex justify-content-between mt-4">
                     <a href="/administrativo" class="btn btn-danger btn-sm"> <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i> Voltar</a>

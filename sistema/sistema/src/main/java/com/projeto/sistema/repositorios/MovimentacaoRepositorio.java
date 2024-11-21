@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.projeto.sistema.modelos.Movimentacao;
 
 public interface MovimentacaoRepositorio extends JpaRepository<Movimentacao, Long> {
-
+	
 }

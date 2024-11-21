@@ -226,30 +226,37 @@
                     <div class="col-12 col-md-6">
                         <label for="garanhaoSelect" class="label-info">Selecione o Garanhão</label>
                         <select id="garanhaoSelect" th:field="*{garanhao}" class="form-control" required>
-                            <option value="" disabled selected>Escolha um Garanhão</option>
+                            <option value="" >Escolha um Garanhão</option>
                             <option th:each="gar : ${listarGaranhoes}" th:value="${gar.id_garanhao}" th:text="${gar.nome_garanhao}"></option>
                         </select>
                     </div>
 					<div class="col-12 col-md-6">
 					    <div class="form-group d-flex align-items-center">
 					        <label for="quantidade" class="label-info mb-0">Quantidade de Palhetas</label>
-					        <div id="saldo-info" style="margin-left: 139px; font-size: 13px">Restam <span id="saldo-atual-palhetas">15</span> palhetas</div>
+					        <div id="saldo-info" style="margin-left: 139px; font-size: 13px">Restam <span id="saldo-atual-palhetas">0</span> palhetas</div>
 					    </div>
-					    <input type="number" required id="quantidade" class="form-control" min="1" max="15" />
+					    <input type="number" required id="quantidade" th:field="*{quantidade}" class="form-control" min="1" max="saldo-atual-palhetas" />
 					</div>
                 </div>
 
                 <!-- Botijão, Data da Movimentação Inputs -->
-                <div class="form-row">
-                    <div class="col-12 col-md-6">
-                        <label for="botijao" class="label-info">Número do Botijão</label>
-                        <input type="text" id="botijao" th:field="*{botijao}" class="form-control" readonly/>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <label for="destino" class="label-info">Destino</label>
-                        <input type="text" required th:field="*{destino}" class="form-control" placeholder="Informe o destino" />
-                    </div>
-                </div>
+				<div class="form-row">
+				    <div class="col-12 col-md-6">
+				        <label for="botijao" class="label-info">Número do Botijão</label>
+				        <input type="text" id="botijao" th:field="*{botijao}" class="form-control" readonly/>
+				    </div>
+					<div class="col-12 col-md-6">
+	                        <label for="destino" class="label-info">Destino</label>
+	                        <select id="destino" th:field="*{destino}" class="form-control" onchange="mostrarCampoAdicional()" required>
+	                            <option value="" >Escolha um destino</option>
+	                            <option value="venda">Venda</option>
+	                            <option value="uso_interno">Uso Interno</option>
+	                            <option value="transferencia">Transferência</option>
+	                        </select>
+	                    </div>
+					</div>
+					
+					
 
                 <!-- Caneca Input -->
                 <div class="form-row">
@@ -258,8 +265,24 @@
                         <input type="text" id="caneca" th:field="*{caneca}" class="form-control" readonly/>
                     </div>
                     <div class="col-12 col-md-6">
-                        <label for="data_movimentacao" class="label-info">Data da Movimentação</label>
-                        <input type="text" readonly="true" th:field="*{data_movimentacao}" th:value="${#dates.format(data_movimentacao, 'dd/MM/yyyy HH:mm:ss')}" class="form-control"/>
+						<!-- Campo adicional para "Venda" -->
+						<div class="form-group" id="campoVenda" style="display: none;">
+						    <label for="campoTextoVenda" class="label-info">Digite informações para venda:</label>
+						    <input type="text" id="campoTextoVenda" th:field="*{endereco}" name="campoTextoVenda" class="form-control" required/>
+						</div>
+
+						<!-- Campo adicional para "Uso Interno" -->
+						<div class="form-group" id="campoUsoInterno" style="display: none;">
+						    <label for="campoTextoUsoInterno" class="label-info">Digite nome da égua:</label>
+						    <input type="text" id="campoTextoUsoInterno" th:field="*{endereco}" name="campoTextoUsoInterno" class="form-control" required/>
+						</div>
+
+						<!-- Campo adicional para "Transferência" -->
+						<div class="form-group" id="campoTransferencia" style="display: none;">
+						    <label for="campoTextoTransferencia" class="label-info">Digite o endereço:</label>
+						    <input type="text" id="campoTextoTransferencia" th:field="*{endereco}" name="campoTextoTransferencia" class="form-control" required/>
+						</div>
+                        
                     </div>
                 </div>
 
@@ -269,8 +292,16 @@
                         <label for="cor_palheta" class="label-info">Cor da Palheta</label>
                         <input type="text" id="cor_palheta" th:field="*{cor_palheta}" class="form-control" readonly/>
                     </div>
+					
+						<div class="col-12 col-md-6">
+						<label for="data_movimentacao" class="label-info">Data da Movimentação</label>
+						<input type="text" readonly="true" th:field="*{data_movimentacao}" th:value="${#dates.format(data_movimentacao, 'dd/MM/yyyy HH:mm:ss')}" class="form-control"/>
+						</div>
+						
+					
                 </div>
-
+				
+				
                 <div class="custom-divider"></div>
 
                 <!-- Buttons -->
@@ -350,9 +381,28 @@
 		        }
 		    });
 
-		    // Simulação: se o saldo mudar por outro motivo
-		    document.getElementById('saldo-atual-palhetas').textContent = "12"; // Exemplo de atualização
-		    atualizarMaximo(); // Atualiza o limite sempre que o saldo muda
+			function mostrarCampoAdicional() {
+			    const destino = document.getElementById("destino").value;
+			    const campos = {
+			        venda: "campoVenda",
+			        uso_interno: "campoUsoInterno",
+			        transferencia: "campoTransferencia",
+			    };
+
+			    // Esconde todos os campos adicionais
+			    Object.values(campos).forEach(id => document.getElementById(id).style.display = "none");
+
+			    // Mostra o campo correspondente
+			    if (campos[destino]) {
+			        const campoAtivo = document.getElementById(campos[destino]);
+			        campoAtivo.style.display = "block";
+
+			        // Limpar vírgulas ao alterar o valor do campo
+			        campoAtivo.addEventListener("input", function() {
+			            this.value = this.value.replace(",", "").trim(); // Remove vírgulas e espaços extras
+			        });
+			    }
+			}
     </script>
 </body>
 </html>

@@ -226,6 +226,7 @@
                         <th class="text-center">Quantidade</th>
                         <th class="text-center">Data da Movimentação</th>
                         <th class="text-center">Destino</th>
+						<th class="text-center">Endereço</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
@@ -238,6 +239,7 @@
                         <td class="text-center" th:text="${movimentacao.quantidade}"></td>
                         <td class="text-center" th:text="${#temporals.format(movimentacao.data_movimentacao, 'dd/MM/yyyy HH:mm')}"></td>
                         <td class="text-center" th:text="${movimentacao.destino}"></td>
+						<td class="text-center" th:text="${movimentacao.endereco}"></td>
                         <td>
                             <a th:href="@{/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}">
                                 <i class="fa-regular fa-pen-to-square" style="color: #001eff;"></i>

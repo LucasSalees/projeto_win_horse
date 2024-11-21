@@ -23,8 +23,9 @@ public class Movimentacao implements Serializable {
     private int botijao;
     private int caneca;
     private String cor_palheta;
+    private String endereco;
 
-    private LocalDateTime data_movimentacao = LocalDateTime.now(); // Data e hora da movimentação
+	private LocalDateTime data_movimentacao = LocalDateTime.now(); // Data e hora da movimentação
     private String destino; // Ex: "entrada" ou "saida"
     private int quantidade;
 
@@ -34,6 +35,13 @@ public class Movimentacao implements Serializable {
     private String nome_garanhao; // Nome do garanhão associado à movimentação
     
     // Getters e Setters
+    public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
 
     public Long getId_movimentacao() {
         return id_movimentacao;
