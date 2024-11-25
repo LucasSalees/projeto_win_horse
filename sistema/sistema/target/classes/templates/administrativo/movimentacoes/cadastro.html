@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
-    <title>Movimentações</title>
+    <title>CM</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -169,7 +169,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	    <div class="container">
+		<div class="container">
 	        <!-- Logo à esquerda -->
 	        <a class="navbar-brand" href="#">
 	            <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png" width="250" height="80" class="d-inline-block align-top" alt="">
@@ -193,9 +193,7 @@
 	                    <a class="nav-link" href="#">Link</a>
 	                </li>
 	                <li class="nav-item dropdown">
-	                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                        Dropdown
-	                    </a>
+	                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
 	                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 	                        <a class="dropdown-item" href="#">Ação</a>
 	                        <a class="dropdown-item" href="#">Outra ação</a>
@@ -245,19 +243,27 @@
 				        <label for="botijao" class="label-info">Número do Botijão</label>
 				        <input type="text" id="botijao" th:field="*{botijao}" class="form-control" readonly/>
 				    </div>
+					
 					<div class="col-12 col-md-6">
-	                        <label for="destino" class="label-info">Destino</label>
-	                        <select id="destino" th:field="*{destino}" class="form-control" onchange="mostrarCampoAdicional()" required>
-	                            <option value="" >Escolha um destino</option>
-	                            <option value="venda">Venda</option>
-	                            <option value="uso_interno">Uso Interno</option>
-	                            <option value="transferencia">Transferência</option>
-	                        </select>
+                        <label for="destino" class="label-info">Destino</label>
+						<div id="destino" class="form-control" >
+	
+							<label>
+					            <input required type="radio" name="destino" value="venda" onclick="mostrarCampoAdicional()"> Venda
+					        </label>
+	
+							<label>
+					            <input required type="radio" name="destino" value="uso_interno" onclick="mostrarCampoAdicional()"> Uso Interno
+					        </label>
+							
+					        <label>
+					            <input required type="radio" name="destino" value="transferencia" onclick="mostrarCampoAdicional()"> Transferência
+					        </label>
+                        
 	                    </div>
 					</div>
+				</div>
 					
-					
-
                 <!-- Caneca Input -->
                 <div class="form-row">
                     <div class="col-12 col-md-6">
@@ -265,26 +271,14 @@
                         <input type="text" id="caneca" th:field="*{caneca}" class="form-control" readonly/>
                     </div>
                     <div class="col-12 col-md-6">
-						<!-- Campo adicional para "Venda" -->
-						<div class="form-group" id="campoVenda" style="display: none;">
-						    <label for="campoTextoVenda" class="label-info">Digite informações para venda:</label>
-						    <input type="text" id="campoTextoVenda" th:field="*{endereco}" name="campoTextoVenda" class="form-control" required/>
-						</div>
-
-						<!-- Campo adicional para "Uso Interno" -->
-						<div class="form-group" id="campoUsoInterno" style="display: none;">
-						    <label for="campoTextoUsoInterno" class="label-info">Digite nome da égua:</label>
-						    <input type="text" id="campoTextoUsoInterno" th:field="*{endereco}" name="campoTextoUsoInterno" class="form-control" required/>
-						</div>
-
-						<!-- Campo adicional para "Transferência" -->
-						<div class="form-group" id="campoTransferencia" style="display: none;">
-						    <label for="campoTextoTransferencia" class="label-info">Digite o endereço:</label>
-						    <input type="text" id="campoTextoTransferencia" th:field="*{endereco}" name="campoTextoTransferencia" class="form-control" required/>
-						</div>
+						<div id="campo-adicional" style="display: none;">
+						    <label for="info-adicional" class="label-info">Informação Adicional</label>
+						    <input required type="text" th:field="*{endereco}" id="info-adicional" class="form-control" placeholder="Preencha as informações">
+						</div>	
                         
                     </div>
                 </div>
+				
 
                 <!-- Cor da Palheta Input -->
                 <div class="form-row">
@@ -298,13 +292,10 @@
 						<input type="text" readonly="true" th:field="*{data_movimentacao}" th:value="${#dates.format(data_movimentacao, 'dd/MM/yyyy HH:mm:ss')}" class="form-control"/>
 						</div>
 						
-					
                 </div>
-				
 				
                 <div class="custom-divider"></div>
 
-                <!-- Buttons -->
                 <div class="d-flex justify-content-between mt-3">
                     <a href="/administrativo" class="btn btn-danger btn-sm">
                         <i class="fa-solid fa-rotate-left"></i> Voltar
@@ -397,10 +388,47 @@
 			        const campoAtivo = document.getElementById(campos[destino]);
 			        campoAtivo.style.display = "block";
 
-			        // Limpar vírgulas ao alterar o valor do campo
-			        campoAtivo.addEventListener("input", function() {
-			            this.value = this.value.replace(",", "").trim(); // Remove vírgulas e espaços extras
+			        // Limpar vírgulas duplicadas ao alterar o valor do campo
+			        campoAtivo.addEventListener("input", function () {
+			            this.value = limparValor(this.value);
 			        });
+			    }
+			}
+
+			// Função para limpar o valor
+			function limparValor(valor) {
+			    return valor
+			        .replace(/,+/g, ",") // Substitui múltiplas vírgulas consecutivas por uma só
+			        .replace(/^,|,$/g, "") // Remove vírgulas do início e do fim da string
+			        .trim(); // Remove espaços no início e no fim
+			}
+
+			// Exemplo de função para salvar no banco de dados
+			function salvarDados() {
+			    const venda = limparValor(document.getElementById("campoVenda").value);
+			    const usoInterno = limparValor(document.getElementById("campoUsoInterno").value);
+			    const transferencia = limparValor(document.getElementById("campoTransferencia").value);
+
+			    console.log("Venda:", venda);
+			    console.log("Uso Interno:", usoInterno);
+			    console.log("Transferência:", transferencia);
+
+			    // Aqui você faria o envio dos valores limpos para o banco de dados
+			    // Exemplo:
+			    // enviarParaBanco(venda, usoInterno, transferencia);
+			}
+			function mostrarCampoAdicional() {
+			    // Obtém o valor do destino selecionado
+			    const destinoSelecionado = document.querySelector('input[name="destino"]:checked').value;
+
+			    // Seleciona o campo adicional
+			    const campoAdicional = document.getElementById("campo-adicional");
+
+			    // Exibe o campo adicional para qualquer destino selecionado
+			    if (destinoSelecionado === "venda" || destinoSelecionado === "uso_interno" || destinoSelecionado === "transferencia") {
+			        campoAdicional.style.display = "block"; // Mostra o campo adicional
+			    } else {
+			        campoAdicional.style.display = "none"; // Oculta o campo adicional
 			    }
 			}
     </script>

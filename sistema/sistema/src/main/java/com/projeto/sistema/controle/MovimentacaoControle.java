@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.spring6.expression.Mvc;
 
 import com.projeto.sistema.modelos.Garanhao;
 import com.projeto.sistema.modelos.Movimentacao;
@@ -50,7 +52,6 @@ public class MovimentacaoControle {
         return cadastrar(movimentacao.orElse(new Movimentacao()));
     }
 
- // Salvar uma nova movimentação
     @PostMapping("/salvarMovimentacao")
     public ModelAndView salvarMovimentacao(Movimentacao movimentacao) {
         // Buscar o garanhão pelo ID
@@ -68,47 +69,26 @@ public class MovimentacaoControle {
 
             // Atualizar o saldo do garanhão
             garanhao.setSaldo_atual_palhetas(novaQuantidade);
-            garanhaoRepositorio.save(garanhao);  // Salvar a atualização no saldo do garanhão
+            garanhaoRepositorio.save(garanhao); // Salvar a atualização no saldo do garanhão
         }
 
         // Preencher os novos campos na movimentação
         movimentacao.setNome_garanhao(garanhao.getNome_garanhao());
         movimentacao.setData_movimentacao(LocalDateTime.now());
 
-        // Atribuir o valor do destino na movimentação
-        String destino = movimentacao.getDestino(); // Verifica qual destino foi escolhido
-        movimentacao.setDestino(destino); // Garantir que o destino seja salvo
+        // Garantir que apenas o destino selecionado pelo usuário seja salvo
+        String destinoSelecionado = movimentacao.getDestino();
+        if (destinoSelecionado != null && !destinoSelecionado.trim().isEmpty()) {
+            movimentacao.setDestino(destinoSelecionado.trim()); // Remove espaços e salva apenas o destino válido
+        } else {
+            movimentacao.setDestino(null); // Se nenhum destino for selecionado, define como null
+        }
 
-        // Salvar movimentação no banco, sempre que o destino for diferente de null ou vazio
+        // Salvar movimentação no banco
         movimentacaoRepositorio.save(movimentacao);
 
-        // Lógica para o redirecionamento para a lista de movimentações, independentemente do destino
+        // Redirecionar para a lista de movimentações
         return new ModelAndView("redirect:/administrativo/movimentacoes/listar");
-    }
-
-
-    // Formulário para venda
-    @GetMapping("/administrativo/movimentacoes/vendaFormulario")
-    public ModelAndView vendaFormulario() {
-        ModelAndView mv = new ModelAndView("/administrativo/movimentacoes/vendaFormulario");
-        mv.addObject("venda", new Object()); // Passar os dados necessários para o formulário de venda
-        return mv;
-    }
-
-    // Formulário para uso interno
-    @GetMapping("/administrativo/movimentacoes/usoInternoFormulario")
-    public ModelAndView usoInternoFormulario() {
-        ModelAndView mv = new ModelAndView("/administrativo/movimentacoes/usoInternoFormulario");
-        mv.addObject("usoInterno", new Object()); // Passar os dados necessários para o formulário de uso interno
-        return mv;
-    }
-
-    // Formulário para transferência
-    @GetMapping("/administrativo/movimentacoes/transferenciaFormulario")
-    public ModelAndView transferenciaFormulario() {
-        ModelAndView mv = new ModelAndView("/administrativo/movimentacoes/transferenciaFormulario");
-        mv.addObject("transferencia", new Object()); // Passar os dados necessários para o formulário de transferência
-        return mv;
     }
 
     // Remover uma movimentação pelo ID
@@ -117,4 +97,6 @@ public class MovimentacaoControle {
         movimentacaoRepositorio.deleteById(id_movimentacao);
         return listarMovimentacoes(); // Após remover, exibe a lista de movimentações
     }
+    
+    
 }
