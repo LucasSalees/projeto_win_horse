@@ -7,16 +7,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.spring6.expression.Mvc;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projeto.sistema.modelos.Garanhao;
 import com.projeto.sistema.modelos.Movimentacao;
 import com.projeto.sistema.repositorios.GaranhaoRepositorio;
 import com.projeto.sistema.repositorios.MovimentacaoRepositorio;
+
+import org.springframework.ui.Model;
 
 @Controller
 public class MovimentacaoControle {
@@ -45,11 +47,32 @@ public class MovimentacaoControle {
         return mv;
     }
 
-    // Editar uma movimentação específica pelo ID
-    @GetMapping("/editarMovimentacao/{id_movimentacao}")
-    public ModelAndView editar(@PathVariable("id_movimentacao") Long id_movimentacao) {
+    @GetMapping("/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}")
+    public String editar(@PathVariable("id_movimentacao") Long id_movimentacao, Model model) {
         Optional<Movimentacao> movimentacao = movimentacaoRepositorio.findById(id_movimentacao);
-        return cadastrar(movimentacao.orElse(new Movimentacao()));
+        
+        // Se a movimentação for encontrada, exibe a página de edição
+        if (movimentacao.isPresent()) {
+            model.addAttribute("movimentacao", movimentacao.get()); // Adiciona o objeto movimentacao ao modelo
+            model.addAttribute("nome_garanhao", movimentacao.get().getGaranhao().getNome_garanhao()); // Adiciona o nome do garanhão ao modelo
+            model.addAttribute("endereco", movimentacao.get().getEndereco());
+            return "administrativo/movimentacoes/eventoMovimentacao"; // Retorna para a página de edição (evento.html dentro de administrativo)
+        }
+        
+        // Caso não encontre a movimentação, redireciona para a lista de movimentações
+        return "redirect:/administrativo/movimentacoes/listar";
+    }
+
+
+
+
+
+
+    // Remover uma movimentação pelo ID
+    @GetMapping("/removerMovimentacao/{id_movimentacao}")
+    public ModelAndView remover(@PathVariable("id_movimentacao") Long id_movimentacao) {
+        movimentacaoRepositorio.deleteById(id_movimentacao);
+        return listarMovimentacoes(); // Após remover, exibe a lista de movimentações
     }
 
     @PostMapping("/salvarMovimentacao")
@@ -90,13 +113,56 @@ public class MovimentacaoControle {
         // Redirecionar para a lista de movimentações
         return new ModelAndView("redirect:/administrativo/movimentacoes/listar");
     }
+    
+    @PostMapping("/administrativo/movimentacoes/editarMovimentacao")
+    public String salvarEdicaoMovimentacao(@ModelAttribute("movimentacao") Movimentacao movimentacao, RedirectAttributes redirectAttributes) {
+        // Buscar a movimentação existente pelo ID
+        Optional<Movimentacao> movimentacaoExistenteOpt = movimentacaoRepositorio.findById(movimentacao.getId_movimentacao());
+        
+        if (movimentacaoExistenteOpt.isPresent()) {
+            Movimentacao movimentacaoExistente = movimentacaoExistenteOpt.get();
 
-    // Remover uma movimentação pelo ID
-    @GetMapping("/removerMovimentacao/{id_movimentacao}")
-    public ModelAndView remover(@PathVariable("id_movimentacao") Long id_movimentacao) {
-        movimentacaoRepositorio.deleteById(id_movimentacao);
-        return listarMovimentacoes(); // Após remover, exibe a lista de movimentações
+            // Obter o garanhão associado à movimentação
+            Garanhao garanhao = movimentacaoExistente.getGaranhao();
+            if (garanhao == null) {
+                redirectAttributes.addFlashAttribute("mensagemErro", "Garanhão associado à movimentação não encontrado.");
+                return "redirect:/administrativo/movimentacoes/listar";
+            }
+
+            // Calcular a diferença entre a quantidade antiga e a nova
+            int quantidadeAntiga = movimentacaoExistente.getQuantidade();
+            int diferenca = movimentacao.getQuantidade() - quantidadeAntiga;
+
+            // Atualizar o saldo do garanhão
+            int novoSaldo = garanhao.getSaldo_atual_palhetas() - diferenca;
+
+            if (novoSaldo < 0) {
+                // Se o saldo for insuficiente
+                redirectAttributes.addFlashAttribute("mensagemErro", "Saldo insuficiente para ajustar a movimentação.");
+                return "redirect:/administrativo/movimentacoes/listar";
+            }
+
+            garanhao.setSaldo_atual_palhetas(novoSaldo);
+
+            // Atualizar os campos editáveis da movimentação
+            movimentacaoExistente.setNome_garanhao(movimentacao.getNome_garanhao());
+            movimentacaoExistente.setQuantidade(movimentacao.getQuantidade());
+            movimentacaoExistente.setDestino(movimentacao.getDestino());
+            movimentacaoExistente.setEndereco(movimentacao.getEndereco());
+
+            // Salvar as atualizações no banco de dados
+            movimentacaoRepositorio.save(movimentacaoExistente);
+            garanhaoRepositorio.save(garanhao);
+
+            // Mensagem de sucesso
+            redirectAttributes.addFlashAttribute("mensagemSucesso", "Movimentação atualizada com sucesso.");
+            return "redirect:/administrativo/movimentacoes/listar"; // Redireciona para a lista de movimentações
+        } else {
+            // Caso a movimentação não seja encontrada
+            redirectAttributes.addFlashAttribute("mensagemErro", "Movimentação não encontrada.");
+            return "redirect:/administrativo/movimentacoes/listar";
+        }
     }
-    
-    
+
+
 }

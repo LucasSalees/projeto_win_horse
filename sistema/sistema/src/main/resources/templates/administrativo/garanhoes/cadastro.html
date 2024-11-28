@@ -30,7 +30,7 @@
         }
 
         h2 {
-            font-size: 28px;
+            font-size: 32px;
             color: #343a40;
             font-weight: bold;
             margin-bottom: 20px;
@@ -193,70 +193,78 @@
 	        </form>
 	    </div>
 	</nav>
-    <div class="col-12 d-flex justify-content-center">  
-        <div class="form-container" style="width: 100%; max-width: 900px;">
-            <form action="/administrativo/garanhoes/salvar" th:object="${garanhao}" method="POST">
-                <h2 class="text-center">Cadastro de Sêmen</h2>
-				<div class="custom-divider"></div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label>Nome do Garanhão</label>
-                        <input type="text" required th:field="*{nome_garanhao}" class="form-control"/>
-                    </div>
-					<div class="col-md-6 mb-3">
-					    <label>Cor da Palheta</label>
-						<select required th:field="*{cor_palheta}" class="form-control">
-						    <option value="">Escolha uma cor</option>
-						    <option value="Azul">Azul</option>
-						    <option value="Vermelho">Vermelho</option>
-						    <option value="Verde">Verde</option>
-						    <option value="Amarelo">Amarelo</option>
-						    <option value="Preto">Preto</option>
-						    <option value="Branco">Branco</option>
-						    <option value="Cinza">Cinza</option>
-						    <option value="Laranja">Laranja</option>
-						</select>
-					</div>
+<div class="container d-flex justify-content-center align-items-center">
+	<div class="form-container" style="width: 100%; max-width: 900px;">
+	    <form action="/administrativo/garanhoes/salvar" th:object="${garanhao}" method="POST">
+			<div class="d-flex align-items-center justify-content-between mb-3">
+    			<a href="/administrativo" style="font-size: 32px; color: #343a40;">
+				<i class="fa-regular fa-circle-left"></i> 
+			    </a>
+			    <h2 class="m-0 text-center flex-grow-1">Cadastro de Sêmen</h2>
+			    <div style="width: 100px;"></div> <!-- Espaçador para alinhamento -->
+			</div>
+						
+			<div class="custom-divider"></div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Nome do Garanhão</label>
+                    <input type="text" required th:field="*{nome_garanhao}" class="form-control"/>
+                </div>
+				<div class="col-md-6 mb-3">
+				    <label>Cor da Palheta</label>
+					<select required th:field="*{cor_palheta}" class="form-control">
+					    <option value="">Escolha uma cor</option>
+					    <option value="Azul">Azul</option>
+					    <option value="Vermelho">Vermelho</option>
+					    <option value="Verde">Verde</option>
+					    <option value="Amarelo">Amarelo</option>
+					    <option value="Preto">Preto</option>
+					    <option value="Branco">Branco</option>
+					    <option value="Cinza">Cinza</option>
+					    <option value="Laranja">Laranja</option>
+					</select>
+				</div>
 
-                    <div class="col-md-6 mb-3">
-                        <label>Botijão</label>
-                        <input type="number" required th:field="*{botijao}" class="form-control" />
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label>Data da Contagem Inicial</label>
-                        <input type="date" required th:field="*{data_contagem_inicial}" class="form-control"/> 
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label>Caneca</label>
-                        <input type="number" required th:field="*{caneca}" class="form-control"/>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label>Saldo Atual de Palhetas</label>
-                        <input type="number " required readonly="true" th:field="*{saldo_atual_palhetas}" class="form-control"/>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label>Saldo Inicial de Palhetas</label>
-                        <input type="number" required th:field="*{saldo_inicial_palhetas}" class="form-control"/>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <input type="hidden" required readonly="true" th:field="*{data_cadastro}" th:value="${#dates.format(data_cadastro, 'dd/MM/yyyy HH:mm:ss')}" class="form-control"/>
-                    </div>
+                <div class="col-md-6 mb-3">
+                    <label>Botijão</label>
+                    <input type="number" required th:field="*{botijao}" class="form-control" />
                 </div>
-				<div class="custom-divider"></div>
-                <input type="hidden" th:field="*{id_garanhao}"/>
-                <div class="d-flex justify-content-between mt-4">
-                    <a href="/administrativo" class="btn btn-danger btn-sm"> <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i> Voltar</a>
-                    <a href="/administrativo/garanhoes/listar" class="btn btn-primary btn-sm"> <i class="fa-solid fa-bars-staggered" style="color: #ffffff;"></i> Listar</a>
-                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa-solid fa-plus" style="color: #ffffff;"></i> <i class="fa-solid fa-horse-head" style="color: #ffffff;"></i> Cadastrar</button>
+                <div class="col-md-6 mb-3">
+                    <label>Data da Contagem Inicial</label>
+                    <input type="date" required th:field="*{data_contagem_inicial}" class="form-control"/> 
                 </div>
-            </form>
-        </div>
+                <div class="col-md-6 mb-3">
+                    <label>Caneca</label>
+                    <input type="number" required th:field="*{caneca}" class="form-control"/>
+                </div>
+                <div class="col-md-6 mb-3">
+					<input type="hidden" th:field="*{saldo_atual_palhetas}" class="form-control"/>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Saldo Inicial de Palhetas</label>
+                    <input type="number" required th:field="*{saldo_inicial_palhetas}" class="form-control"/>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input type="hidden" required readonly="true" th:field="*{data_cadastro}" th:value="${#dates.format(data_cadastro, 'dd/MM/yyyy HH:mm:ss')}" class="form-control"/>
+                </div>
+            </div>
+			<div class="custom-divider"></div>
+            <input type="hidden" th:field="*{id_garanhao}"/>
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/administrativo" class="btn btn-danger btn-sm"> <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i> Voltar</a>
+                <a href="/administrativo/garanhoes/listar" class="btn btn-primary btn-sm"> <i class="fa-solid fa-bars-staggered" style="color: #ffffff;"></i> Listar</a>
+                <button type="submit" class="btn btn-success btn-sm"> <i class="fa-solid fa-plus" style="color: #ffffff;"></i> <i class="fa-solid fa-horse-head" style="color: #ffffff;"></i> Cadastrar</button>
+            </div>
+        </form>
     </div>
+</div>
 
-    <div class="watermark">LucasSales@2024</div>
+	<div class="watermark">LucasSales@2024</div>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYQk3l0Uks7txk2NlXXaw58+3bh" crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYQk3l0Uks7txk2NlXXaw58+3bh" crossorigin="anonymous"></script>
 </body>
+
 </html>

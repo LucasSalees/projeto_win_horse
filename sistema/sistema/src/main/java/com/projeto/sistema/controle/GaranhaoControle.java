@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.projeto.sistema.modelos.Garanhao;
+
 import com.projeto.sistema.repositorios.GaranhaoRepositorio;
 
 @Controller
@@ -41,11 +43,49 @@ public class GaranhaoControle {
     }
 
     // Editar um garanhão específico pelo ID
-    @GetMapping("/administrativo/garanhoes/editar/{id_garanhao}")
-    public ModelAndView editar(@PathVariable("id_garanhao") Long id_garanhao) {
-        Optional<Garanhao> garanhao = garanhaoRepositorio.findById(id_garanhao);
-        return cadastrar(garanhao.orElse(new Garanhao()));
+    @GetMapping("/administrativo/garanhoes/eventoGaranhao/editarGaranhao/{id_garanhao}")
+    public String editar(@PathVariable("id_garanhao") Long id_garanhao, Model model) {
+        Optional<Garanhao> Garanhao = garanhaoRepositorio.findById(id_garanhao);
+        
+     // Se a movimentação for encontrada, exibe a página de edição
+        if (Garanhao.isPresent()) {
+            model.addAttribute("garanhao", Garanhao.get()); // Adiciona o objeto movimentacao ao modelo
+            model.addAttribute("nome_garanhao", Garanhao.get().getNome_garanhao()); // Adiciona o nome do garanhão ao modelo
+            return "administrativo/garanhoes/eventoGaranhao"; // Retorna para a página de edição (evento.html dentro de administrativo)
+        }
+     // Caso não encontre a movimentação, redireciona para a lista de movimentações
+        return "redirect:/administrativo/garanhoes/listar";
     }
+    
+    @PostMapping("/administrativo/garanhoes/eventoGaranhao/editarGaranhao/{id_garanhao}")
+    public String salvarEdicao(@PathVariable("id_garanhao") Long id_garanhao, @ModelAttribute Garanhao garanhaoAtualizado) {
+        // Busca o garanhão existente no banco de dados
+        Optional<Garanhao> garanhaoExistente = garanhaoRepositorio.findById(id_garanhao);
+
+        if (garanhaoExistente.isPresent()) {
+            Garanhao garanhao = garanhaoExistente.get();
+            
+            // Atualiza apenas os campos que podem ser alterados
+            garanhao.setNome_garanhao(garanhaoAtualizado.getNome_garanhao());
+            garanhao.setCor_palheta(garanhaoAtualizado.getCor_palheta());
+            garanhao.setBotijao(garanhaoAtualizado.getBotijao());
+            garanhao.setSaldo_inicial_palhetas(garanhaoAtualizado.getSaldo_inicial_palhetas());
+            garanhao.setCaneca(garanhaoAtualizado.getCaneca());
+            garanhao.setData_contagem_inicial(garanhaoAtualizado.getData_contagem_inicial());
+            garanhao.setData_cadastro(garanhaoAtualizado.getData_cadastro());
+            garanhao.setSaldo_atual_palhetas(garanhaoAtualizado.getSaldo_atual_palhetas());
+            
+
+            // Salva as alterações no banco de dados
+            garanhaoRepositorio.save(garanhao);
+        }
+
+        // Redireciona para a lista de garanhões após a edição
+        return "redirect:/administrativo/garanhoes/listar";
+    }
+
+
+    
 
     @PostMapping("/administrativo/garanhoes/salvar")
     public ModelAndView salvar(@ModelAttribute Garanhao garanhao, BindingResult result) {
