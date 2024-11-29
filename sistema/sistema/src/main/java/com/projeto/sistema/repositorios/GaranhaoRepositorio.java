@@ -6,5 +6,5 @@ import com.projeto.sistema.modelos.Garanhao;
 
 @Repository
 public interface GaranhaoRepositorio extends JpaRepository<Garanhao, Long> {
-    // Você pode adicionar consultas personalizadas aqui, se necessário
+    
 }

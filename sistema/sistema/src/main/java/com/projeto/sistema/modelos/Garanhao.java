@@ -107,8 +107,8 @@ public class Garanhao implements Serializable {
         return data_cadastro;
     }
 
-    public void setData_cadastro(LocalDateTime data_cadastro) {
-        this.data_cadastro = data_cadastro;
+    public void setData_cadastro(LocalDateTime localDateTime) {
+        this.data_cadastro = localDateTime;
     }
 
     public int getSaldo_inicial_palhetas() {

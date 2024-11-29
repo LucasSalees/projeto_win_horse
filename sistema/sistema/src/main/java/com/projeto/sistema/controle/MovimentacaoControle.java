@@ -63,11 +63,6 @@ public class MovimentacaoControle {
         return "redirect:/administrativo/movimentacoes/listar";
     }
 
-
-
-
-
-
     // Remover uma movimentação pelo ID
     @GetMapping("/removerMovimentacao/{id_movimentacao}")
     public ModelAndView remover(@PathVariable("id_movimentacao") Long id_movimentacao) {
@@ -163,6 +158,4 @@ public class MovimentacaoControle {
             return "redirect:/administrativo/movimentacoes/listar";
         }
     }
-
-
 }

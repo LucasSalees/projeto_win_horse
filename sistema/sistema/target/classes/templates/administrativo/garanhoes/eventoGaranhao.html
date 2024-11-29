@@ -217,7 +217,7 @@
 <!-- Main Content -->
 <div class="container d-flex justify-content-center align-items-center">
 	    <div class="form-container" style="width: 100%; max-width: 900px;">
-        <form action="/salvarGaranhao" th:object="${garanhao}" method="POST" id="garanhaoForm">
+			<form action="/administrativo/garanhoes/editarGaranhao" th:object="${garanhao}" method="POST" id="garanhaoForm">
 			
 			<div class="d-flex align-items-center justify-content-between mb-3">
 				<a href="/administrativo/garanhoes/listar" style="font-size: 32px; color: #343a40;">
@@ -263,7 +263,7 @@
 				
 				<div class="col-12 col-md-6">
 					<label for="data_contagem_inicial" class="label-info">Data contagem incial</label>
-					<input type="text" th:field="*{data_contagem_inicial}" th:value="${#dates.format(data_contagem_inicial, 'dd/MM/yyyy')}" class="form-control" readonly/>
+					<input type="date" required th:field="*{data_contagem_inicial}" th:value="${#dates.format(data_contagem_inicial, 'dd/MM/yyyy')}" class="form-control"/>
 				</div>
 			</div>
 				
@@ -304,8 +304,9 @@
 					 <a href="#" class="btn btn-warning btn-sm text-white"><i class="fa-solid fa-print"></i> Imprimir</a>
 					 
                 <button type="submit" class="btn btn-success btn-sm">
-                    <i class="fa-solid fa-plus"></i> Editar Movimentação
+                    <i class="fa-solid fa-plus"></i> Editar Garanhão
                 </button>
+				<input type="hidden" th:field="*{id_garanhao}" />
             </div>
         </form>
     </div>

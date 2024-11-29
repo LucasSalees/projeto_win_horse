@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projeto.sistema.modelos.Garanhao;
 
@@ -57,35 +58,56 @@ public class GaranhaoControle {
         return "redirect:/administrativo/garanhoes/listar";
     }
     
-    @PostMapping("/administrativo/garanhoes/eventoGaranhao/editarGaranhao/{id_garanhao}")
-    public String salvarEdicao(@PathVariable("id_garanhao") Long id_garanhao, @ModelAttribute Garanhao garanhaoAtualizado) {
-        // Busca o garanhão existente no banco de dados
-        Optional<Garanhao> garanhaoExistente = garanhaoRepositorio.findById(id_garanhao);
+    @PostMapping("/administrativo/garanhoes/editarGaranhao")
+    public String salvarEdicaoGaranhao(@ModelAttribute("garanhao") Garanhao garanhao, RedirectAttributes redirectAttributes) {
+        // Buscar o garanhão existente pelo ID
+        Optional<Garanhao> garanhaoExistenteOpt = garanhaoRepositorio.findById(garanhao.getId_garanhao());
+        
+        if (garanhaoExistenteOpt.isPresent()) {
+            Garanhao garanhaoExistente = garanhaoExistenteOpt.get();
 
-        if (garanhaoExistente.isPresent()) {
-            Garanhao garanhao = garanhaoExistente.get();
-            
-            // Atualiza apenas os campos que podem ser alterados
-            garanhao.setNome_garanhao(garanhaoAtualizado.getNome_garanhao());
-            garanhao.setCor_palheta(garanhaoAtualizado.getCor_palheta());
-            garanhao.setBotijao(garanhaoAtualizado.getBotijao());
-            garanhao.setSaldo_inicial_palhetas(garanhaoAtualizado.getSaldo_inicial_palhetas());
-            garanhao.setCaneca(garanhaoAtualizado.getCaneca());
-            garanhao.setData_contagem_inicial(garanhaoAtualizado.getData_contagem_inicial());
-            garanhao.setData_cadastro(garanhaoAtualizado.getData_cadastro());
-            garanhao.setSaldo_atual_palhetas(garanhaoAtualizado.getSaldo_atual_palhetas());
-            
+            // Garantir que o saldo inicial não seja negativo
+            if (garanhao.getSaldo_inicial_palhetas() < 0) {
+                redirectAttributes.addFlashAttribute("mensagemErro", "O saldo de palhetas não pode ser negativo.");
+                return "redirect:/administrativo/garanhoes/listar";
+            }
 
-            // Salva as alterações no banco de dados
-            garanhaoRepositorio.save(garanhao);
+            // Verifique se há alteração no saldo inicial
+            int saldoInicialAnterior = garanhaoExistente.getSaldo_inicial_palhetas();
+            int saldoAtualAnterior = garanhaoExistente.getSaldo_atual_palhetas();
+
+            // Atualiza o saldo inicial
+            garanhaoExistente.setSaldo_inicial_palhetas(garanhao.getSaldo_inicial_palhetas());
+
+            // Se o saldo inicial foi alterado, ajusta o saldo atual
+            if (saldoInicialAnterior != garanhaoExistente.getSaldo_inicial_palhetas()) {
+                int diferenca = garanhaoExistente.getSaldo_inicial_palhetas() - saldoInicialAnterior;
+                garanhaoExistente.setSaldo_atual_palhetas(saldoAtualAnterior + diferenca);
+            }
+
+            // Atualizar os outros campos do garanhão
+            garanhaoExistente.setNome_garanhao(garanhao.getNome_garanhao());
+            garanhaoExistente.setCor_palheta(garanhao.getCor_palheta());
+            
+            // Atualiza as datas
+            // A data de cadastro é a data atual
+            garanhaoExistente.setData_cadastro(LocalDateTime.now());  // Data atual
+            // A data de contagem inicial é fornecida pelo usuário
+            garanhaoExistente.setData_contagem_inicial(garanhao.getData_contagem_inicial());
+
+            // Salvar as atualizações no banco de dados
+            garanhaoRepositorio.save(garanhaoExistente);
+
+            // Mensagem de sucesso
+            redirectAttributes.addFlashAttribute("mensagemSucesso", "Garanhão atualizado com sucesso.");
+            return "redirect:/administrativo/garanhoes/listar"; // Redireciona para a lista de garanhões
+        } else {
+            // Caso o garanhão não seja encontrado
+            redirectAttributes.addFlashAttribute("mensagemErro", "Garanhão não encontrado.");
+            return "redirect:/administrativo/garanhoes/listar";
         }
-
-        // Redireciona para a lista de garanhões após a edição
-        return "redirect:/administrativo/garanhoes/listar";
     }
 
-
-    
 
     @PostMapping("/administrativo/garanhoes/salvar")
     public ModelAndView salvar(@ModelAttribute Garanhao garanhao, BindingResult result) {
@@ -120,16 +142,11 @@ public class GaranhaoControle {
         return new ModelAndView("redirect:/administrativo/garanhoes/listar");  // Redireciona para a listagem após salvar
     }
 
-    // Remover um garanhão pelo ID
-    @GetMapping("/administrativo/garanhoes/remover/{id_garanhao}")
+    // Remover uma movimentação pelo ID
+    @GetMapping("/removerGaranhao/{id_garanhao}")
     public ModelAndView remover(@PathVariable("id_garanhao") Long id_garanhao) {
-        try {
-            garanhaoRepositorio.deleteById(id_garanhao);
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Adicione um mecanismo de mensagem de erro aqui, se necessário
-        }
-        return listarGaranhoes();
+        garanhaoRepositorio.deleteById(id_garanhao);
+        return listarGaranhoes(); // Após remover, exibe a lista de movimentações
     }
 
     @PostMapping("/administrativo/garanhoes/ajustarSaldo")
@@ -188,4 +205,5 @@ public class GaranhaoControle {
 
         return response;
     }
+
 }
