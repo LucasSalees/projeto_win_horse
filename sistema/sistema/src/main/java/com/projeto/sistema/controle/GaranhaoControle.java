@@ -3,6 +3,7 @@ package com.projeto.sistema.controle;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,7 @@ public class GaranhaoControle {
     public String salvarEdicaoGaranhao(@ModelAttribute("garanhao") Garanhao garanhao, RedirectAttributes redirectAttributes) {
         // Buscar o garanhão existente pelo ID
         Optional<Garanhao> garanhaoExistenteOpt = garanhaoRepositorio.findById(garanhao.getId_garanhao());
-        
+
         if (garanhaoExistenteOpt.isPresent()) {
             Garanhao garanhaoExistente = garanhaoExistenteOpt.get();
 
@@ -72,41 +73,57 @@ public class GaranhaoControle {
                 return "redirect:/administrativo/garanhoes/listar";
             }
 
-            // Verifique se há alteração no saldo inicial
-            int saldoInicialAnterior = garanhaoExistente.getSaldo_inicial_palhetas();
-            int saldoAtualAnterior = garanhaoExistente.getSaldo_atual_palhetas();
-
-            // Atualiza o saldo inicial
-            garanhaoExistente.setSaldo_inicial_palhetas(garanhao.getSaldo_inicial_palhetas());
-
-            // Se o saldo inicial foi alterado, ajusta o saldo atual
-            if (saldoInicialAnterior != garanhaoExistente.getSaldo_inicial_palhetas()) {
-                int diferenca = garanhaoExistente.getSaldo_inicial_palhetas() - saldoInicialAnterior;
-                garanhaoExistente.setSaldo_atual_palhetas(saldoAtualAnterior + diferenca);
-            }
-
-            // Atualizar os outros campos do garanhão
-            garanhaoExistente.setNome_garanhao(garanhao.getNome_garanhao());
-            garanhaoExistente.setCor_palheta(garanhao.getCor_palheta());
-            
-            // Atualiza as datas
-            // A data de cadastro é a data atual
-            garanhaoExistente.setData_cadastro(LocalDateTime.now());  // Data atual
-            // A data de contagem inicial é fornecida pelo usuário
-            garanhaoExistente.setData_contagem_inicial(garanhao.getData_contagem_inicial());
+            // Atualizar apenas os campos alterados
+            atualizarCamposGaranhao(garanhao, garanhaoExistente);
 
             // Salvar as atualizações no banco de dados
             garanhaoRepositorio.save(garanhaoExistente);
 
             // Mensagem de sucesso
             redirectAttributes.addFlashAttribute("mensagemSucesso", "Garanhão atualizado com sucesso.");
-            return "redirect:/administrativo/garanhoes/listar"; // Redireciona para a lista de garanhões
+            return "redirect:/administrativo/garanhoes/listar";
         } else {
             // Caso o garanhão não seja encontrado
             redirectAttributes.addFlashAttribute("mensagemErro", "Garanhão não encontrado.");
             return "redirect:/administrativo/garanhoes/listar";
         }
     }
+
+    // Método auxiliar para atualizar os campos
+    private void atualizarCamposGaranhao(Garanhao novo, Garanhao existente) {
+        // Verifica e atualiza o saldo inicial e ajusta o saldo atual
+        int saldoInicialAnterior = existente.getSaldo_inicial_palhetas();
+        int saldoAtualAnterior = existente.getSaldo_atual_palhetas();
+
+        existente.setSaldo_inicial_palhetas(novo.getSaldo_inicial_palhetas());
+        if (saldoInicialAnterior != novo.getSaldo_inicial_palhetas()) {
+            int diferenca = novo.getSaldo_inicial_palhetas() - saldoInicialAnterior;
+            existente.setSaldo_atual_palhetas(saldoAtualAnterior + diferenca);
+        }
+
+        // Atualizar outros campos
+        if (!Objects.equals(existente.getNome_garanhao(), novo.getNome_garanhao())) {
+            existente.setNome_garanhao(novo.getNome_garanhao());
+        }
+
+        if (existente.getBotijao() != novo.getBotijao()) {
+            existente.setBotijao(novo.getBotijao());
+        }
+
+        if (existente.getCaneca() != novo.getCaneca()) {
+            existente.setCaneca(novo.getCaneca());
+        }
+
+        if (!Objects.equals(existente.getCor_palheta(), novo.getCor_palheta())) {
+            existente.setCor_palheta(novo.getCor_palheta());
+        }
+
+        // Atualiza apenas a data de contagem inicial, se necessária
+        if (novo.getData_contagem_inicial() != null) {
+            existente.setData_contagem_inicial(novo.getData_contagem_inicial());
+        }
+    }
+
 
 
     @PostMapping("/administrativo/garanhoes/salvar")

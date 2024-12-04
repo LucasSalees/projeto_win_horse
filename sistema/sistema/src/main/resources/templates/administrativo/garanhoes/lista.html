@@ -8,7 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
-    <title>LG</title>
+    
+	<title>Lista de garanhões</title>
 	<style>
 	    body {
 	        font-family: Arial, sans-serif;
@@ -247,7 +248,9 @@
     </div>
     <div class="row mt-3">
         <div class="col text-left">
-            <a href="#" class="btn btn-warning btn-sm text-white"><i class="fa-solid fa-print"></i> Imprimir</a>
+			<a href="#" id="btnImprimir" class="btn btn-warning btn-sm text-white">
+			    <i class="fa-solid fa-print"></i> Imprimir
+			</a>
         </div>
         <div class="col text-right">
             <a href="/administrativo/garanhoes/cadastro">
@@ -268,6 +271,156 @@
             language: { url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/pt-BR.json' }
         });
     });
+	document.getElementById('btnImprimir').addEventListener('click', function (e) {
+	        e.preventDefault(); // Evita o comportamento padrão do link
+	        
+	        // Clona a tabela que será impressa
+	        const tabela = document.getElementById('tabela').cloneNode(true);
+
+	        // Cria uma nova janela para impressão
+	        const janelaImpressao = window.open('', '', 'width=800,height=600');
+
+	        // Adiciona estilo básico para a tabela (opcional, para manter formatação)
+	        janelaImpressao.document.write(`
+			<html>
+			    <head>
+			        <title>Impressão - Haras Rosa Mystica</title>
+			        <style>
+			            /* Estilização geral */
+			            body {
+			                font-family: 'Arial', sans-serif;
+			                margin: 0;
+			                padding: 0;
+			                color: #000;
+			                background-color: #fff;
+			            }
+
+			            /* Cabeçalho */
+			            .header {
+			                display: flex;
+			                align-items: center;
+			                justify-content: space-between;
+			                padding: 20px;
+			                border-bottom: 1px solid #000;
+			            }
+
+			            .header-img img {
+			                width: 120px;
+			                height: auto;
+			            }
+
+			            .header-title {
+			                font-size: 28px;
+			                font-weight: bold;
+			                text-transform: uppercase;
+			                color: #000;
+			                margin: 0 20px;
+			                text-align: center;
+			                flex-grow: 1;
+			            }
+
+			            /* Estilização do conteúdo */
+			            .content {
+			                width: 80%;
+			                margin: 20px auto;
+			            }
+
+			            /* Estilização da tabela */
+			            table {
+			                width: 100%;
+			                border-collapse: collapse;
+			                margin-top: 20px;
+			                font-size: 14px;
+			                color: #000;
+			            }
+
+			            th, td {
+			                border: 1px solid #000;
+			                padding: 10px;
+			                text-align: left;
+			            }
+
+			            th {
+			                font-weight: bold;
+			                text-transform: uppercase;
+			            }
+
+			            /* Área para assinatura */
+			            .signature {
+			                width: 80%;
+			                margin: 30px auto;
+			                font-size: 14px;
+			                display: flex;
+			                justify-content: space-between;
+			            }
+''
+			            .signature .label {
+			                margin: 0;
+			            }
+
+			            /* Rodapé */
+			            .footer {
+			                text-align: center;
+			                font-size: 12px;
+			                color: #000;
+			                padding: 10px 0;
+			                border-top: 1px solid #000;
+			                position: relative;
+			            }
+
+			            /* Configurações para impressão */
+			            @media print {
+			                .footer {
+			                    position: fixed;
+			                    bottom: 0;
+			                    width: 100%;
+			                    border: none;
+			                }
+
+			                .header, .content {
+			                    page-break-inside: avoid;
+			                }
+			            }
+			        </style>
+			    </head>
+			    <body>
+			        <div class="header">
+			            <div class="header-img">
+			                <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png" alt="Logo do Haras Rosa Mystica">
+			            </div>
+			            <h2 class="header-title">Lista de Sêmen Disponível</h2>
+			        </div>
+
+			        <div class="content">
+			            <!-- A tabela será inserida dinamicamente aqui -->
+			            <table>
+			                <tbody>
+			                    
+			                </tbody>
+			            </table>
+			        </div>
+
+			        <div class="footer">
+			            <div class="signature">
+			                <div class="label">Data: ____/____/________</div>
+			                <div class="label">Assinatura: _____________________</div>
+			            </div>
+			            © 2024 Haras Rosa Mystica - Todos os direitos reservados.
+			        </div>
+			    </body>
+			</html>
+
+			`);
+
+	        // Adiciona a tabela ao corpo da nova janela
+	        janelaImpressao.document.body.appendChild(tabela);
+
+	        // Fecha o conteúdo e inicia a impressão
+	        janelaImpressao.document.close();
+	        janelaImpressao.focus();
+	        janelaImpressao.print();
+	        janelaImpressao.close();
+	    });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>

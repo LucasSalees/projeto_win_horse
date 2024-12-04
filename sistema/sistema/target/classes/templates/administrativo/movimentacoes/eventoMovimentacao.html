@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
-    <title>editar</title>
+    <title>Editar movimentação</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -316,7 +316,9 @@
 						 	<i class="fa-solid fa-trash" style="color: #ffffff;"></i> excluir
 						 </a>
 						 
-						 <a href="#" class="btn btn-warning btn-sm text-white"><i class="fa-solid fa-print"></i> Imprimir</a>
+						 <a href="#" id="btnImprimir" class="btn btn-warning btn-sm text-white" onclick="imprimirFormulario()">
+	 					     <i class="fa-solid fa-print"></i> Imprimir
+	 					 </a>
 						 
                     <button type="submit" class="btn btn-success btn-sm">
                         <i class="fa-solid fa-plus"></i> Editar Movimentação
@@ -446,6 +448,185 @@
 			        campoAdicional.style.display = "none"; // Oculta o campo adicional
 			    }
 			}
+			function imprimirFormulario() {
+			    // Captura os valores dos campos do formulário
+			    const nomeGaranhao = document.getElementById('nome_garanhao').value;
+			    const quantidade = document.getElementById('quantidade').value;
+			    const corPalheta = document.getElementById('cor_palheta').value;
+			    const botijao = document.getElementById('botijao').value;
+			    const destino = document.querySelector('input[name="destino"]:checked').value; // Captura o valor do radio button
+			    const caneca = document.getElementById('caneca').value;
+			    const infoAdicional = document.getElementById('info-adicional').value;
+			    const dataMovimentacao = document.getElementById('data_movimentacao').value;
+
+			    // Abre uma nova janela para impressão
+			    const janelaImpressao = window.open('', '', 'width=800,height=600');
+			    
+			    // Adiciona o conteúdo formatado para a impressão
+			    janelaImpressao.document.write(`
+			    <html>
+			        <head>
+			            <title>Impressão - Haras Rosa Mystica</title>
+			            <style>
+			                /* Estilização geral */
+			                body {
+			                    font-family: 'Arial', sans-serif;
+			                    margin: 0;
+			                    padding: 0;
+			                    color: #000;
+			                    background-color: #fff;
+			                }
+
+			                /* Cabeçalho */
+			                .header {
+			                    display: flex;
+			                    align-items: center;
+			                    justify-content: space-between;
+			                    padding: 20px;
+			                    border-bottom: 1px solid #000;
+			                }
+
+			                .header-img img {
+			                    width: 120px;
+			                    height: auto;
+			                }
+
+			                .header-title {
+			                    font-size: 28px;
+			                    font-weight: bold;
+			                    text-transform: uppercase;
+			                    color: #000;
+			                    margin: 0 20px;
+			                    text-align: center;
+			                    flex-grow: 1;
+			                }
+
+			                /* Estilização do conteúdo */
+			                .content {
+			                    width: 80%;
+			                    margin: 20px auto;
+			                }
+
+			                table {
+			                    width: 100%;
+			                    border-collapse: collapse;
+			                }
+
+			                table td {
+			                    border: 1px solid #000;
+			                    padding: 8px;
+			                }
+
+			                table td:first-child {
+			                    font-weight: bold;
+			                    width: 30%;
+			                }
+
+			                /* Área para assinatura */
+			                .signature {
+			                    width: 80%;
+			                    margin: 30px auto;
+			                    font-size: 14px;
+			                    display: flex;
+			                    justify-content: space-between;
+			                }
+
+			                .signature .label {
+			                    margin: 0;
+			                }
+
+			                /* Rodapé */
+			                .footer {
+			                    text-align: center;
+			                    font-size: 12px;
+			                    color: #000;
+			                    padding: 10px 0;
+			                    border-top: 1px solid #000;
+			                    position: relative;
+			                }
+
+			                /* Configurações para impressão */
+			                @media print {
+			                    .footer {
+			                        position: fixed;
+			                        bottom: 0;
+			                        width: 100%;
+			                        border: none;
+			                    }
+
+			                    .header, .content {
+			                        page-break-inside: avoid;
+			                    }
+			                }
+			            </style>
+			        </head>
+			        <body>
+			            <div class="header">
+			                <div class="header-img">
+			                    <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png" alt="Logo do Haras Rosa Mystica">
+			                </div>
+			                <h2 class="header-title">Detalhes da Movimentação</h2>
+			            </div>
+
+			            <div class="content">
+			                <table>
+			                    <tr>
+			                        <td>Nome do Garanhão:</td>
+			                        <td>${nomeGaranhao}</td>
+			                    </tr>
+			                    <tr>
+			                        <td>Quantidade de Palhetas:</td>
+			                        <td>${quantidade}</td>
+			                    </tr>
+			                    <tr>
+			                        <td>Cor da Palheta:</td>
+			                        <td>${corPalheta}</td>
+			                    </tr>
+			                    <tr>
+			                        <td>Número do Botijão:</td>
+			                        <td>${botijao}</td>
+			                    </tr>
+			                    <tr>
+			                        <td>Destino:</td>
+			                        <td>${destino}</td>
+			                    </tr>
+			                    <tr>
+			                        <td>Número da Caneca:</td>
+			                        <td>${caneca}</td>
+			                    </tr>
+			                    <tr>
+			                        <td>Informação Adicional:</td>
+			                        <td>${infoAdicional}</td>
+			                    </tr>
+			                    <tr>
+			                        <td>Data da Movimentação:</td>
+			                        <td>${dataMovimentacao}</td>
+			                    </tr>
+			                </table>
+			            </div>
+
+			            <div class="footer">
+			                <div class="signature">
+			                    <div class="label">Data: ____/____/________</div>
+			                    <div class="label">Assinatura: _____________________</div>
+			                </div>
+			                © 2024 Haras Rosa Mystica - Todos os direitos reservados.
+			            </div>
+			        </body>
+			    </html>
+			    `);
+
+			    // Fecha o conteúdo e prepara para impressão
+			    janelaImpressao.document.close();
+			    janelaImpressao.focus();
+
+			    // Aguarda meio segundo antes de iniciar a impressão
+			    setTimeout(function() {
+			        janelaImpressao.print();
+			        janelaImpressao.close();
+			    }, 500);
+			}
+
     </script>
 </body>
 </html>

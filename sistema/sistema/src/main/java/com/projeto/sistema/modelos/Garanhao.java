@@ -140,4 +140,5 @@ public class Garanhao implements Serializable {
     public void ajustarSaldoAtual(int quantidade) {
         this.saldo_atual_palhetas += quantidade;
     }
+    
 }
