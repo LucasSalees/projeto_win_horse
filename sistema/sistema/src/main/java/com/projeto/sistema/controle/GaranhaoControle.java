@@ -2,11 +2,15 @@ package com.projeto.sistema.controle;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,14 +23,18 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projeto.sistema.modelos.Garanhao;
-
+import com.projeto.sistema.modelos.Movimentacao;
 import com.projeto.sistema.repositorios.GaranhaoRepositorio;
+import com.projeto.sistema.repositorios.MovimentacaoRepositorio;
 
 @Controller
 public class GaranhaoControle {
 
     @Autowired
     private GaranhaoRepositorio garanhaoRepositorio;
+    
+    @Autowired
+    private MovimentacaoRepositorio movimentacaoRepositorio;
 
     // Exibir o formulário de cadastro
     @GetMapping("/administrativo/garanhoes/cadastro")
@@ -124,8 +132,6 @@ public class GaranhaoControle {
         }
     }
 
-
-
     @PostMapping("/administrativo/garanhoes/salvar")
     public ModelAndView salvar(@ModelAttribute Garanhao garanhao, BindingResult result) {
         // Validação do formulário
@@ -159,12 +165,37 @@ public class GaranhaoControle {
         return new ModelAndView("redirect:/administrativo/garanhoes/listar");  // Redireciona para a listagem após salvar
     }
 
-    // Remover uma movimentação pelo ID
     @GetMapping("/removerGaranhao/{id_garanhao}")
-    public ModelAndView remover(@PathVariable("id_garanhao") Long id_garanhao) {
-        garanhaoRepositorio.deleteById(id_garanhao);
-        return listarGaranhoes(); // Após remover, exibe a lista de movimentações
+    public ResponseEntity<String> remover(@PathVariable("id_garanhao") Long id_garanhao) {
+        System.out.println("ID recebido para exclusão: " + id_garanhao); // Log para verificar o ID
+
+        try {
+            // Busca movimentações associadas ao garanhão pelo ID
+            List<Movimentacao> movimentacoesAssociadas = movimentacaoRepositorio.findAll()
+                    .stream()
+                    .filter(movimentacao -> movimentacao.getGaranhao().getId_garanhao().equals(id_garanhao))
+                    .collect(Collectors.toList());
+
+            if (!movimentacoesAssociadas.isEmpty()) {
+                // Caso existam movimentações associadas
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("Erro ao excluir: Garanhão possui movimentações associadas.");
+            }
+
+            // Se não houver movimentações, tenta excluir o garanhão
+            garanhaoRepositorio.deleteById(id_garanhao);
+            return ResponseEntity.ok("Garanhão removido com sucesso!");
+
+        } catch (Exception e) {
+            // Caso ocorra algum erro durante a exclusão
+            System.out.println("Erro ao excluir o garanhão: " + e.getMessage()); // Log no backend
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao excluir: " + e.getMessage());
+        }
     }
+
+
+
 
     @PostMapping("/administrativo/garanhoes/ajustarSaldo")
     public ModelAndView ajustarSaldo(Long idGaranhao, int quantidade) {

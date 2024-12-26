@@ -51,17 +51,25 @@ public class MovimentacaoControle {
     public String editar(@PathVariable("id_movimentacao") Long id_movimentacao, Model model) {
         Optional<Movimentacao> movimentacao = movimentacaoRepositorio.findById(id_movimentacao);
         
-        // Se a movimentação for encontrada, exibe a página de edição
         if (movimentacao.isPresent()) {
-            model.addAttribute("movimentacao", movimentacao.get()); // Adiciona o objeto movimentacao ao modelo
-            model.addAttribute("nome_garanhao", movimentacao.get().getGaranhao().getNome_garanhao()); // Adiciona o nome do garanhão ao modelo
-            model.addAttribute("endereco", movimentacao.get().getEndereco());
-            return "administrativo/movimentacoes/eventoMovimentacao"; // Retorna para a página de edição (evento.html dentro de administrativo)
+            Movimentacao movimentacaoEncontrada = movimentacao.get();
+            Garanhao garanhao = movimentacaoEncontrada.getGaranhao();
+
+            // Adiciona os dados ao modelo
+            model.addAttribute("movimentacao", movimentacaoEncontrada); 
+            model.addAttribute("nome_garanhao", garanhao != null ? garanhao.getNome_garanhao() : "N/A");
+            model.addAttribute("saldo_atual_palhetas", garanhao != null ? garanhao.getSaldo_atual_palhetas() : 0);
+
+            model.addAttribute("endereco", movimentacaoEncontrada.getEndereco());
+
+            return "administrativo/movimentacoes/eventoMovimentacao";
         }
         
-        // Caso não encontre a movimentação, redireciona para a lista de movimentações
+        // Caso não encontre a movimentação
         return "redirect:/administrativo/movimentacoes/listar";
     }
+
+
 
     // Remover uma movimentação pelo ID
     @GetMapping("/removerMovimentacao/{id_movimentacao}")
@@ -144,7 +152,7 @@ public class MovimentacaoControle {
             movimentacaoExistente.setQuantidade(movimentacao.getQuantidade());
             movimentacaoExistente.setDestino(movimentacao.getDestino());
             movimentacaoExistente.setEndereco(movimentacao.getEndereco());
-
+            movimentacaoExistente.setIdentificador_profissional(movimentacao.getIdentificador_profissional());
             // Salvar as atualizações no banco de dados
             movimentacaoRepositorio.save(movimentacaoExistente);
             garanhaoRepositorio.save(garanhao);
@@ -157,5 +165,8 @@ public class MovimentacaoControle {
             redirectAttributes.addFlashAttribute("mensagemErro", "Movimentação não encontrada.");
             return "redirect:/administrativo/movimentacoes/listar";
         }
+        
+        
     }
+ 
 }

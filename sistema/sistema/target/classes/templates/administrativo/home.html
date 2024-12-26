@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Home</title>
+	<link rel="icon" href="https://imgs.search.brave.com/zy0sfkgKeppdWAXGyYDnopeaDcBoxZyy_1tEfu-gL8c/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvN2Q5NDZhNTVl/NmM5YzdiNDc3ZDMw/NGVmYzExZmMxNjY4/NDQzZmVhYWVkODQ2/NTVhMmYyNTJjMGE5/MTcwNTYwMS93d3cu/aGFyYXNyb3NhbXlz/dGljYS5jb20uYnIv" type="image/x-icon">
 	
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #C0C0C0;
         }
         .text-center {
             color: #333;
@@ -42,11 +43,13 @@
         .list-group-item {
             font-size: 1.1rem;
             transition: background-color 0.3s ease;
+			font-family: "Asar", Sans-serif; /* Fonte específica */
         }
 
         .list-group-item:hover {
-            background-color: #D3D3D3;
+            background-color: #cf8311;
             cursor: pointer;
+			font-family: "Asar", Sans-serif; /* Fonte específica */
         }
 
         .list-group-item i {
@@ -63,11 +66,20 @@
 
         h1.display-4 {
             font-weight: 700;
-            color: #343a40;
+            color: #333333;
+			margin: 0px 0px 0px;
         }
+		
+		p {
+		    margin-top: 1rem;
+		    margin-bottom: 1rem;
+		}
 
         h4 {
-            font-weight: 600;
+			font-family: "Asar", Sans-serif; /* Fonte específica */
+			margin-top: 10px;
+			color: #cf8311;
+			font-size: 30px;
         }
 
         .mb-4 {
@@ -79,67 +91,95 @@
 		.btn {
             border-radius: 50px;
         }
+		.lead {
+	    font-size: 40px;
+	    font-weight: 300;
+		font-family: "Asar", Sans-serif; /* Fonte específica */
+		color: #cf8311;
+		}
+		.card-header.bg-primary {
+		    background-color: rgb(15, 15, 15) !important;
+		}
+		.card-header.bg-success {
+		    background-color: rgb(15, 15, 15) !important;
+		}
 
-        /* Ajuste para o Navbar */
-        .navbar {
-            font-size: 1rem; /* Define o tamanho da fonte */
-        }
+		/* Ajuste para o Navbar */ 
+		.navbar {
+		    font-size: 1rem; /* Define o tamanho da fonte */
+			width: 100%;  /* Largura do Navbar */
+		    height: 138.86px; /* Define a altura */
+		    background-color: #000000C4; /* Define a cor de fundo com opacidade */
+			border-style: solid;
+		    border-width: 0 0 4px;
+		    border-color: #fc0;
+		}
 
-        .navbar-nav .nav-item .nav-link {
-            font-size: 1.2rem; /* Define o tamanho da fonte dos itens do menu */
-            padding: 0.5rem 1rem; /* Ajusta o espaçamento dos itens */
-        }
+		.navbar-nav .nav-item .nav-link {
+		    font-size: 1.2rem; /* Define o tamanho da fonte dos itens do menu */
+		    padding: 0.5rem 1rem; /* Ajusta o espaçamento dos itens */
+		    font-family: "Asar", Sans-serif;
+		    text-decoration: none; /* Remove o sublinhado dos links */
+		    color: #000; /* Cor padrão dos links */
+		    transition: color 0.3s ease; /* Suaviza a transição de cor */
+		}
 
-        .navbar-toggler {
-            border: none;
-        }
+		.navbar-nav .nav-item .nav-link:hover {
+		    color: #cf8311; /* Cor ao passar o mouse */
+		}
 
-        .navbar-brand img {
-            width: 250px;
-            height: 80px; /* Ajuste o tamanho do logo */
-        }
+		.navbar-toggler {
+		    border: none;
+		}
 
-        .navbar-nav {
-            margin-left: auto; /* Alinha os itens à direita para centralizar */
-        }
+		.navbar-brand img {
+		    width: 300px;
+		    height: 100px; /* Ajuste o tamanho do logo */
+		}
 
-        .navbar-collapse {
-            justify-content: center; /* Centraliza o conteúdo do menu */
-        }
+		.navbar-nav {
+		    margin-left: auto; /* Alinha os itens à direita para centralizar */
+		}
 
-        .navbar-dark .navbar-nav .nav-link {
-            color: #fff; /* Cor dos itens de navegação */
-        }
+		.navbar-collapse {
+		    justify-content: center; /* Centraliza o conteúdo do menu */
+		}
 
-        /* Ajuste no campo de pesquisa */
-        .form-inline .form-control {
-            font-size: 1rem; /* Tamanho da fonte do campo de pesquisa */
-        }
+		.navbar-dark .navbar-nav .nav-link {
+		    color: #fff; /* Cor dos itens de navegação */
+		}
 
-        .form-inline .btn {
-            font-size: 1rem; /* Tamanho da fonte do botão */
-        }
-		
+		/* Ajuste no campo de pesquisa */
+		.form-inline .form-control {
+		    font-size: 1rem; /* Tamanho da fonte do campo de pesquisa */
+		}
+
+		.form-inline .btn {
+		    font-size: 1rem; /* Tamanho da fonte do botão */
+		}
+
 		.watermark {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 14px;
-            color: rgba(0, 0, 0, 0.5);
-            pointer-events: none;
-        }
+		    position: fixed;
+		    bottom: 10px;
+		    right: 10px;
+		    font-size: 14px;
+		    color: rgba(0, 0, 0, 0.5);
+		    pointer-events: none;
+		}
+
 		.container-fluid {
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin-top: 10px;
-			margin-bottom: 10px;
-            max-width: 1030px;
-            width: 100%;
-            border-top: 4px solid #C0C0C0;
-        }
-		
+		    background: #fff;
+		    padding: 30px;
+		    border-radius: 8px;
+		    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		    margin-top: 10px;
+		    margin-bottom: 10px;
+		    max-width: 1030px;
+		    width: 100%;
+		    border-top: 4px solid #808080;
+			border-bottom: 4px solid #808080;
+		}
+
 		.row {
 		    display: -ms-flexbox;
 		    display: flex;
@@ -147,71 +187,156 @@
 		    flex-wrap: wrap;
 		    margin-right: -60px;
 		    margin-left: -60px;
+		}		
+		.video-background {
+		    position: relative;
+		    width: 100%;
+		    height: 80vh; /* Altura reduzida para 80% da altura da viewport */
+		    overflow: hidden;
+		    z-index: -1; /* Envia o vídeo para o plano de fundo */
 		}
 
-        /* Responsividade */
-        @media (max-width: 991px) {
-            .navbar-collapse {
-                justify-content: flex-start; /* Ajusta a posição para dispositivos menores */
-            }
-        }
+		.video-background iframe {
+		    position: absolute;
+		    top: 50%; /* Centraliza verticalmente */
+		    left: 50%; /* Centraliza horizontalmente */
+		    width: 120%; /* Largura maior para aplicar zoom */
+		    height: 120%; /* Altura maior para aplicar zoom */
+		    transform: translate(-50%, -50%) scale(1.5); /* Zoom de 1.5x e centralização */
+		    pointer-events: none; /* Evita interações com o vídeo */
+		    z-index: -1; /* Envia o iframe para trás do conteúdo */
+		}
+		
+		/* Overlay escuro sobre o vídeo */
+		.video-overlay {
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    background-color: rgba(0, 0, 0, 0.6); /* Preto com 50% de opacidade */
+		    z-index: 0; /* Fica entre o vídeo e o texto */
+		}
+
+		.video-text {
+		    position: absolute;
+		    top: 50%; /* Centraliza verticalmente */
+		    left: 50%; /* Centraliza horizontalmente */
+		    transform: translate(-50%, -50%); /* Ajuste perfeito de centralização */
+		    text-align: center; /* Centraliza os textos internamente */
+		    color: #fff; /* Cor branca */
+		    font-family: "Asar", Sans-serif; /* Fonte específica */
+		    z-index: 1; /* Fica acima do vídeo */
+			margin-top: 72px;
+		}
+
+		.video-text h2 {
+		    color: #cf8311; /* Cor do texto */
+		    font-family: "Asar", Sans-serif; /* Fonte "Asar" */
+		    font-size: 62px; /* Tamanho grande */
+		    margin: 10px 0; /* Espaçamento entre os textos */
+		    animation: fadeIn 10s ease-in-out; /* Animação de entrada */
+			
+		}
+		.shadow-sm {
+		    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.25) !important;
+		}
+
+		@keyframes fadeIn {
+		    0% {
+		        opacity: 0;
+		        transform: translateY(-20px); /* Começa um pouco acima */
+		    }
+		    100% {
+		        opacity: 1;
+		        transform: translateY(0); /* Termina na posição original */
+		    }
+		}
+
+		/* Responsividade */
+		@media (max-width: 991px) {
+		    .navbar-collapse {
+		        justify-content: flex-start; /* Ajusta a posição para dispositivos menores */
+		    }
+		}
+
     </style>
 </head>
+<link href="https://fonts.googleapis.com/css2?family=Asar&display=swap" rel="stylesheet">
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		    <div class="container">
-		        <!-- Logo à esquerda -->
-		        <a class="navbar-brand" href="#">
-		            <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png" width="250" height="80" class="d-inline-block align-top" alt="">
-		        </a>
+	<nav class="navbar navbar-expand-lg navbar-dark">
+	    <div class="container">
+	        <!-- Logo à esquerda -->
+	        <a class="navbar-brand" href="#">
+	            <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png" class="d-inline-block align-top" alt="">
+	        </a>
 
-		        <!-- Botão do menu responsivo -->
-		        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-		            <span class="navbar-toggler-icon"></span>
-		        </button>
+	        <!-- Botão do menu responsivo -->
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
 
-		        <!-- Div vazia para centralizar o menu de navegação -->
-		        <div class="d-none d-lg-flex flex-grow-1"></div>
+	        <!-- Div vazia para centralizar o menu de navegação -->
+	        <div class="d-none d-lg-flex flex-grow-1"></div>
 
-		        <!-- Conteúdo centralizado -->
-		        <div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
-		            <ul class="navbar-nav">
-		                <li class="nav-item active">
-		                    <a class="nav-link" href="/administrativo">Home <span class="sr-only">(página atual)</span></a>
-		                </li>
-		                <li class="nav-item">
-		                    <a class="nav-link" href="#">Link</a>
-		                </li>
-		                <li class="nav-item dropdown">
-		                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		                        Dropdown
-		                    </a>
-		                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		                        <a class="dropdown-item" href="#">Ação</a>
-		                        <a class="dropdown-item" href="#">Outra ação</a>
-		                        <div class="dropdown-divider"></div>
-		                        <a class="dropdown-item" href="#">Algo mais aqui</a>
-		                    </div>
-		                </li>
-		            </ul>
-		        </div>
+	        <!-- Conteúdo centralizado -->
+	        <div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
+	            <ul class="navbar-nav">
+	                <li class="nav-item active">
+	                    <a class="nav-link" href="/administrativo">Página inicial <span class="sr-only">(página atual)</span></a>
+	                </li>
+	                <!--<li class="nav-item">
+	                    <a class="nav-link" href="#">Link</a>
+	                </li>
+	                <li class="nav-item dropdown">
+	                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                        Dropdown
+	                    </a>
+	                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	                        <a class="dropdown-item" href="#">Ação</a>
+	                        <a class="dropdown-item" href="#">Outra ação</a>
+	                        <div class="dropdown-divider"></div>
+	                        <a class="dropdown-item" href="#">Algo mais aqui</a>
+	                    </div>-->
+	                </li>
+	            </ul>
+	        </div>
 
-		        <!-- Campo de pesquisa à direita -->
-		        <form class="form-inline my-2 my-lg-0">
-		            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-		            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
-		        </form>
-		    </div>
-		</nav>
+	        <!-- Campo de pesquisa à direita
+	        <form class="form-inline my-2 my-lg-0">
+	            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+	            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
+	        </form>-->
+	    </div>
+	</nav>
+	
+	<div class="video-background">
+	    <iframe 
+	        class="elementor-background-video-embed" 
+	        src="https://www.youtube.com/embed/Fe4P6_icoLY?controls=0&autoplay=1&mute=1&loop=1&playlist=Fe4P6_icoLY&start=2&end=45" 
+	        frameborder="0" 
+	        allowfullscreen>
+	    </iframe>
 		
+		<!-- Overlay escuro -->
+		    <div class="video-overlay"></div>
+	</div>
+	<!-- Textos sobrepostos -->
+	    <div class="video-text">
+	        <h2 class="text-line">Bem-vindo ao Sistema</h2>
+	        <h2 class="text-line">de Controle de Sêmen</h2>
+	    </div>
+	</div>
 
-<div class="container-fluid" style="width: 100%; max-width: 1000px;">
+<div class="container-fluid" style="width: 100%; max-width: 1000px; height: 444px;">
     <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8"> 
+			
             <!-- Cabeçalho de boas-vindas -->
             <div class="text-center mb-4">
-                <h1 class="display-4 font-weight-bold">Bem-vindo ao Sistema de Controle de Sêmen</h1>
+				
+                <!--<h1 class="display-4 font-weight-bold">Bem-vindo ao Sistema de Controle de Sêmen</h1>-->
                 <p class="lead">Acesse os cadastros e listas abaixo para gerenciar os registros.</p>
             </div>
 

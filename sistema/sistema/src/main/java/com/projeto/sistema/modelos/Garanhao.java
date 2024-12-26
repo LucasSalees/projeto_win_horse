@@ -15,12 +15,12 @@ import jakarta.persistence.Table;
 @Table(name = "garanhoes") // Nome da tabela no banco de dados
 public class Garanhao implements Serializable {
 
-    private static final long serialVersionUID = 1L; // Isso é para controle de versão da serialização
-    
+    private static final long serialVersionUID = 1L; // Controle de versão da serialização
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_garanhao;
-    
+
     private String nome_garanhao;
     private String cor_palheta;
     private int caneca;
@@ -31,17 +31,17 @@ public class Garanhao implements Serializable {
     private int saldo_atual_palhetas; // Saldo atual de palhetas
 
     @Column(nullable = false)
-    private int quantidade = 0; // Valor default para quantidade
-    
+    private int quantidade = 0; // Valor padrão para quantidade
+
     // Construtor com todos os parâmetros necessários
-    public Garanhao(String nome_garanhao, String cor_palheta, int caneca, 
+    public Garanhao(String nome_garanhao, String cor_palheta, int caneca,
                     int saldo_inicial_palhetas, int quantidade) {
         this.nome_garanhao = nome_garanhao;
         this.cor_palheta = cor_palheta;
         this.caneca = caneca;
         this.saldo_inicial_palhetas = saldo_inicial_palhetas;
         this.saldo_atual_palhetas = saldo_inicial_palhetas; // Define o saldo atual com o valor do saldo inicial
-        this.quantidade = quantidade;  // Preenchendo o campo quantidade
+        this.quantidade = quantidade; // Preenchendo o campo quantidade
         this.data_cadastro = LocalDateTime.now(); // Data e hora de cadastro
         this.data_contagem_inicial = LocalDate.now(); // Data da contagem inicial
     }
@@ -50,19 +50,7 @@ public class Garanhao implements Serializable {
     public Garanhao() {
     }
 
-    public int getBotijao() {
-		return botijao;
-	}
-
-	public void setBotijao(int botijao) {
-		this.botijao = botijao;
-	}
-
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-	}
-
-	// Getters e Setters
+    // Getters e Setters
     public Long getId_garanhao() {
         return id_garanhao;
     }
@@ -93,6 +81,14 @@ public class Garanhao implements Serializable {
 
     public void setCaneca(int caneca) {
         this.caneca = caneca;
+    }
+
+    public int getBotijao() {
+        return botijao;
+    }
+
+    public void setBotijao(int botijao) {
+        this.botijao = botijao;
     }
 
     public LocalDate getData_contagem_inicial() {
@@ -128,11 +124,11 @@ public class Garanhao implements Serializable {
         this.saldo_atual_palhetas = saldo_atual_palhetas;
     }
 
-    public Integer getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(Integer quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -140,5 +136,4 @@ public class Garanhao implements Serializable {
     public void ajustarSaldoAtual(int quantidade) {
         this.saldo_atual_palhetas += quantidade;
     }
-    
 }

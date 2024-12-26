@@ -20,28 +20,32 @@ public class Movimentacao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_movimentacao;
+
     private int botijao;
     private int caneca;
     private String cor_palheta;
     private String endereco;
-
-	private LocalDateTime data_movimentacao = LocalDateTime.now(); // Data e hora da movimentação
+    private LocalDateTime data_movimentacao = LocalDateTime.now(); // Data e hora da movimentação
     private String destino; // Ex: "entrada" ou "saida"
     private int quantidade;
+    private String profissional;
+	private String nome_profissional;
+    private String identificador_profissional;
 
-    @ManyToOne
+	@ManyToOne
     @JoinColumn(name = "garanhao_id_garanhao", referencedColumnName = "id_garanhao")
     private Garanhao garanhao;
+
     private String nome_garanhao; // Nome do garanhão associado à movimentação
-    
+
     // Getters e Setters
     public String getEndereco() {
-		return endereco;
-	}
+        return endereco;
+    }
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 
     public Long getId_movimentacao() {
         return id_movimentacao;
@@ -110,7 +114,6 @@ public class Movimentacao implements Serializable {
         this.garanhao = garanhao;
     }
 
-    // Novos Getters e Setters
     public String getNome_garanhao() {
         return nome_garanhao;
     }
@@ -118,5 +121,26 @@ public class Movimentacao implements Serializable {
     public void setNome_garanhao(String nome_garanhao) {
         this.nome_garanhao = nome_garanhao;
     }
+    public String getNome_profissional() {
+		return nome_profissional;
+	}
 
+	public void setNome_profissional(String nome_profissional) {
+		this.nome_profissional = nome_profissional;
+	}
+
+	public String getIdentificador_profissional() {
+		return identificador_profissional;
+	}
+
+	public void setIdentificador_profissional(String identificador_profissional) {
+		this.identificador_profissional = identificador_profissional;
+	}
+	public String getProfissional() {
+		return profissional;
+	}
+
+	public void setProfissional(String profissional) {
+		this.profissional = profissional;
+	}
 }
