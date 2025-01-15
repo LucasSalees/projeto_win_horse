@@ -165,8 +165,7 @@ public class MovimentacaoControle {
             redirectAttributes.addFlashAttribute("mensagemErro", "Movimentação não encontrada.");
             return "redirect:/administrativo/movimentacoes/listar";
         }
-        
-        
+
     }
  
 }

@@ -1,390 +1,507 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <!-- Meta tags Obrigatórias -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Meta tags Obrigatórias -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+		integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>Cadastro de garanhão</title>
-	<link rel="icon" href="https://imgs.search.brave.com/zy0sfkgKeppdWAXGyYDnopeaDcBoxZyy_1tEfu-gL8c/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvN2Q5NDZhNTVl/NmM5YzdiNDc3ZDMw/NGVmYzExZmMxNjY4/NDQzZmVhYWVkODQ2/NTVhMmYyNTJjMGE5/MTcwNTYwMS93d3cu/aGFyYXNyb3NhbXlz/dGljYS5jb20uYnIv" type="image/x-icon">
-	
-    <style>
+	<title>Cadastro de garanhão</title>
+	<link rel="icon"
+		href="https://imgs.search.brave.com/zy0sfkgKeppdWAXGyYDnopeaDcBoxZyy_1tEfu-gL8c/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvN2Q5NDZhNTVl/NmM5YzdiNDc3ZDMw/NGVmYzExZmMxNjY4/NDQzZmVhYWVkODQ2/NTVhMmYyNTJjMGE5/MTcwNTYwMS93d3cu/aGFyYXNyb3NhbXlz/dGljYS5jb20uYnIv"
+		type="image/x-icon">
+
+	<style>
 		body {
-            font-family: "Asar", Sans-serif;
-            background-color: #C0C0C0;
-        }
-        .form-container {
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			font-family: "Asar", Sans-serif;
+			background-color: #C0C0C0;
+		}
+
+		.form-container {
+			background: #fff;
+			padding: 30px;
+			border-radius: 8px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 			margin-top: 10px;
 			margin-bottom: 10px;
-            max-width: 900px;
-            width: 100%;
-            border-top: 4px solid #808080;
+			max-width: 900px;
+			width: 100%;
+			border-top: 4px solid #808080;
 			border-bottom: 4px solid #808080;
-        }
+		}
 
-        h2 {
-            font-size: 32px;
-            color: #333333;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-align: center;
-			
-        }
+		h2 {
+			font-size: 32px;
+			color: #333333;
+			font-weight: bold;
+			margin-bottom: 20px;
+			text-align: center;
 
-        .watermark {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 14px;
-            color: rgba(0, 0, 0, 0.5);
-            pointer-events: none;
-        }
+		}
 
-        .form-row {
-            margin-bottom: 20px;
-        }
+		.watermark {
+			position: fixed;
+			bottom: 10px;
+			right: 10px;
+			font-size: 14px;
+			color: rgba(0, 0, 0, 0.5);
+			pointer-events: none;
+		}
 
-        .form-group {
-            margin-bottom: 0;
-        }
+		.form-row {
+			margin-bottom: 20px;
+		}
 
-        .saldo-info {
-            font-size: 14px;
-            color: #6c757d;
-            line-height: 2.2;
-        }
+		.form-group {
+			margin-bottom: 0;
+		}
 
-        .form-control {
-            border-radius: 8px;
-        }
+		.saldo-info {
+			font-size: 14px;
+			color: #6c757d;
+			line-height: 2.2;
+		}
 
-        .btn {
-            border-radius: 50px;
-        }
-		
+		.form-control {
+			border-radius: 8px;
+		}
+
+		.btn {
+			border-radius: 50px;
+		}
+
 		/* Personalização do botão primário */
 		.btn-light {
-		    background-color: #1b1e21; /* Cor de fundo personalizada */
-		    color: white; /* Cor do texto do botão */
-		    border: none; /* Remove borda */
+			background-color: #1b1e21;
+			/* Cor de fundo personalizada */
+			color: white;
+			/* Cor do texto do botão */
+			border: none;
+			/* Remove borda */
 		}
 
 		/* Estilo do ícone dentro do botão */
 		.btn-light i {
-		    color: #ffffff; /* Cor branca para o ícone */
+			color: #ffffff;
+			/* Cor branca para o ícone */
 		}
 
 		/* Efeito no hover */
 		.btn-light:hover {
-		    background-color: #cf8311; /* Cor de fundo diferente no hover */
-		   
+			background-color: #cf8311;
+			/* Cor de fundo diferente no hover */
+
 		}
 
 		.btn-light:hover i {
-		    color: #ffffff; /* Cor do ícone no hover */
+			color: #ffffff;
+			/* Cor do ícone no hover */
 		}
+
 		.btn-dark {
-		    background-color: #cf8311; /* Cor de fundo personalizada */
-		    color: white; /* Cor do texto do botão */
-		    border: none; /* Remove borda */
+			background-color: #cf8311;
+			/* Cor de fundo personalizada */
+			color: white;
+			/* Cor do texto do botão */
+			border: none;
+			/* Remove borda */
 		}
 
 		/* Estilo dos ícones dentro do botão */
 		.btn-dark i {
-		    color: #ffffff; /* Cor branca para os ícones */
+			color: #ffffff;
+			/* Cor branca para os ícones */
 		}
 
 		/* Efeito no hover */
 		.btn-dark:hover {
-		    background-color: #1b1e21; /* Cor de fundo diferente no hover */
-		   
+			background-color: #1b1e21;
+			/* Cor de fundo diferente no hover */
+
 		}
 
 		.btn-dark:hover i {
-		    color: #f0ad4e; /* Cor dos ícones no hover */
+			color: #f0ad4e;
+			/* Cor dos ícones no hover */
 		}
 
-        .btn-sm {
-            font-size: 14px;
-            padding: 10px 20px;
-        }
+		.btn-sm {
+			font-size: 14px;
+			padding: 10px 20px;
+		}
 
-        .btn i {
-            margin-right: 8px;
-        }
+		.btn i {
+			margin-right: 8px;
+		}
 
-        .text-muted {
-            color: #6c757d !important;
-        }
+		.text-muted {
+			color: #6c757d !important;
+		}
 
-        	
+
 		label {
-		    display: inline-block;
-		    margin-bottom: .5rem;
-		    font-weight: 600;
+			display: inline-block;
+			margin-bottom: .5rem;
+			font-weight: 600;
 		}
 
-        .custom-divider {
-            margin: 10px 0;
-            border-top: 1px solid #e1e1e1;
-        }
-		/* Ajuste para o Navbar */ 
+		.custom-divider {
+			margin: 10px 0;
+			border-top: 1px solid #e1e1e1;
+		}
+
+		/* Ajuste para o Navbar */
 		.navbar {
-		    font-size: 1rem; /* Define o tamanho da fonte */
-			width: 100%;  /* Largura do Navbar */
-		    height: 138.86px; /* Define a altura */
-		    background-color: #000000C4; /* Define a cor de fundo com opacidade */
+			font-size: 1rem;
+			/* Define o tamanho da fonte */
+			width: 100%;
+			/* Largura do Navbar */
+			height: 138.86px;
+			/* Define a altura */
+			background-color: #000000C4;
+			/* Define a cor de fundo com opacidade */
 			border-style: solid;
-		    border-width: 0 0 4px;
-		    border-color: #fc0;
+			border-width: 0 0 4px;
+			border-color: #fc0;
 		}
 
 		.navbar-nav .nav-item .nav-link {
-		    font-size: 1.2rem; /* Define o tamanho da fonte dos itens do menu */
-		    padding: 0.5rem 1rem; /* Ajusta o espaçamento dos itens */
-		    font-family: "Asar", Sans-serif;
-		    text-decoration: none; /* Remove o sublinhado dos links */
-		    color: #000; /* Cor padrão dos links */
-		    transition: color 0.3s ease; /* Suaviza a transição de cor */
+			font-size: 1.2rem;
+			/* Define o tamanho da fonte dos itens do menu */
+			padding: 0.5rem 1rem;
+			/* Ajusta o espaçamento dos itens */
+			font-family: "Asar", Sans-serif;
+			text-decoration: none;
+			/* Remove o sublinhado dos links */
+			color: #000;
+			/* Cor padrão dos links */
+			transition: color 0.3s ease;
+			/* Suaviza a transição de cor */
 		}
 
 		.navbar-nav .nav-item .nav-link:hover {
-		    color: #cf8311; /* Cor ao passar o mouse */
+			color: #cf8311;
+			/* Cor ao passar o mouse */
 		}
 
 		.navbar-toggler {
-		    border: none;
+			border: none;
 		}
 
 		.navbar-brand img {
-		    width: 300px;
-		    height: 100px; /* Ajuste o tamanho do logo */
+			width: 300px;
+			height: 100px;
+			/* Ajuste o tamanho do logo */
 		}
 
 		.navbar-nav {
-		    margin-left: auto; /* Alinha os itens à direita para centralizar */
+			margin-left: auto;
+			/* Alinha os itens à direita para centralizar */
 		}
 
 		.navbar-collapse {
-		    justify-content: center; /* Centraliza o conteúdo do menu */
+			justify-content: center;
+			/* Centraliza o conteúdo do menu */
 		}
 
 		.navbar-dark .navbar-nav .nav-link {
-		    color: #fff; /* Cor dos itens de navegação */
+			color: #fff;
+			/* Cor dos itens de navegação */
 		}
 
 		/* Ajuste no campo de pesquisa */
 		.form-inline .form-control {
-		    font-size: 1rem; /* Tamanho da fonte do campo de pesquisa */
+			font-size: 1rem;
+			/* Tamanho da fonte do campo de pesquisa */
 		}
 
 		.form-inline .btn {
-		    font-size: 1rem; /* Tamanho da fonte do botão */
+			font-size: 1rem;
+			/* Tamanho da fonte do botão */
 		}
-		.mb-3, .my-3 {
-		    margin-bottom: 1rem !important;
-		    font-family: "Asar", Sans-serif;
+
+		.mb-3,
+		.my-3 {
+			margin-bottom: 1rem !important;
+			font-family: "Asar", Sans-serif;
 		}
+
 		.m-0 {
-		    margin: 0 !important;
-		    font-family: "Asar", Sans-serif;
+			margin: 0 !important;
+			font-family: "Asar", Sans-serif;
 			color: #cf8311;
 		}
+
 		.custom-link {
-		    color: rgb(15, 15, 15); /* Cor inicial */
-		    font-size: 32px; /* Tamanho da fonte */
-		    text-decoration: none; /* Remove o sublinhado do link */
+			color: rgb(15, 15, 15);
+			/* Cor inicial */
+			font-size: 32px;
+			/* Tamanho da fonte */
+			text-decoration: none;
+			/* Remove o sublinhado do link */
 		}
 
 		.custom-link:hover {
-		    color: #cf8311; /* Cor do texto ao passar o mouse */
+			color: #cf8311;
+			/* Cor do texto ao passar o mouse */
+		}
+
+		/* Remove o hover branco dos itens de menu */
+		.dropdown-item:hover {
+			background-color: transparent;
+			/* Nenhuma cor de fundo no hover */
+			color: #cf8311;
+			/* Cor do texto no hover (ajustável) */
+			text-decoration: none;
+			/* Remove sublinhado, se necessário */
+		}
+
+		.dropdown-item i {
+			margin-right: 8px;
+			font-size: 1.6rem;
+			/* Tamanho maior dos ícones */
+		}
+
+		/* Estilo base para os ícones */
+		.dropdown-item i {
+			font-size: 2rem;
+			/* Tamanho dos ícones */
+			transition: transform 0.3s ease, color 0.3s ease;
+		}
+
+		/* Hover para o ícone do usuário */
+		.dropdown-item i.fa-user:hover {
+			color: #cf8311;
+			/* Cor ao passar o mouse */
+			transform: scale(1.1);
+			/* Aumenta o tamanho no hover */
+		}
+
+		/* Hover para o ícone de sair */
+		.dropdown-item i.fa-right-from-bracket:hover {
+			color: #0000ff;
+			/* Azul no hover */
+			transform: rotate(15deg);
+			/* Rotaciona no hover */
+		}
+
+		.navbar-background {
+			background: linear-gradient(45deg, #363636, #000000);
+			/* Gradiente mais suave entre cinza e preto */
+			background-size: 400% 400%;
+			/* Movimento dinâmico do gradiente */
+			animation: gradientAnimation 8s ease infinite;
+			/* Animação suave no gradiente */
+			height: 138.86px;
+			/* Ajusta a altura do navbar para um visual mais espaçoso */
+			display: flex;
+			align-items: center;
+			/* Centraliza verticalmente os itens */
+			justify-content: space-between;
+			/* Espaço entre os itens */
+			padding: 0 20px;
+			/* Adiciona espaçamento nas laterais */
+			box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+			/* Sombra mais suave para um efeito de profundidade */
+			font-family: 'Roboto', sans-serif;
+			/* Fonte moderna e limpa */
+			position: relative;
+			/* Necessário para sobrepor outros elementos, se necessário */
+		}
+
+		/* Animação suave para o gradiente */
+		@keyframes gradientAnimation {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
 		}
 	</style>
 </head>
 <link href="https://fonts.googleapis.com/css2?family=Asar&display=swap" rel="stylesheet">
+
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark">
-	    <div class="container">
-	        <!-- Logo à esquerda -->
-			<a class="navbar-brand" href="#">
-			    <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png"
-			        class="d-inline-block align-top" alt="Logo">
+
+	<nav class="navbar navbar-expand-lg navbar-dark navbar-background">
+		<div class="container">
+			<!-- Logo à esquerda -->
+			<a class="navbar-brand" href="/administrativo">
+				<img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png"
+					class="d-inline-block align-top" alt="">
 			</a>
 
-	        <!-- Botão do menu responsivo -->
-	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-	            <span class="navbar-toggler-icon"></span>
-	        </button>
+			<!-- Botão do menu responsivo -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+				aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-	        <!-- Div vazia para centralizar o menu de navegação -->
-	        <div class="d-none d-lg-flex flex-grow-1"></div>
+			<!-- Div vazia para centralizar o menu de navegação -->
+			<div class="d-none d-lg-flex flex-grow-1"></div>
 
-	        <!-- Conteúdo centralizado -->
-	        <div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
-	            <ul class="navbar-nav">
-	                <li class="nav-item active">
-	                    <a class="nav-link" href="/administrativo">Ir para a página inicial <span class="sr-only">(página atual)</span></a>
-	                </li>
-				<!--<li class="nav-item">
-	                    <a class="nav-link" href="#">Link</a>
-	                </li>
-	                <li class="nav-item dropdown">
-	                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                        Dropdown
-	                    </a>
-	                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	                        <a class="dropdown-item" href="#">Ação</a>
-	                        <a class="dropdown-item" href="#">Outra ação</a>
-	                        <div class="dropdown-divider"></div>
-	                        <a class="dropdown-item" href="#">Algo mais aqui</a>
-	                    </div>-->
-	                </li>
-	            </ul>
-	        </div>
-
-	        <!-- Campo de pesquisa à direita
-	        <form class="form-inline my-2 my-lg-0">
-	            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-	            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
-	        </form>-->
-	    </div>
-	</nav>
-<div class="container d-flex justify-content-center align-items-center">
-	<div class="form-container" style="width: 100%; max-width: 900px;">
-	    <form action="/administrativo/garanhoes/salvar" th:object="${garanhao}" method="POST">
-			<div class="d-flex align-items-center justify-content-between mb-3">
-    			<a href="/administrativo" class="custom-link">
-				<i class="fa-regular fa-circle-left"></i> 
-			    </a>
-			    <h2 class="m-0 text-center flex-grow-1">Cadastro de Sêmen</h2>
-			    <div style="width: 100px;"></div> <!-- Espaçador para alinhamento -->
+			<!-- Conteúdo centralizado -->
+			<div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
+				<a class="dropdown-item" href="/administrativo/usuarios/listar">
+					<i class="fa-solid fa-user" style="color: #ffffff;"></i>
+				</a>
+				<a class="dropdown-item" href="/sair">
+					<i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i>
+				</a>
 			</div>
-						
-			<div class="custom-divider"></div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label>Nome do Garanhão</label>
-                    <input type="text" required th:field="*{nome_garanhao}" class="form-control"/>
-                </div>
-				<div class="col-md-6 mb-3">
-				    <label>Cor da Palheta</label>
-					<select required th:field="*{cor_palheta}" class="form-control">
-					    <option value="">Escolha uma cor</option>
-					    <option value="Laranja">Laranja</option>
-					    <option value="Roxo">Roxo</option>
-					    <option value="Vermelho">Vermelho</option>
-					    <option value="Branco">Branco</option>
-					    <option value="Cinza">Cinza</option>
-					    <option value="Rosa">Rosa</option>
-					    <option value="Amarelo">Amarelo</option>
-					    <option value="Azul">Azul</option>
-					</select>
+		</div>
+	</nav>
+	<div class="container d-flex justify-content-center align-items-center">
+		<div class="form-container" style="width: 100%; max-width: 900px;">
+			<form action="/administrativo/garanhoes/salvar" th:object="${garanhao}" method="POST">
+				<div class="d-flex align-items-center justify-content-between mb-3">
+					<a href="/administrativo" class="custom-link">
+						<i class="fa-regular fa-circle-left"></i>
+					</a>
+					<h2 class="m-0 text-center flex-grow-1">Cadastro de Sêmen</h2>
+					<div style="width: 100px;"></div> <!-- Espaçador para alinhamento -->
 				</div>
 
-                <div class="col-md-6 mb-3">
-                    <label>Botijão</label>
-                    <input type="number" required th:field="*{botijao}" class="form-control" />
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label>Data da Contagem Inicial</label>
-                    <input type="date" required th:field="*{data_contagem_inicial}" class="form-control"/> 
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label>Caneca</label>
-                    <input type="number" required th:field="*{caneca}" class="form-control" />
-                </div>
-                <div class="col-md-6 mb-3">
-					<input type="hidden" th:field="*{saldo_atual_palhetas}" class="form-control"/>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label>Saldo Inicial de Palhetas</label>
-                    <input type="number" required th:field="*{saldo_inicial_palhetas}" class="form-control"/>
-                </div>
-                <div class="col-md-6 mb-3">
-				     <input type="hidden" required readonly="true" th:field="*{data_cadastro}" th:value="${#dates.format(data_cadastro, 'dd/MM/yyyy HH:mm:ss')}" class="form-control"/>
+				<div class="custom-divider"></div>
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<label>Nome do Garanhão</label>
+						<input type="text" required th:field="*{nome_garanhao}" class="form-control" />
+					</div>
+					<div class="col-md-6 mb-3">
+						<label>Cor da Palheta</label>
+						<select required th:field="*{cor_palheta}" class="form-control">
+							<option value="">Escolha uma cor</option>
+							<option value="Laranja">Laranja</option>
+							<option value="Roxo">Roxo</option>
+							<option value="Vermelho">Vermelho</option>
+							<option value="Branco">Branco</option>
+							<option value="Cinza">Cinza</option>
+							<option value="Rosa">Rosa</option>
+							<option value="Amarelo">Amarelo</option>
+							<option value="Azul">Azul</option>
+						</select>
+					</div>
+
+					<div class="col-md-6 mb-3">
+						<label>Botijão</label>
+						<input type="number" required th:field="*{botijao}" class="form-control" />
+					</div>
+					<div class="col-md-6 mb-3">
+						<label>Data da Contagem Inicial</label>
+						<input type="date" required th:field="*{data_contagem_inicial}" class="form-control" />
+					</div>
+					<div class="col-md-6 mb-3">
+						<label>Caneca</label>
+						<input type="number" required th:field="*{caneca}" class="form-control" />
+					</div>
+					<div class="col-md-6 mb-3">
+						<input type="hidden" th:field="*{saldo_atual_palhetas}" class="form-control" />
+					</div>
+					<div class="col-md-6 mb-3">
+						<label>Saldo Inicial de Palhetas</label>
+						<input type="number" required th:field="*{saldo_inicial_palhetas}" class="form-control" />
+					</div>
+					<div class="col-md-6 mb-3">
+						<input type="hidden" required readonly="true" th:field="*{data_cadastro}"
+							th:value="${#dates.format(data_cadastro, 'dd/MM/yyyy HH:mm:ss')}" class="form-control" />
+					</div>
 				</div>
-            </div>
-			<div class="custom-divider"></div>
-            <input type="hidden" th:field="*{id_garanhao}"/>
-            <div class="d-flex justify-content-between mt-4">
-                
-                <a href="/administrativo/garanhoes/listar" class="btn btn-light btn-sm text-white"> <i class="fa-solid fa-bars-staggered" style="color: #ffffff;"></i> Lista</a>
-				
-                <button type="submit" class="btn btn-dark btn-sm"> <i class="fa-solid fa-plus" style="color: #ffffff;"></i> <i class="fa-solid fa-horse-head" style="color: #ffffff;"></i> Cadastrar</button>
-				
-            </div>
-        </form>
-    </div>
-</div>
+				<div class="custom-divider"></div>
+				<input type="hidden" th:field="*{id_garanhao}" />
+				<div class="d-flex justify-content-between mt-4">
+
+					<a href="/administrativo/garanhoes/listar" class="btn btn-light btn-sm text-white"> <i
+							class="fa-solid fa-bars-staggered" style="color: #ffffff;"></i> Lista</a>
+
+					<button type="submit" class="btn btn-dark btn-sm"> <i class="fa-solid fa-plus"
+							style="color: #ffffff;"></i> <i class="fa-solid fa-horse-head" style="color: #ffffff;"></i>
+						Cadastrar</button>
+
+				</div>
+			</form>
+		</div>
+	</div>
 
 	<div class="watermark">LucasSales@2024</div>
-	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYQk3l0Uks7txk2NlXXaw58+3bh" crossorigin="anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYQk3l0Uks7txk2NlXXaw58+3bh"
+		crossorigin="anonymous"></script>
 	<script>
 		// Função para atualizar a data e hora
-	    function atualizarHorario() {
-	        var now = new Date();
-	        var dia = String(now.getDate()).padStart(2, '0');
-	        var mes = String(now.getMonth() + 1).padStart(2, '0');
-	        var ano = now.getFullYear();
-	        var horas = String(now.getHours()).padStart(2, '0');
-	        var minutos = String(now.getMinutes()).padStart(2, '0');
+		function atualizarHorario() {
+			var now = new Date();
+			var dia = String(now.getDate()).padStart(2, '0');
+			var mes = String(now.getMonth() + 1).padStart(2, '0');
+			var ano = now.getFullYear();
+			var horas = String(now.getHours()).padStart(2, '0');
+			var minutos = String(now.getMinutes()).padStart(2, '0');
 
-	        // Formata a data e hora como dd/MM/yyyy HH:mm:ss
-	        var dataFormatada = dia + '/' + mes + '/' + ano + ' ' + horas + ':' + minutos;
+			// Formata a data e hora como dd/MM/yyyy HH:mm:ss
+			var dataFormatada = dia + '/' + mes + '/' + ano + ' ' + horas + ':' + minutos;
 
-	        // Atualiza o valor do campo de input e também mantém a vinculação com o modelo
-	        document.getElementById('data_cadastro').value = dataFormatada;
-	    }
+			// Atualiza o valor do campo de input e também mantém a vinculação com o modelo
+			document.getElementById('data_cadastro').value = dataFormatada;
+		}
 
-	    // Atualiza a data e hora a cada segundo
-	    setInterval(atualizarHorario, 1000);
+		// Atualiza a data e hora a cada segundo
+		setInterval(atualizarHorario, 1000);
 
-	    // Chama a função uma vez ao carregar para já preencher o campo com a hora atual
-	    atualizarHorario();
-		
+		// Chama a função uma vez ao carregar para já preencher o campo com a hora atual
+		atualizarHorario();
+
 		// Validação para o campo "Botijão"
-		    const botijaoInput = document.getElementById('botijao');
-		    botijaoInput.addEventListener('input', (event) => {
-		        const valorDigitado = parseInt(event.target.value, 10);
+		const botijaoInput = document.getElementById('botijao');
+		botijaoInput.addEventListener('input', (event) => {
+			const valorDigitado = parseInt(event.target.value, 10);
 
-		        if (valorDigitado < 0) {
-		            event.target.value = 0; // Ajusta automaticamente para 0
-		            alert('O valor do botijão não pode ser negativo.');
-		        }
-		    });
+			if (valorDigitado < 0) {
+				event.target.value = 0; // Ajusta automaticamente para 0
+				alert('O valor do botijão não pode ser negativo.');
+			}
+		});
 
-		    // Validação para o campo "Caneca"
-		    const canecaInput = document.getElementById('caneca');
-		    canecaInput.addEventListener('input', (event) => {
-		        const valorDigitado = parseInt(event.target.value, 10);
+		// Validação para o campo "Caneca"
+		const canecaInput = document.getElementById('caneca');
+		canecaInput.addEventListener('input', (event) => {
+			const valorDigitado = parseInt(event.target.value, 10);
 
-		        if (valorDigitado < 0) {
-		            event.target.value = 0; // Ajusta automaticamente para 0
-		            alert('O valor da caneca não pode ser negativo.');
-		        }
-		    });
+			if (valorDigitado < 0) {
+				event.target.value = 0; // Ajusta automaticamente para 0
+				alert('O valor da caneca não pode ser negativo.');
+			}
+		});
 
-			// Validação para o campo "Saldo Inicial de Palhetas"
-		    const saldoInicialPalhetasInput = document.getElementById('saldo_inicial_palhetas'); // Certifique-se de que o ID bate com o HTML
-		    saldoInicialPalhetasInput.addEventListener('input', (event) => {
-		        const valorDigitado = parseInt(event.target.value, 10) || 0; // Garante que o valor seja tratado como número
+		// Validação para o campo "Saldo Inicial de Palhetas"
+		const saldoInicialPalhetasInput = document.getElementById('saldo_inicial_palhetas'); // Certifique-se de que o ID bate com o HTML
+		saldoInicialPalhetasInput.addEventListener('input', (event) => {
+			const valorDigitado = parseInt(event.target.value, 10) || 0; // Garante que o valor seja tratado como número
 
-		        if (valorDigitado < 0) {
-		            event.target.value = 0; // Ajusta automaticamente para 0
-		            alert('O saldo inicial de palhetas não pode ser negativo.');
-		        }
-		    });
+			if (valorDigitado < 0) {
+				event.target.value = 0; // Ajusta automaticamente para 0
+				alert('O saldo inicial de palhetas não pode ser negativo.');
+			}
+		});
 	</script>
 </body>
 

@@ -2,354 +2,436 @@
 <html lang="pt-br">
 
 <head>
-    <!-- Meta tags obrigatórias -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Meta tags obrigatórias -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
 
-    <title>Lista de movimentação</title>
-    <link rel="icon"
-        href="https://imgs.search.brave.com/zy0sfkgKeppdWAXGyYDnopeaDcBoxZyy_1tEfu-gL8c/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvN2Q5NDZhNTVl/NmM5YzdiNDc3ZDMw/NGVmYzExZmMxNjY4/NDQzZmVhYWVkODQ2/NTVhMmYyNTJjMGE5/MTcwNTYwMS93d3cu/aGFyYXNyb3NhbXlz/dGljYS5jb20uYnIv"
-        type="image/x-icon">
+	<title>Lista de movimentação</title>
+	<link rel="icon"
+		href="https://imgs.search.brave.com/zy0sfkgKeppdWAXGyYDnopeaDcBoxZyy_1tEfu-gL8c/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvN2Q5NDZhNTVl/NmM5YzdiNDc3ZDMw/NGVmYzExZmMxNjY4/NDQzZmVhYWVkODQ2/NTVhMmYyNTJjMGE5/MTcwNTYwMS93d3cu/aGFyYXNyb3NhbXlz/dGljYS5jb20uYnIv"
+		type="image/x-icon">
 
-    <style>
-        body {
-            font-family: "Asar", Sans-serif;
-            background-color: #C0C0C0;
-        }
+	<style>
+		body {
+			font-family: "Asar", Sans-serif;
+			background-color: #C0C0C0;
+		}
 
-        .form-container {
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin-top: 10px;
-            margin-bottom: 10px;
-            max-width: 1030px;
-            width: 100%;
-            border-top: 4px solid #808080;
-            border-bottom: 4px solid #808080;
-        }
+		.form-container {
+			background: #fff;
+			padding: 30px;
+			border-radius: 8px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			margin-top: 10px;
+			margin-bottom: 10px;
+			max-width: 1030px;
+			width: 100%;
+			border-top: 4px solid #808080;
+			border-bottom: 4px solid #808080;
+		}
 
-        h2 {
-            font-size: 32px;
-            color: #333333;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+		h2 {
+			font-size: 32px;
+			color: #333333;
+			font-weight: bold;
+			margin-bottom: 20px;
+			text-align: center;
+		}
 
-        .table-container {
-            overflow-x: auto;
-        }
+		.table-container {
+			overflow-x: auto;
+		}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
 
-        th,
-        td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
+		th,
+		td {
+			padding: 10px;
+			text-align: center;
+			border: 1px solid #ddd;
+		}
 
-        th {
-            background-color: #f2f2f2;
-        }
+		th {
+			background-color: #f2f2f2;
+		}
 
-        .watermark {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 14px;
-            color: rgba(0, 0, 0, 0.5);
-            pointer-events: none;
-        }
+		.watermark {
+			position: fixed;
+			bottom: 10px;
+			right: 10px;
+			font-size: 14px;
+			color: rgba(0, 0, 0, 0.5);
+			pointer-events: none;
+		}
 
-        .form-control {
-            border-radius: 8px;
-        }
+		.form-control {
+			border-radius: 8px;
+		}
 
-        .btn {
-            border-radius: 50px;
-        }
+		.btn {
+			border-radius: 50px;
+		}
 
-        /* Personalização do botão primário */
-        .btn-light {
-            background-color: #1b1e21;
-            /* Cor de fundo personalizada */
-            color: white;
-            /* Cor do texto do botão */
-            border: none;
-            /* Remove borda */
-        }
+		/* Personalização do botão primário */
+		.btn-light {
+			background-color: #1b1e21;
+			/* Cor de fundo personalizada */
+			color: white;
+			/* Cor do texto do botão */
+			border: none;
+			/* Remove borda */
+		}
 
-        /* Estilo do ícone dentro do botão */
-        .btn-light i {
-            color: #ffffff;
-            /* Cor branca para o ícone */
-        }
+		/* Estilo do ícone dentro do botão */
+		.btn-light i {
+			color: #ffffff;
+			/* Cor branca para o ícone */
+		}
 
-        /* Efeito no hover */
-        .btn-light:hover {
-            background-color: #cf8311;
-            /* Cor de fundo diferente no hover */
+		/* Efeito no hover */
+		.btn-light:hover {
+			background-color: #cf8311;
+			/* Cor de fundo diferente no hover */
 
-        }
+		}
 
-        .btn-light:hover i {
-            color: #ffffff;
-            /* Cor do ícone no hover */
-        }
+		.btn-light:hover i {
+			color: #ffffff;
+			/* Cor do ícone no hover */
+		}
 
-        /* Personalização do botão de sucesso */
-        .btn-dark {
-            background-color: #cf8311;
-            /* Cor de fundo personalizada */
-            color: white;
-            /* Cor do texto do botão */
-            border: none;
-            /* Remove borda */
-        }
+		/* Personalização do botão de sucesso */
+		.btn-dark {
+			background-color: #cf8311;
+			/* Cor de fundo personalizada */
+			color: white;
+			/* Cor do texto do botão */
+			border: none;
+			/* Remove borda */
+		}
 
-        /* Estilo dos ícones dentro do botão */
-        .btn-dark i {
-            color: #ffffff;
-            /* Cor branca para os ícones */
-        }
+		/* Estilo dos ícones dentro do botão */
+		.btn-dark i {
+			color: #ffffff;
+			/* Cor branca para os ícones */
+		}
 
-        /* Efeito no hover */
-        .btn-dark:hover {
-            background-color: #1b1e21;
-            /* Cor de fundo diferente no hover */
+		/* Efeito no hover */
+		.btn-dark:hover {
+			background-color: #1b1e21;
+			/* Cor de fundo diferente no hover */
 
-        }
+		}
 
-        .btn-dark:hover i {
-            color: #ffffff;
-            /* Cor dos ícones no hover */
-        }
+		.btn-dark:hover i {
+			color: #ffffff;
+			/* Cor dos ícones no hover */
+		}
 
-        .btn-sm {
-            font-size: 14px;
-            padding: 10px 20px;
-        }
+		.btn-sm {
+			font-size: 14px;
+			padding: 10px 20px;
+		}
 
-        .btn i {
-            margin-right: 8px;
-        }
+		.btn i {
+			margin-right: 8px;
+		}
 
-        /* Ajuste para o Navbar */
-        .navbar {
-            font-size: 1rem;
-            /* Define o tamanho da fonte */
-            width: 100%;
-            /* Largura do Navbar */
-            height: 138.86px;
-            /* Define a altura */
-            background-color: #000000C4;
-            /* Define a cor de fundo com opacidade */
-            border-style: solid;
-            border-width: 0 0 4px;
-            border-color: #fc0;
-        }
+		/* Ajuste para o Navbar */
+		.navbar {
+			font-size: 1rem;
+			/* Define o tamanho da fonte */
+			width: 100%;
+			/* Largura do Navbar */
+			height: 138.86px;
+			/* Define a altura */
+			background-color: #000000C4;
+			/* Define a cor de fundo com opacidade */
+			border-style: solid;
+			border-width: 0 0 4px;
+			border-color: #fc0;
+		}
 
-        .navbar-nav .nav-item .nav-link {
-            font-size: 1.2rem;
-            /* Define o tamanho da fonte dos itens do menu */
-            padding: 0.5rem 1rem;
-            /* Ajusta o espaçamento dos itens */
-            font-family: "Asar", Sans-serif;
-            text-decoration: none;
-            /* Remove o sublinhado dos links */
-            color: #000;
-            /* Cor padrão dos links */
-            transition: color 0.3s ease;
-            /* Suaviza a transição de cor */
-        }
+		.navbar-nav .nav-item .nav-link {
+			font-size: 1.2rem;
+			/* Define o tamanho da fonte dos itens do menu */
+			padding: 0.5rem 1rem;
+			/* Ajusta o espaçamento dos itens */
+			font-family: "Asar", Sans-serif;
+			text-decoration: none;
+			/* Remove o sublinhado dos links */
+			color: #000;
+			/* Cor padrão dos links */
+			transition: color 0.3s ease;
+			/* Suaviza a transição de cor */
+		}
 
-        .navbar-nav .nav-item .nav-link:hover {
-            color: #cf8311;
-            /* Cor ao passar o mouse */
-        }
+		.navbar-nav .nav-item .nav-link:hover {
+			color: #cf8311;
+			/* Cor ao passar o mouse */
+		}
 
 
-        .navbar-toggler {
-            border: none;
-        }
+		.navbar-toggler {
+			border: none;
+		}
 
-        .navbar-brand img {
-            width: 300x;
-            height: 100px;
-            /* Ajuste o tamanho do logo */
-        }
+		.navbar-brand img {
+			width: 300x;
+			height: 100px;
+			/* Ajuste o tamanho do logo */
+		}
 
-        .navbar-nav {
-            margin-left: auto;
-            /* Alinha os itens à direita para centralizar */
-        }
+		.navbar-nav {
+			margin-left: auto;
+			/* Alinha os itens à direita para centralizar */
+		}
 
-        .navbar-collapse {
-            justify-content: center;
-            /* Centraliza o conteúdo do menu */
-        }
+		.navbar-collapse {
+			justify-content: center;
+			/* Centraliza o conteúdo do menu */
+		}
 
-        .navbar-dark .navbar-nav .nav-link {
-            color: #fff;
-            /* Cor dos itens de navegação */
-        }
+		.navbar-dark .navbar-nav .nav-link {
+			color: #fff;
+			/* Cor dos itens de navegação */
+		}
 
-        /* Ajuste no campo de pesquisa */
-        .form-inline .form-control {
-            font-size: 1rem;
-            /* Tamanho da fonte do campo de pesquisa */
-        }
+		/* Ajuste no campo de pesquisa */
+		.form-inline .form-control {
+			font-size: 1rem;
+			/* Tamanho da fonte do campo de pesquisa */
+		}
 
-        .form-inline .btn {
-            font-size: 1rem;
-            /* Tamanho da fonte do botão */
-        }
+		.form-inline .btn {
+			font-size: 1rem;
+			/* Tamanho da fonte do botão */
+		}
 
-        .custom-divider {
-            margin: 10px 0;
-            border-top: 1px solid #e1e1e1;
-        }
+		.custom-divider {
+			margin: 10px 0;
+			border-top: 1px solid #e1e1e1;
+		}
 
-        .mb-4 {
-            font-weight: 700 !important;
-            color: #343a40;
-        }
+		.mb-4 {
+			font-weight: 700 !important;
+			color: #343a40;
+		}
 
-        .table-container {
-            overflow-x: auto;
-            display: flex;
-            justify-content: center;
-        }
+		.table-container {
+			overflow-x: auto;
+			display: flex;
+			justify-content: center;
+		}
 
-        table {
-            width: auto;
-            border-collapse: collapse;
-            margin: 0 auto;
-        }
+		table {
+			width: auto;
+			border-collapse: collapse;
+			margin: 0 auto;
+		}
 
-        .text-center {
-            text-align: center;
-        }
+		.text-center {
+			text-align: center;
+		}
 
-        div.dt-container .dt-search input {
-            border: 1px solid #aaa;
-            border-radius: 50px;
-            padding: 5px;
-            background-color: transparent;
-            color: inherit;
-            margin-left: 3px;
-        }
+		div.dt-container .dt-search input {
+			border: 1px solid #aaa;
+			border-radius: 50px;
+			padding: 5px;
+			background-color: transparent;
+			color: inherit;
+			margin-left: 3px;
+		}
 
-        div.dt-container .dt-input {
-            border: 1px solid #aaa;
-            border-radius: 50px;
-            padding: 5px;
-            background-color: transparent;
-            color: inherit;
-        }
+		div.dt-container .dt-input {
+			border: 1px solid #aaa;
+			border-radius: 50px;
+			padding: 5px;
+			background-color: transparent;
+			color: inherit;
+		}
 
-        /* Faz o link ocupar toda a linha */
-        .row-link {
-            display: block;
-            /* Faz o link ocupar o espaço completo da linha */
-            text-decoration: none;
-            /* Remove o sublinhado */
-            color: inherit;
-            /* Herda a cor de texto da célula */
-        }
+		/* Faz o link ocupar toda a linha */
+		.row-link {
+			display: block;
+			/* Faz o link ocupar o espaço completo da linha */
+			text-decoration: none;
+			/* Remove o sublinhado */
+			color: inherit;
+			/* Herda a cor de texto da célula */
+		}
 
-        /* Link ocupa toda a célula */
-        .text-center a {
-            display: block;
-            /* Faz o link ocupar toda a célula */
-            text-decoration: none;
-            /* Remove o sublinhado */
-            color: inherit;
-            /* Herda a cor do texto */
-            transition: background-color 0.3s ease;
-            /* Transição suave */
-        }
+		/* Link ocupa toda a célula */
+		.text-center a {
+			display: block;
+			/* Faz o link ocupar toda a célula */
+			text-decoration: none;
+			/* Remove o sublinhado */
+			color: inherit;
+			/* Herda a cor do texto */
+			transition: background-color 0.3s ease;
+			/* Transição suave */
+		}
 
-        .table tbody tr:hover {
-            background-color: #cf8311;
-            /* Cor de fundo ao passar o mouse */
-            cursor: pointer;
-            /* Indica que a linha é clicável */
-            transition: background-color 0.3s ease;
-            color: #ffffff;
-        }
+		.table tbody tr:hover {
+			background-color: #cf8311;
+			/* Cor de fundo ao passar o mouse */
+			cursor: pointer;
+			/* Indica que a linha é clicável */
+			transition: background-color 0.3s ease;
+			color: #ffffff;
+		}
 
-        .m-0 {
-            margin: 0 !important;
-            font-family: "Asar", Sans-serif;
-            color: #cf8311;
-        }
+		.m-0 {
+			margin: 0 !important;
+			font-family: "Asar", Sans-serif;
+			color: #cf8311;
+		}
 
-        .custom-link {
-            color: rgb(15, 15, 15);
-            /* Cor inicial */
-            font-size: 32px;
-            /* Tamanho da fonte */
-            text-decoration: none;
-            /* Remove o sublinhado do link */
-        }
+		.custom-link {
+			color: rgb(15, 15, 15);
+			/* Cor inicial */
+			font-size: 32px;
+			/* Tamanho da fonte */
+			text-decoration: none;
+			/* Remove o sublinhado do link */
+		}
 
-        .custom-link:hover {
-            color: #cf8311;
-            /* Cor do texto ao passar o mouse */
-        }
+		.custom-link:hover {
+			color: #cf8311;
+			/* Cor do texto ao passar o mouse */
+		}
 
-        table.dataTable thead>tr>th.dt-orderable-asc,
-        table.dataTable thead>tr>th.dt-orderable-desc,
-        table.dataTable thead>tr>td.dt-orderable-asc,
-        table.dataTable thead>tr>td.dt-orderable-desc {
-            cursor: pointer;
-            background-color: #1b1e21;
-            color: #cf8311;
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+		table.dataTable thead>tr>th.dt-orderable-asc,
+		table.dataTable thead>tr>th.dt-orderable-desc,
+		table.dataTable thead>tr>td.dt-orderable-asc,
+		table.dataTable thead>tr>td.dt-orderable-desc {
+			cursor: pointer;
+			background-color: #1b1e21;
+			color: #cf8311;
+		}
+
+		/* Remove o hover branco dos itens de menu */
+		.dropdown-item:hover {
+			background-color: transparent;
+			/* Nenhuma cor de fundo no hover */
+			color: #cf8311;
+			/* Cor do texto no hover (ajustável) */
+			text-decoration: none;
+			/* Remove sublinhado, se necessário */
+		}
+
+		.dropdown-item i {
+			margin-right: 8px;
+			font-size: 1.6rem;
+			/* Tamanho maior dos ícones */
+		}
+
+		/* Estilo base para os ícones */
+		.dropdown-item i {
+			font-size: 2rem;
+			/* Tamanho dos ícones */
+			transition: transform 0.3s ease, color 0.3s ease;
+		}
+
+		/* Hover para o ícone do usuário */
+		.dropdown-item i.fa-user:hover {
+			color: #cf8311;
+			/* Cor ao passar o mouse */
+			transform: scale(1.1);
+			/* Aumenta o tamanho no hover */
+		}
+
+		/* Hover para o ícone de sair */
+		.dropdown-item i.fa-right-from-bracket:hover {
+			color: #0000ff;
+			/* Azul no hover */
+			transform: rotate(15deg);
+			/* Rotaciona no hover */
+		}
+
+		.navbar-background {
+			background: linear-gradient(45deg, #363636, #000000);
+			/* Gradiente mais suave entre cinza e preto */
+			background-size: 400% 400%;
+			/* Movimento dinâmico do gradiente */
+			animation: gradientAnimation 8s ease infinite;
+			/* Animação suave no gradiente */
+			height: 138.86px;
+			/* Ajusta a altura do navbar para um visual mais espaçoso */
+			display: flex;
+			align-items: center;
+			/* Centraliza verticalmente os itens */
+			justify-content: space-between;
+			/* Espaço entre os itens */
+			padding: 0 20px;
+			/* Adiciona espaçamento nas laterais */
+			box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+			/* Sombra mais suave para um efeito de profundidade */
+			font-family: 'Roboto', sans-serif;
+			/* Fonte moderna e limpa */
+			position: relative;
+			/* Necessário para sobrepor outros elementos, se necessário */
+		}
+
+		/* Animação suave para o gradiente */
+		@keyframes gradientAnimation {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+	</style>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 </head>
 <link href="https://fonts.googleapis.com/css2?family=Asar&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <!-- Logo à esquerda -->
-            <a class="navbar-brand" href="#">
-                <img href="/administrativo/garanhoes/lista"
-                    src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png"
-                    class="d-inline-block align-top" alt="Logo">
-            </a>
+	<nav class="navbar navbar-expand-lg navbar-dark navbar-background">
+		<div class="container">
+			<!-- Logo à esquerda -->
+			<a class="navbar-brand" href="/administrativo">
+				<img href="/administrativo/garanhoes/lista"
+					src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png"
+					class="d-inline-block align-top" alt="Logo">
+			</a>
 
-            <!-- Botão do menu responsivo -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
-                aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+			<!-- Botão do menu responsivo -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+				aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-            <!-- Div vazia para centralizar o menu de navegação -->
-            <div class="d-none d-lg-flex flex-grow-1"></div>
+			<!-- Div vazia para centralizar o menu de navegação -->
+			<div class="d-none d-lg-flex flex-grow-1"></div>
 
-            <!-- Conteúdo centralizado -->
-            <div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/administrativo">Ir para a página inicial<span class="sr-only">(página
-                                atual)</span></a>
-                    </li>
-                    <!--<li class="nav-item">
+			<!-- Conteúdo centralizado -->
+			<div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
+
+				<a class="dropdown-item" href="/administrativo/usuarios/listar">
+					<i class="fa-solid fa-user" style="color: #ffffff;"></i>
+				</a>
+
+				<a class="dropdown-item" href="/sair">
+					<i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i>
+				</a>
+				<!--<li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -362,171 +444,171 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Algo mais aqui</a>
                     </div>-->
-                    </li>
-                </ul>
-            </div>
+				</li>
+				</ul>
+			</div>
 
-            <!-- Campo de pesquisa à direita
+			<!-- Campo de pesquisa à direita
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
             <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
         </form>-->
-        </div>
-    </nav>
+		</div>
+	</nav>
 
-    <div class="container d-flex justify-content-center align-items-center">
-        <div class="form-container" style="width: 160%; max-width: 1300px;">
+	<div class="container d-flex justify-content-center align-items-center">
+		<div class="form-container" style="width: 160%; max-width: 1300px;">
 
-            <div class="d-flex align-items-center justify-content-between mb-3">
-                <a href="/administrativo" class="custom-link">
-                    <i class="fa-regular fa-circle-left"></i>
-                </a>
-                <h2 class="m-0 text-center flex-grow-1">Lista de Movimentações de Sêmen</h2>
-                <div style="width: 100px;"></div> <!-- Espaçador para alinhamento -->
-            </div>
+			<div class="d-flex align-items-center justify-content-between mb-3">
+				<a href="/administrativo" class="custom-link">
+					<i class="fa-regular fa-circle-left"></i>
+				</a>
+				<h2 class="m-0 text-center flex-grow-1">Lista de Movimentações de Sêmen</h2>
+				<div style="width: 100px;"></div> <!-- Espaçador para alinhamento -->
+			</div>
 
-            <div class="custom-divider"></div>
-            <div class="table-container">
-                <table class="table table-striped" id="tabela">
-                    <thead>
-                        <tr>
-                            <th class="text-center">Nome do Garanhão</th>
-                            <th class="text-center">Botijão</th>
-                            <th class="text-center">Caneca</th>
-                            <th class="text-center">Cor da Palheta</th>
-                            <th class="text-center">Quantidade</th>
-                            <th class="text-center">Data da Movimentação</th>
-                            <th class="text-center">Destino</th>
-                            <th class="text-center">Endereço</th>
-                            <th class="text-center">Profissional</th>
-                            <th class="text-center">Nome</th>
-                            <th class="text-center">Identificador</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="movimentacao : ${listaMovimentacoes}">
-                            <!-- Nome do Garanhão como link -->
-                            <td class="text-center">
-                                <a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
-                                    th:text="${movimentacao.garanhao.nome_garanhao}"></a>
-                            </td>
-                            <!-- Botijão como link -->
-                            <td class="text-center">
-                                <a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
-                                    th:text="${movimentacao.garanhao.botijao}"></a>
-                            </td>
-                            <!-- Caneca como link -->
-                            <td class="text-center">
-                                <a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
-                                    th:text="${movimentacao.garanhao.caneca}"></a>
-                            </td>
-                            <!-- Cor da Palheta como link -->
-                            <td class="text-center">
-                                <a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
-                                    th:text="${movimentacao.garanhao.cor_palheta}"></a>
-                            </td>
-                            <!-- Quantidade como link -->
-                            <td class="text-center">
-                                <a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
-                                    th:text="${movimentacao.quantidade}"></a>
-                            </td>
-                            <!-- Data de Movimentação como link -->
-                            <td class="text-center">
-                                <a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
-                                    th:text="${#temporals.format(movimentacao.data_movimentacao, 'dd/MM/yyyy HH:mm')}"></a>
-                            </td>
-                            <!-- Destino como link -->
-                            <td class="text-center">
-                                <a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
-                                    th:text="${movimentacao.destino}"></a>
-                            </td>
-                            <!-- Endereço como link -->
-                            <td class="text-center">
-                                <a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
-                                    th:text="${movimentacao.endereco}"></a>
-                            </td>
-                            <td class="text-center">
-                                <a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
-                                    th:text="${movimentacao.profissional}"></a>
-                            </td>
-                            <td class="text-center">
-                                <a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
-                                    th:text="${movimentacao.nome_profissional}"></a>
-                            </td>
-                            <td class="text-center">
-                                <a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
-                                    th:text="${movimentacao.identificador_profissional}"></a>
-                            </td>
-                    </tbody>
-                </table>
-            </div>
-            <div class="custom-divider"></div>
-            <div class="row mt-3">
+			<div class="custom-divider"></div>
+			<div class="table-container">
+				<table class="table table-striped" id="tabela">
+					<thead>
+						<tr>
+							<th class="text-center">Nome do Garanhão</th>
+							<th class="text-center">Botijão</th>
+							<th class="text-center">Caneca</th>
+							<th class="text-center">Cor da Palheta</th>
+							<th class="text-center">Quantidade</th>
+							<th class="text-center">Data da Movimentação</th>
+							<th class="text-center">Destino</th>
+							<th class="text-center">Endereço</th>
+							<th class="text-center">Profissional</th>
+							<th class="text-center">Nome</th>
+							<th class="text-center">Identificador</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="movimentacao : ${listaMovimentacoes}">
+							<!-- Nome do Garanhão como link -->
+							<td class="text-center">
+								<a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
+									th:text="${movimentacao.garanhao.nome_garanhao}"></a>
+							</td>
+							<!-- Botijão como link -->
+							<td class="text-center">
+								<a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
+									th:text="${movimentacao.garanhao.botijao}"></a>
+							</td>
+							<!-- Caneca como link -->
+							<td class="text-center">
+								<a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
+									th:text="${movimentacao.garanhao.caneca}"></a>
+							</td>
+							<!-- Cor da Palheta como link -->
+							<td class="text-center">
+								<a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
+									th:text="${movimentacao.garanhao.cor_palheta}"></a>
+							</td>
+							<!-- Quantidade como link -->
+							<td class="text-center">
+								<a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
+									th:text="${movimentacao.quantidade}"></a>
+							</td>
+							<!-- Data de Movimentação como link -->
+							<td class="text-center">
+								<a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
+									th:text="${#temporals.format(movimentacao.data_movimentacao, 'dd/MM/yyyy HH:mm')}"></a>
+							</td>
+							<!-- Destino como link -->
+							<td class="text-center">
+								<a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
+									th:text="${movimentacao.destino}"></a>
+							</td>
+							<!-- Endereço como link -->
+							<td class="text-center">
+								<a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
+									th:text="${movimentacao.endereco}"></a>
+							</td>
+							<td class="text-center">
+								<a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
+									th:text="${movimentacao.profissional}"></a>
+							</td>
+							<td class="text-center">
+								<a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
+									th:text="${movimentacao.nome_profissional}"></a>
+							</td>
+							<td class="text-center">
+								<a th:href="@{/administrativo/movimentacoes/eventoMovimentacao/editarMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
+									th:text="${movimentacao.identificador_profissional}"></a>
+							</td>
+					</tbody>
+				</table>
+			</div>
+			<div class="custom-divider"></div>
+			<div class="row mt-3">
 
-                <div class="col text-left">
-                    <a href="#" id="btnImprimir" class="btn btn-light btn-sm text-white">
-                        <i class="fa-solid fa-print"></i> Imprimir
-                    </a>
-                </div>
-                <div class="col text-right">
-                    <a href="/administrativo/movimentacoes/cadastro">
-                        <button type="button" class="btn btn-dark btn-sm"><i class="fa-solid fa-plus"></i> Efetuar
-                            Movimentação</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+				<div class="col text-left">
+					<a href="#" id="btnImprimir" class="btn btn-light btn-sm text-white">
+						<i class="fa-solid fa-print"></i> Imprimir
+					</a>
+				</div>
+				<div class="col text-right">
+					<a href="/administrativo/movimentacoes/cadastro">
+						<button type="button" class="btn btn-dark btn-sm"><i class="fa-solid fa-plus"></i> Efetuar
+							Movimentação</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div>
+	<div>
 
-        <div class="watermark">LucasSales@2024</div>
+		<div class="watermark">LucasSales@2024</div>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.dataTables.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#tabela').DataTable({
-                    language: { url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/pt-BR.json' }
-                });
-            });
-            document.getElementById('btnImprimir').addEventListener('click', function (e) {
-                e.preventDefault(); // Evita o comportamento padrão do link
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://cdn.datatables.net/2.1.8/js/dataTables.dataTables.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$('#tabela').DataTable({
+					language: { url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/pt-BR.json' }
+				});
+			});
+			document.getElementById('btnImprimir').addEventListener('click', function (e) {
+				e.preventDefault(); // Evita o comportamento padrão do link
 
-                // Clona a tabela original
-                const tabela = document.getElementById('tabela');
-                const linhas = Array.from(tabela.querySelectorAll('tbody tr')); // Todas as linhas da tabela
+				// Clona a tabela original
+				const tabela = document.getElementById('tabela');
+				const linhas = Array.from(tabela.querySelectorAll('tbody tr')); // Todas as linhas da tabela
 
-                // Configuração de itens por página
-                const maxItensPorPagina = 14; // Número máximo de itens por página
-                const paginas = []; // Array para armazenar as tabelas divididas
+				// Configuração de itens por página
+				const maxItensPorPagina = 14; // Número máximo de itens por página
+				const paginas = []; // Array para armazenar as tabelas divididas
 
-                // Divide as linhas em lotes de no máximo `maxItensPorPagina`
-                for (let i = 0; i < linhas.length; i += maxItensPorPagina) {
-                    const novaTabela = document.createElement('table');
-                    novaTabela.innerHTML = `
+				// Divide as linhas em lotes de no máximo `maxItensPorPagina`
+				for (let i = 0; i < linhas.length; i += maxItensPorPagina) {
+					const novaTabela = document.createElement('table');
+					novaTabela.innerHTML = `
 	            <thead>${tabela.querySelector('thead').innerHTML}</thead>
 	            <tbody></tbody>
 	        `;
-                    const tbody = novaTabela.querySelector('tbody');
+					const tbody = novaTabela.querySelector('tbody');
 
-                    // Clona as linhas e processa os links para transformá-los em texto
-                    linhas.slice(i, i + maxItensPorPagina).forEach(linha => {
-                        const linhaClonada = linha.cloneNode(true);
-                        const links = linhaClonada.querySelectorAll('a'); // Seleciona todos os links dentro da linha clonada
-                        links.forEach(link => {
-                            const texto = document.createTextNode(link.textContent); // Obtém o texto do link
-                            link.parentNode.replaceChild(texto, link); // Substitui o link pelo texto puro
-                        });
-                        tbody.appendChild(linhaClonada);
-                    });
+					// Clona as linhas e processa os links para transformá-los em texto
+					linhas.slice(i, i + maxItensPorPagina).forEach(linha => {
+						const linhaClonada = linha.cloneNode(true);
+						const links = linhaClonada.querySelectorAll('a'); // Seleciona todos os links dentro da linha clonada
+						links.forEach(link => {
+							const texto = document.createTextNode(link.textContent); // Obtém o texto do link
+							link.parentNode.replaceChild(texto, link); // Substitui o link pelo texto puro
+						});
+						tbody.appendChild(linhaClonada);
+					});
 
-                    paginas.push(novaTabela); // Adiciona a tabela dividida no array de páginas
-                }
+					paginas.push(novaTabela); // Adiciona a tabela dividida no array de páginas
+				}
 
-                // Cria a janela para impressão
-                const janelaImpressao = window.open('', '', 'width=800,height=600');
-                janelaImpressao.document.write(`
+				// Cria a janela para impressão
+				const janelaImpressao = window.open('', '', 'width=800,height=600');
+				janelaImpressao.document.write(`
 		<html>
 		<head>
 		    <title>Impressão - Haras Rosa Mystica</title>
@@ -655,14 +737,14 @@
 		</html>
 
 	    `);
-                janelaImpressao.document.close();
-                janelaImpressao.focus();
-                janelaImpressao.print();
-                janelaImpressao.close();
-            });
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+				janelaImpressao.document.close();
+				janelaImpressao.focus();
+				janelaImpressao.print();
+				janelaImpressao.close();
+			});
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+		<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 </body>
 
 </html>

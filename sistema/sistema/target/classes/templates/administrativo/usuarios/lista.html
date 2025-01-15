@@ -11,7 +11,7 @@
 		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
 
-	<title>Lista de garanhões</title>
+	<title>Lista de Usuários</title>
 	<link rel="icon"
 		href="https://imgs.search.brave.com/zy0sfkgKeppdWAXGyYDnopeaDcBoxZyy_1tEfu-gL8c/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvN2Q5NDZhNTVl/NmM5YzdiNDc3ZDMw/NGVmYzExZmMxNjY4/NDQzZmVhYWVkODQ2/NTVhMmYyNTJjMGE5/MTcwNTYwMS93d3cu/aGFyYXNyb3NhbXlz/dGljYS5jb20uYnIv"
 		type="image/x-icon">
@@ -396,7 +396,7 @@
 			<!-- Logo à esquerda -->
 			<a class="navbar-brand" href="/administrativo">
 				<img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png"
-					class="d-inline-block align-top" alt="Logo">
+					class="d-inline-block align-top" alt="">
 			</a>
 
 			<!-- Botão do menu responsivo -->
@@ -410,36 +410,13 @@
 
 			<!-- Conteúdo centralizado -->
 			<div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
-
 				<a class="dropdown-item" href="/administrativo/usuarios/listar">
 					<i class="fa-solid fa-user" style="color: #ffffff;"></i>
 				</a>
-
 				<a class="dropdown-item" href="/sair">
 					<i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i>
 				</a>
-				<!--<li class="nav-item">
-	                    <a class="nav-link" href="#">Link</a>
-	                </li>
-	                <li class="nav-item dropdown">
-	                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                        Dropdown
-	                    </a>
-	                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	                        <a class="dropdown-item" href="#">Ação</a>
-	                        <a class="dropdown-item" href="#">Outra ação</a>
-	                        <div class="dropdown-divider"></div>
-	                        <a class="dropdown-item" href="#">Algo mais aqui</a>
-	                    </div>-->
-				</li>
-				</ul>
 			</div>
-
-			<!-- Campo de pesquisa à direita
-	        <form class="form-inline my-2 my-lg-0">
-	            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-	            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
-	        </form>-->
 		</div>
 	</nav>
 
@@ -450,7 +427,7 @@
 				<a href="/administrativo" class="custom-link">
 					<i class="fa-regular fa-circle-left"></i>
 				</a>
-				<h2 class="m-0 text-center flex-grow-1">Lista de Sêmen</h2>
+				<h2 class="m-0 text-center flex-grow-1">Lista de Usuários</h2>
 				<div style="width: 100px;"></div> <!-- Espaçador para alinhamento -->
 			</div>
 			<div class="custom-divider"></div>
@@ -458,47 +435,41 @@
 				<table class="table table-striped" id="tabela">
 					<thead>
 						<tr>
-							<th class="text-center">Nome do Garanhão</th>
-							<th class="text-center">Botijão</th>
-							<th class="text-center">Caneca</th>
-							<th class="text-center">Cor</th>
-							<th class="text-center">Data da Contagem Inicial</th>
-							<th class="text-center">Saldo Inicial</th>
-							<th class="text-center">Saldo Atual</th>
+							<th class="text-center">Nome do usuario</th>
+							<th class="text-center">Email</th>
+							<th class="text-center">Senha</th>
+							<th class="text-center">Tipo</th>
+							<th class="text-center">Data do cadastro</th>
+
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="garanhao : ${listaGaranhoes}">
+						<tr th:each="usuario : ${listaUsuarios}">
 							<!-- Cada célula agora é um link que ocupa toda a célula -->
 							<td class="text-center">
-								<a th:href="@{/administrativo/garanhoes/eventoGaranhao/editarGaranhao/{id_garanhao}(id_garanhao=${garanhao.id_garanhao})}"
-									th:text="${garanhao.nome_garanhao}" class="row-link"></a>
+								<a th:href="@{/administrativo/usuarios/eventoUsuario/editarUsuario/{id_usuario}(id_usuario=${usuario.id_usuario})}"
+									th:text="${usuario.nome_usuario}" class="row-link"></a>
 							</td>
 							<td class="text-center">
-								<a th:href="@{/administrativo/garanhoes/eventoGaranhao/editarGaranhao/{id_garanhao}(id_garanhao=${garanhao.id_garanhao})}"
-									th:text="${garanhao.botijao}" class="row-link"></a>
+								<a th:href="@{/administrativo/usuarios/eventoUsuario/editarUsuario/{id_usuario}(id_usuario=${usuario.id_usuario})}"
+									th:text="${usuario.email}" class="row-link"></a>
 							</td>
 							<td class="text-center">
-								<a th:href="@{/administrativo/garanhoes/eventoGaranhao/editarGaranhao/{id_garanhao}(id_garanhao=${garanhao.id_garanhao})}"
-									th:text="${garanhao.caneca}" class="row-link"></a>
+								<a th:href="@{/administrativo/usuarios/eventoUsuario/editarUsuario/{id_usuario}(id_usuario=${usuario.id_usuario})}"
+									th:text="${usuario.senha}" class="row-link"></a>
 							</td>
 							<td class="text-center">
-								<a th:href="@{/administrativo/garanhoes/eventoGaranhao/editarGaranhao/{id_garanhao}(id_garanhao=${garanhao.id_garanhao})}"
-									th:text="${garanhao.cor_palheta}" class="row-link"></a>
+								<a th:href="@{/administrativo/usuarios/eventoUsuario/editarUsuario/{id_usuario}(id_usuario=${usuario.id_usuario})}"
+									th:text="${usuario.tipo}" class="row-link"></a>
 							</td>
 							<td class="text-center">
-								<a th:href="@{/administrativo/garanhoes/eventoGaranhao/editarGaranhao/{id_garanhao}(id_garanhao=${garanhao.id_garanhao})}"
-									th:text="${#temporals.format(garanhao.data_contagem_inicial, 'dd/MM/yyyy')}"
+								<a th:href="@{/administrativo/usuarios/eventoUsuario/editarUsuario/{id_usuario}(id_usuario=${usuario.id_usuario})}"
+									th:text="${#temporals.format(usuario.data_cadastro, 'dd/MM/yyyy HH:mm')}"
 									class="row-link"></a>
 							</td>
-							<td class="text-center">
-								<a th:href="@{/administrativo/garanhoes/eventoGaranhao/editarGaranhao/{id_garanhao}(id_garanhao=${garanhao.id_garanhao})}"
-									th:text="${garanhao.saldo_inicial_palhetas}" class="row-link"></a>
-							</td>
-							<td class="text-center">
-								<a th:href="@{/administrativo/garanhoes/eventoGaranhao/editarGaranhao/{id_garanhao}(id_garanhao=${garanhao.id_garanhao})}"
-									th:text="${garanhao.saldo_atual_palhetas}" class="row-link"></a>
-							</td>
+
+
+
 						</tr>
 					</tbody>
 				</table>
@@ -511,9 +482,9 @@
 					</a>
 				</div>
 				<div class="col text-right">
-					<a href="/administrativo/garanhoes/cadastro">
+					<a href="/administrativo/usuarios/cadastro">
 						<button type="button" class="btn btn-dark btn-sm"><i class="fa-solid fa-plus"></i> <i
-								class="fa-solid fa-horse-head"></i> Cadastrar</button>
+								class="fa-solid fa-user"></i> Cadastrar</button>
 					</a>
 				</div>
 			</div>
@@ -677,15 +648,11 @@
 	                <div class="header-img">
 	                    <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png" alt="Logo do Haras Rosa Mystica">
 	                </div>
-	                <h2 class="header-title">Lista de Sêmen Disponível - Página ${index + 1}</h2>
+	                <h2 class="header-title">Lista de Usuários - Página ${index + 1}</h2>
 	            </div>
 	            <div class="content">${tabela.outerHTML}</div>
 				<div class="footer">
 				    <div class="signature">
-				        <div class="signature-block">
-							<div class="label">___________________________________________</div>
-							<div class="label">Assinatura do veterinário da reprodução</div>
-				        </div>
 				        
 				    </div>
 				    <div class="footer-text">

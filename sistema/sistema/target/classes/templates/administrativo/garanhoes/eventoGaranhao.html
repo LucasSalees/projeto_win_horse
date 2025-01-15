@@ -2,642 +2,700 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
-    <title>Editar sêmen</title>
-    <link rel="icon"
-        href="https://imgs.search.brave.com/zy0sfkgKeppdWAXGyYDnopeaDcBoxZyy_1tEfu-gL8c/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvN2Q5NDZhNTVl/NmM5YzdiNDc3ZDMw/NGVmYzExZmMxNjY4/NDQzZmVhYWVkODQ2/NTVhMmYyNTJjMGE5/MTcwNTYwMS93d3cu/aGFyYXNyb3NhbXlz/dGljYS5jb20uYnIv"
-        type="image/x-icon">
+	<title>Editar sêmen</title>
+	<link rel="icon"
+		href="https://imgs.search.brave.com/zy0sfkgKeppdWAXGyYDnopeaDcBoxZyy_1tEfu-gL8c/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvN2Q5NDZhNTVl/NmM5YzdiNDc3ZDMw/NGVmYzExZmMxNjY4/NDQzZmVhYWVkODQ2/NTVhMmYyNTJjMGE5/MTcwNTYwMS93d3cu/aGFyYXNyb3NhbXlz/dGljYS5jb20uYnIv"
+		type="image/x-icon">
 
-    <style>
-        body {
-            font-family: "Asar", Sans-serif;
-            background-color: #C0C0C0;
-        }
+	<style>
+		body {
+			font-family: "Asar", Sans-serif;
+			background-color: #C0C0C0;
+		}
 
-        /* Estilos para o container do formulário */
-        .form-container {
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin-top: 10px;
-            margin-bottom: 10px;
-            max-width: 900px;
-            width: 100%;
-            border-top: 4px solid #808080;
-            border-bottom: 4px solid #808080;
-        }
+		/* Estilos para o container do formulário */
+		.form-container {
+			background: #fff;
+			padding: 30px;
+			border-radius: 8px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			margin-top: 10px;
+			margin-bottom: 10px;
+			max-width: 900px;
+			width: 100%;
+			border-top: 4px solid #808080;
+			border-bottom: 4px solid #808080;
+		}
 
-        h2 {
-            font-size: 32px;
-            color: #333333;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+		h2 {
+			font-size: 32px;
+			color: #333333;
+			font-weight: bold;
+			margin-bottom: 20px;
+			text-align: center;
+		}
 
-        .watermark {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 14px;
-            color: rgba(0, 0, 0, 0.5);
-            pointer-events: none;
-        }
+		.watermark {
+			position: fixed;
+			bottom: 10px;
+			right: 10px;
+			font-size: 14px;
+			color: rgba(0, 0, 0, 0.5);
+			pointer-events: none;
+		}
 
-        .form-row {
-            margin-bottom: 20px;
-        }
+		.form-row {
+			margin-bottom: 20px;
+		}
 
-        .form-group {
-            margin-bottom: 0;
-        }
+		.form-group {
+			margin-bottom: 0;
+		}
 
-        .saldo-info {
-            font-size: 14px;
-            color: #6c757d;
-            line-height: 2.2;
-        }
+		.saldo-info {
+			font-size: 14px;
+			color: #6c757d;
+			line-height: 2.2;
+		}
 
-        .form-control {
-            border-radius: 8px;
-        }
+		.form-control {
+			border-radius: 8px;
+		}
 
-        .btn {
-            border-radius: 50px;
-        }
+		.btn {
+			border-radius: 50px;
+		}
 
-        .btn-danger {
-            background-color: #B22222;
-            /* Cor de fundo personalizada */
-            color: white;
-            /* Cor do texto do botão */
-            border: none;
-            /* Remove borda */
-        }
+		.btn-danger {
+			background-color: #B22222;
+			/* Cor de fundo personalizada */
+			color: white;
+			/* Cor do texto do botão */
+			border: none;
+			/* Remove borda */
+		}
 
-        /* Estilo do ícone dentro do botão */
-        .btn-danger i {
-            color: #ffffff;
-            /* Cor branca para o ícone */
-        }
+		/* Estilo do ícone dentro do botão */
+		.btn-danger i {
+			color: #ffffff;
+			/* Cor branca para o ícone */
+		}
 
-        /* Efeito no hover */
-        .btn-danger:hover {
-            background-color: #FF0000;
-            /* Cor de fundo diferente no hover */
+		/* Efeito no hover */
+		.btn-danger:hover {
+			background-color: #FF0000;
+			/* Cor de fundo diferente no hover */
 
-        }
+		}
 
-        .btn-danger:hover i {
-            color: #ffffff;
-            /* Cor do ícone no hover */
-        }
+		.btn-danger:hover i {
+			color: #ffffff;
+			/* Cor do ícone no hover */
+		}
 
-        .btn-light {
-            background-color: #1b1e21;
-            /* Cor de fundo personalizada */
-            color: white;
-            /* Cor do texto do botão */
-            border: none;
-            /* Remove borda */
-        }
+		.btn-light {
+			background-color: #1b1e21;
+			/* Cor de fundo personalizada */
+			color: white;
+			/* Cor do texto do botão */
+			border: none;
+			/* Remove borda */
+		}
 
-        /* Estilo do ícone dentro do botão */
-        .btn-light i {
-            color: #ffffff;
-            /* Cor branca para o ícone */
-        }
+		/* Estilo do ícone dentro do botão */
+		.btn-light i {
+			color: #ffffff;
+			/* Cor branca para o ícone */
+		}
 
-        /* Efeito no hover */
-        .btn-light:hover {
-            background-color: #cf8311;
-            /* Cor de fundo diferente no hover */
+		/* Efeito no hover */
+		.btn-light:hover {
+			background-color: #cf8311;
+			/* Cor de fundo diferente no hover */
 
-        }
+		}
 
-        .btn-light:hover i {
-            color: #ffffff;
-            /* Cor do ícone no hover */
-        }
+		.btn-light:hover i {
+			color: #ffffff;
+			/* Cor do ícone no hover */
+		}
 
-        .btn-dark {
-            background-color: #cf8311;
-            /* Cor de fundo personalizada */
-            color: white;
-            /* Cor do texto do botão */
-            border: none;
-            /* Remove borda */
-        }
+		.btn-dark {
+			background-color: #cf8311;
+			/* Cor de fundo personalizada */
+			color: white;
+			/* Cor do texto do botão */
+			border: none;
+			/* Remove borda */
+		}
 
-        /* Estilo dos ícones dentro do botão */
-        .btn-dark i {
-            color: #ffffff;
-            /* Cor branca para os ícones */
-        }
+		/* Estilo dos ícones dentro do botão */
+		.btn-dark i {
+			color: #ffffff;
+			/* Cor branca para os ícones */
+		}
 
-        /* Efeito no hover */
-        .btn-dark:hover {
-            background-color: #1b1e21;
-            /* Cor de fundo diferente no hover */
+		/* Efeito no hover */
+		.btn-dark:hover {
+			background-color: #1b1e21;
+			/* Cor de fundo diferente no hover */
 
-        }
+		}
 
-        .btn-dark:hover i {
-            color: #ffffff;
-            /* Cor dos ícones no hover */
-        }
+		.btn-dark:hover i {
+			color: #ffffff;
+			/* Cor dos ícones no hover */
+		}
 
-        .btn-sm {
-            font-size: 14px;
-            padding: 10px 20px;
-        }
+		.btn-sm {
+			font-size: 14px;
+			padding: 10px 20px;
+		}
 
-        .btn i {
-            margin-right: 8px;
-        }
+		.btn i {
+			margin-right: 8px;
+		}
 
-        .text-muted {
-            color: #6c757d !important;
-        }
+		.text-muted {
+			color: #6c757d !important;
+		}
 
-        label {
-            display: inline-block;
-            margin-bottom: .5rem;
-            font-weight: 600;
-        }
+		label {
+			display: inline-block;
+			margin-bottom: .5rem;
+			font-weight: 600;
+		}
 
-        .custom-divider {
-            margin: 10px 0;
-            border-top: 1px solid #e1e1e1;
-        }
+		.custom-divider {
+			margin: 10px 0;
+			border-top: 1px solid #e1e1e1;
+		}
 
-        .navbar {
-            position: relative;
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-            -ms-flex-align: center;
-            align-items: center;
-            -ms-flex-pack: justify;
-            justify-content: space-between;
-            padding: .5rem 1rem;
-        }
+		.navbar {
+			position: relative;
+			display: -ms-flexbox;
+			display: flex;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			-ms-flex-align: center;
+			align-items: center;
+			-ms-flex-pack: justify;
+			justify-content: space-between;
+			padding: .5rem 1rem;
+		}
 
-        /* Ajuste para o Navbar */
-        .navbar {
-            font-size: 1rem;
-            /* Define o tamanho da fonte */
-            width: 100%;
-            /* Largura do Navbar */
-            height: 138.86px;
-            /* Define a altura */
-            background-color: #000000C4;
-            /* Define a cor de fundo com opacidade */
-            border-style: solid;
-            border-width: 0 0 4px;
-            border-color: #fc0;
-        }
+		/* Ajuste para o Navbar */
+		.navbar {
+			font-size: 1rem;
+			/* Define o tamanho da fonte */
+			width: 100%;
+			/* Largura do Navbar */
+			height: 138.86px;
+			/* Define a altura */
+			background-color: #000000C4;
+			/* Define a cor de fundo com opacidade */
+			border-style: solid;
+			border-width: 0 0 4px;
+			border-color: #fc0;
+		}
 
-        .navbar-nav .nav-item .nav-link {
-            font-size: 1.2rem;
-            /* Define o tamanho da fonte dos itens do menu */
-            padding: 0.5rem 1rem;
-            /* Ajusta o espaçamento dos itens */
-            font-family: "Asar", Sans-serif;
-            text-decoration: none;
-            /* Remove o sublinhado dos links */
-            color: #000;
-            /* Cor padrão dos links */
-            transition: color 0.3s ease;
-            /* Suaviza a transição de cor */
-        }
+		.navbar-nav .nav-item .nav-link {
+			font-size: 1.2rem;
+			/* Define o tamanho da fonte dos itens do menu */
+			padding: 0.5rem 1rem;
+			/* Ajusta o espaçamento dos itens */
+			font-family: "Asar", Sans-serif;
+			text-decoration: none;
+			/* Remove o sublinhado dos links */
+			color: #000;
+			/* Cor padrão dos links */
+			transition: color 0.3s ease;
+			/* Suaviza a transição de cor */
+		}
 
-        .navbar-nav .nav-item .nav-link:hover {
-            color: #cf8311;
-            /* Cor ao passar o mouse */
-        }
+		.navbar-nav .nav-item .nav-link:hover {
+			color: #cf8311;
+			/* Cor ao passar o mouse */
+		}
 
-        .navbar-toggler {
-            border: none;
-        }
+		.navbar-toggler {
+			border: none;
+		}
 
-        .navbar-brand img {
-            width: 300px;
-            height: 100px;
-            /* Ajuste o tamanho do logo */
-        }
+		.navbar-brand img {
+			width: 300px;
+			height: 100px;
+			/* Ajuste o tamanho do logo */
+		}
 
-        .navbar-nav {
-            margin-left: auto;
-            /* Alinha os itens à direita para centralizar */
-        }
+		.navbar-nav {
+			margin-left: auto;
+			/* Alinha os itens à direita para centralizar */
+		}
 
-        .navbar-collapse {
-            justify-content: center;
-            /* Centraliza o conteúdo do menu */
-        }
+		.navbar-collapse {
+			justify-content: center;
+			/* Centraliza o conteúdo do menu */
+		}
 
-        .navbar-dark .navbar-nav .nav-link {
-            color: #fff;
-            /* Cor dos itens de navegação */
-        }
+		.navbar-dark .navbar-nav .nav-link {
+			color: #fff;
+			/* Cor dos itens de navegação */
+		}
 
-        /* Ajuste no campo de pesquisa */
-        .form-inline .form-control {
-            font-size: 1rem;
-            /* Tamanho da fonte do campo de pesquisa */
-        }
+		/* Ajuste no campo de pesquisa */
+		.form-inline .form-control {
+			font-size: 1rem;
+			/* Tamanho da fonte do campo de pesquisa */
+		}
 
-        .form-inline .btn {
-            font-size: 1rem;
-            /* Tamanho da fonte do botão */
-        }
+		.form-inline .btn {
+			font-size: 1rem;
+			/* Tamanho da fonte do botão */
+		}
 
-        div.dt-container .dt-search input {
-            border: 1px solid #aaa;
-            border-radius: 50px;
-            padding: 5px;
-            background-color: transparent;
-            color: inherit;
-            margin-left: 3px;
-        }
+		div.dt-container .dt-search input {
+			border: 1px solid #aaa;
+			border-radius: 50px;
+			padding: 5px;
+			background-color: transparent;
+			color: inherit;
+			margin-left: 3px;
+		}
 
-        .m-0 {
-            margin: 0 !important;
-            font-family: "Asar", Sans-serif;
-            color: #cf8311;
-        }
+		.m-0 {
+			margin: 0 !important;
+			font-family: "Asar", Sans-serif;
+			color: #cf8311;
+		}
 
-        .custom-link {
-            color: rgb(15, 15, 15);
-            /* Cor inicial */
-            font-size: 32px;
-            /* Tamanho da fonte */
-            text-decoration: none;
-            /* Remove o sublinhado do link */
-        }
+		.custom-link {
+			color: rgb(15, 15, 15);
+			/* Cor inicial */
+			font-size: 32px;
+			/* Tamanho da fonte */
+			text-decoration: none;
+			/* Remove o sublinhado do link */
+		}
 
-        .custom-link:hover {
-            color: #cf8311;
-            /* Cor do texto ao passar o mouse */
-        }
+		.custom-link:hover {
+			color: #cf8311;
+			/* Cor do texto ao passar o mouse */
+		}
 
-        .custom-link {
-            color: rgb(15, 15, 15);
-            /* Cor inicial */
-            font-size: 32px;
-            /* Tamanho da fonte */
-            text-decoration: none;
-            /* Remove o sublinhado do link */
-        }
+		.custom-link {
+			color: rgb(15, 15, 15);
+			/* Cor inicial */
+			font-size: 32px;
+			/* Tamanho da fonte */
+			text-decoration: none;
+			/* Remove o sublinhado do link */
+		}
 
-        .custom-link:hover {
-            color: #cf8311;
-            /* Cor do texto ao passar o mouse */
-        }
-    </style>
+		.custom-link:hover {
+			color: #cf8311;
+			/* Cor do texto ao passar o mouse */
+		}
+
+		/* Remove o hover branco dos itens de menu */
+		.dropdown-item:hover {
+			background-color: transparent;
+			/* Nenhuma cor de fundo no hover */
+			color: #cf8311;
+			/* Cor do texto no hover (ajustável) */
+			text-decoration: none;
+			/* Remove sublinhado, se necessário */
+		}
+
+		.dropdown-item i {
+			margin-right: 8px;
+			font-size: 1.6rem;
+			/* Tamanho maior dos ícones */
+		}
+
+		/* Estilo base para os ícones */
+		.dropdown-item i {
+			font-size: 2rem;
+			/* Tamanho dos ícones */
+			transition: transform 0.3s ease, color 0.3s ease;
+		}
+
+		/* Hover para o ícone do usuário */
+		.dropdown-item i.fa-user:hover {
+			color: #cf8311;
+			/* Cor ao passar o mouse */
+			transform: scale(1.1);
+			/* Aumenta o tamanho no hover */
+		}
+
+		/* Hover para o ícone de sair */
+		.dropdown-item i.fa-right-from-bracket:hover {
+			color: #0000ff;
+			/* Azul no hover */
+			transform: rotate(15deg);
+			/* Rotaciona no hover */
+		}
+
+		.navbar-background {
+			background: linear-gradient(45deg, #363636, #000000);
+			/* Gradiente mais suave entre cinza e preto */
+			background-size: 400% 400%;
+			/* Movimento dinâmico do gradiente */
+			animation: gradientAnimation 8s ease infinite;
+			/* Animação suave no gradiente */
+			height: 138.86px;
+			/* Ajusta a altura do navbar para um visual mais espaçoso */
+			display: flex;
+			align-items: center;
+			/* Centraliza verticalmente os itens */
+			justify-content: space-between;
+			/* Espaço entre os itens */
+			padding: 0 20px;
+			/* Adiciona espaçamento nas laterais */
+			box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+			/* Sombra mais suave para um efeito de profundidade */
+			font-family: 'Roboto', sans-serif;
+			/* Fonte moderna e limpa */
+			position: relative;
+			/* Necessário para sobrepor outros elementos, se necessário */
+		}
+
+		/* Animação suave para o gradiente */
+		@keyframes gradientAnimation {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+	</style>
 </head>
 <link href="https://fonts.googleapis.com/css2?family=Asar&display=swap" rel="stylesheet">
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <!-- Logo à esquerda -->
-            <a class="navbar-brand" href="#">
-                <img href="/administrativo/garanhoes/lista"
-                    src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png"
-                    class="d-inline-block align-top" alt="Logo">
-            </a>
 
-            <!-- Botão do menu responsivo -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
-                aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+	<nav class="navbar navbar-expand-lg navbar-dark navbar-background">
+		<div class="container">
+			<!-- Logo à esquerda -->
+			<a class="navbar-brand" href="/administrativo">
+				<img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png"
+					class="d-inline-block align-top" alt="">
+			</a>
 
-            <!-- Div vazia para centralizar o menu de navegação -->
-            <div class="d-none d-lg-flex flex-grow-1"></div>
+			<!-- Botão do menu responsivo -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+				aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-            <!-- Conteúdo centralizado -->
-            <div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/administrativo">Ir para a página inicial <span
-                                class="sr-only">(página atual)</span></a>
-                    </li>
-                    <!--<li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Ação</a>
-                        <a class="dropdown-item" href="#">Outra ação</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Algo mais aqui</a>
-                    </div>-->
-                    </li>
-                </ul>
-            </div>
+			<!-- Div vazia para centralizar o menu de navegação -->
+			<div class="d-none d-lg-flex flex-grow-1"></div>
 
-            <!-- Campo de pesquisa à direita
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
-        </form>-->
-        </div>
-    </nav>
+			<!-- Conteúdo centralizado -->
+			<div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
+				<a class="dropdown-item" href="/administrativo/usuarios/listar">
+					<i class="fa-solid fa-user" style="color: #ffffff;"></i>
+				</a>
+				<a class="dropdown-item" href="/sair">
+					<i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i>
+				</a>
+			</div>
+		</div>
+	</nav>
 
-    <!-- Main Content -->
-    <div class="container d-flex justify-content-center align-items-center">
-        <div class="form-container" style="width: 100%; max-width: 900px;">
-            <form action="/administrativo/garanhoes/editarGaranhao" th:object="${garanhao}" method="POST"
-                id="garanhaoForm">
+	<!-- Main Content -->
+	<div class="container d-flex justify-content-center align-items-center">
+		<div class="form-container" style="width: 100%; max-width: 900px;">
+			<form action="/administrativo/garanhoes/editarGaranhao" th:object="${garanhao}" method="POST"
+				id="garanhaoForm">
 
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <a href="/administrativo/garanhoes/listar" class="custom-link">
-                        <i class="fa-regular fa-circle-left"></i>
-                    </a>
-                    </a>
-                    <h2 class="m-0 text-center flex-grow-1">Editar Sêmen</h2>
-                    <div style="width: 100px;"></div> <!-- Espaçador para alinhamento -->
-                </div>
+				<div class="d-flex align-items-center justify-content-between mb-3">
+					<a href="/administrativo/garanhoes/listar" class="custom-link">
+						<i class="fa-regular fa-circle-left"></i>
+					</a>
+					</a>
+					<h2 class="m-0 text-center flex-grow-1">Editar Sêmen</h2>
+					<div style="width: 100px;"></div> <!-- Espaçador para alinhamento -->
+				</div>
 
-                <div class="custom-divider"></div>
+				<div class="custom-divider"></div>
 
-                <!-- Garanhão and Quantidade Inputs -->
-                <div class="form-row">
-                    <div class="col-12 col-md-6">
-                        <label for="nome_garanhao" class="label-info">Nome do Garanhão</label>
-                        <input type="text" required id="nome_garanhao" th:field="*{nome_garanhao}"
-                            class="form-control" />
-                    </div>
-                    <div class="col-12 col-md-6">
+				<!-- Garanhão and Quantidade Inputs -->
+				<div class="form-row">
+					<div class="col-12 col-md-6">
+						<label for="nome_garanhao" class="label-info">Nome do Garanhão</label>
+						<input type="text" required id="nome_garanhao" th:field="*{nome_garanhao}"
+							class="form-control" />
+					</div>
+					<div class="col-12 col-md-6">
 
-                        <label>Cor da Palheta</label>
-                        <select required th:field="*{cor_palheta}" class="form-control">
-                            <option value="">Escolha uma cor</option>
-                            <option value="Laranja">Laranja</option>
-                            <option value="Roxo">Roxo</option>
-                            <option value="Vermelho">Vermelho</option>
-                            <option value="Branco">Branco</option>
-                            <option value="Cinza">Cinza</option>
-                            <option value="Rosa">Rosa</option>
-                            <option value="Amarelo">Amarelo</option>
-                            <option value="Azul">Azul</option>
-                            <option value="Preto">Preto</option>
-                        </select>
-                    </div>
+						<label>Cor da Palheta</label>
+						<select required th:field="*{cor_palheta}" class="form-control">
+							<option value="">Escolha uma cor</option>
+							<option value="Laranja">Laranja</option>
+							<option value="Roxo">Roxo</option>
+							<option value="Vermelho">Vermelho</option>
+							<option value="Branco">Branco</option>
+							<option value="Cinza">Cinza</option>
+							<option value="Rosa">Rosa</option>
+							<option value="Amarelo">Amarelo</option>
+							<option value="Azul">Azul</option>
+							<option value="Preto">Preto</option>
+						</select>
+					</div>
 
-                </div>
+				</div>
 
-                <!-- Botijão, Data da Movimentação Inputs -->
-                <div class="form-row">
-                    <div class="col-12 col-md-6">
-                        <label for="botijao" class="label-info">Número do Botijão</label>
-                        <input type="number" required id="botijao" th:field="*{botijao}" class="form-control" />
-                    </div>
+				<!-- Botijão, Data da Movimentação Inputs -->
+				<div class="form-row">
+					<div class="col-12 col-md-6">
+						<label for="botijao" class="label-info">Número do Botijão</label>
+						<input type="number" required id="botijao" th:field="*{botijao}" class="form-control" />
+					</div>
 
-                    <div class="col-12 col-md-6">
-                        <label for="data_contagem_inicial" class="label-info">Data contagem inicial</label>
-                        <input type="text" th:field="*{data_contagem_inicial}" class="form-control" readonly />
-                    </div>
-                </div>
+					<div class="col-12 col-md-6">
+						<label for="data_contagem_inicial" class="label-info">Data contagem inicial</label>
+						<input type="text" th:field="*{data_contagem_inicial}" class="form-control" readonly />
+					</div>
+				</div>
 
-                <!-- Caneca Input -->
-                <div class="form-row">
-                    <div class="col-12 col-md-6">
-                        <label for="caneca" class="label-info">Número da Caneca</label>
-                        <input type="number" required id="caneca" th:field="*{caneca}" class="form-control" />
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <label for="data_cadastro" class="label-info">Data do cadastro</label>
-                        <input type="text" th:field="*{data_cadastro}"
-                            th:value="${#dates.format(data_cadastro, 'dd/MM/yyyy HH:mm:ss')}" class="form-control"
-                            readonly />
-                    </div>
-                </div>
+				<!-- Caneca Input -->
+				<div class="form-row">
+					<div class="col-12 col-md-6">
+						<label for="caneca" class="label-info">Número da Caneca</label>
+						<input type="number" required id="caneca" th:field="*{caneca}" class="form-control" />
+					</div>
+					<div class="col-12 col-md-6">
+						<label for="data_cadastro" class="label-info">Data do cadastro</label>
+						<input type="text" th:field="*{data_cadastro}"
+							th:value="${#dates.format(data_cadastro, 'dd/MM/yyyy HH:mm:ss')}" class="form-control"
+							readonly />
+					</div>
+				</div>
 
-                <!-- Cor da Palheta Input -->
-                <div class="form-row">
-                    <div class="col-12 col-md-6">
-                        <label for="saldo_inicial_palhetas" class="label-info">Saldo Inicial de Palhetas</label>
-                        <input type="number" id="saldo_inicial_palhetas" th:field="*{saldo_inicial_palhetas}"
-                            class="form-control" />
-                    </div>
-                    <div class="col-12 col-md-6">
+				<!-- Cor da Palheta Input -->
+				<div class="form-row">
+					<div class="col-12 col-md-6">
+						<label for="saldo_inicial_palhetas" class="label-info">Saldo Inicial de Palhetas</label>
+						<input type="number" id="saldo_inicial_palhetas" th:field="*{saldo_inicial_palhetas}"
+							class="form-control" />
+					</div>
+					<div class="col-12 col-md-6">
 
-                        <label for="saldo_atual_palhetas" class="label-info">Saldo atual de Palhetas</label>
-                        <input type="number" id="saldo_atual_palhetas" th:field="*{saldo_atual_palhetas}"
-                            class="form-control" readonly />
+						<label for="saldo_atual_palhetas" class="label-info">Saldo atual de Palhetas</label>
+						<input type="number" id="saldo_atual_palhetas" th:field="*{saldo_atual_palhetas}"
+							class="form-control" readonly />
 
-                    </div>
-                </div>
+					</div>
+				</div>
 
-                <div class="custom-divider"></div>
+				<div class="custom-divider"></div>
 
-                <div class="d-flex justify-content-between mt-3">
+				<div class="d-flex justify-content-between mt-3">
 
 					<a th:href="@{/removerGaranhao/{id_garanhao}(id_garanhao=${garanhao.id_garanhao})}"
-					   class="btn btn-danger btn-sm" href="javascript:void(0);"
-					   onclick="excluirGaranhao([[${garanhao.id_garanhao}]]); return false;">
-					   <i class="fa-solid fa-trash" style="color: #ffffff;"></i> Excluir
+						class="btn btn-danger btn-sm" href="javascript:void(0);"
+						onclick="excluirGaranhao([[${garanhao.id_garanhao}]]); return false;">
+						<i class="fa-solid fa-trash" style="color: #ffffff;"></i> Excluir
 					</a>
 
-                    <a href="#" id="btnImprimir" class="btn btn-dark btn-sm " onclick="imprimirFormulario()">
-                        <i class="fa-solid fa-print"></i> Imprimir
-                    </a>
+					<a href="#" id="btnImprimir" class="btn btn-dark btn-sm " onclick="imprimirFormulario()">
+						<i class="fa-solid fa-print"></i> Imprimir
+					</a>
 
-                    <button type="submit" class="btn btn-light btn-sm ">
-                        <i class="fa-solid fa-plus"></i> Editar Garanhão
-                    </button>
-                    <input type="hidden" th:field="*{id_garanhao}" />
-                </div>
-            </form>
-        </div>
-    </div>
+					<button type="submit" class="btn btn-light btn-sm ">
+						<i class="fa-solid fa-plus"></i> Editar Garanhão
+					</button>
+					<input type="hidden" th:field="*{id_garanhao}" />
+				</div>
+			</form>
+		</div>
+	</div>
 
-    <div class="watermark">LucasSales@2024</div>
+	<div class="watermark">LucasSales@2024</div>
 
-    <!-- Scripts JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Inicializa o Select2 para o campo de seleção de garanhão
-            $('#garanhaoSelect').select2();
+	<!-- Scripts JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			// Inicializa o Select2 para o campo de seleção de garanhão
+			$('#garanhaoSelect').select2();
 
-            // Evento de alteração do campo "Garanhão"
-            $('#garanhaoSelect').on('change', function () {
-                var idGaranhao = $(this).val();
+			// Evento de alteração do campo "Garanhão"
+			$('#garanhaoSelect').on('change', function () {
+				var idGaranhao = $(this).val();
 
-                // Verifica se um garanhão foi selecionado
-                if (idGaranhao) {
-                    // Faz uma requisição para obter os dados do garanhão selecionado
-                    $.ajax({
-                        url: "/administrativo/garanhoes/dados/" + idGaranhao, // URL para obter os dados do garanhão
-                        method: "GET",
-                        success: function (data) {
-                            // Preenche os campos com os dados retornados
-                            $("#botijao").val(data.botijao); // Preenche o campo Botijão
-                            $("#caneca").val(data.caneca);   // Preenche o campo Caneca
-                            $("#cor_palheta").val(data.cor_palheta); // Preenche o campo Cor da Palheta
-                            $("#saldo-atual-palhetas").text(data.saldo_atual_palhetas); // Atualiza o saldo restante
-                            $("#quantidade").attr('max', data.saldo_atual_palhetas); // Define o máximo de palhetas baseado no saldo
-                        }
-                    });
-                } else {
-                    // Limpa os campos se nenhum garanhão for selecionado
-                    $("#botijao, #caneca, #cor_palheta").val("");
-                    $("#saldo-atual-palhetas").text("0");
-                    $("#quantidade").attr('max', 0);
-                }
-            });
-        });
+				// Verifica se um garanhão foi selecionado
+				if (idGaranhao) {
+					// Faz uma requisição para obter os dados do garanhão selecionado
+					$.ajax({
+						url: "/administrativo/garanhoes/dados/" + idGaranhao, // URL para obter os dados do garanhão
+						method: "GET",
+						success: function (data) {
+							// Preenche os campos com os dados retornados
+							$("#botijao").val(data.botijao); // Preenche o campo Botijão
+							$("#caneca").val(data.caneca);   // Preenche o campo Caneca
+							$("#cor_palheta").val(data.cor_palheta); // Preenche o campo Cor da Palheta
+							$("#saldo-atual-palhetas").text(data.saldo_atual_palhetas); // Atualiza o saldo restante
+							$("#quantidade").attr('max', data.saldo_atual_palhetas); // Define o máximo de palhetas baseado no saldo
+						}
+					});
+				} else {
+					// Limpa os campos se nenhum garanhão for selecionado
+					$("#botijao, #caneca, #cor_palheta").val("");
+					$("#saldo-atual-palhetas").text("0");
+					$("#quantidade").attr('max', 0);
+				}
+			});
+		});
 
 		function excluirGaranhao(id) {
-		    console.log("ID recebido:", id); // Log para verificar o ID
+			console.log("ID recebido:", id); // Log para verificar o ID
 
-		    // Confirmação inicial antes de excluir
-		    if (confirm('Tem certeza que deseja excluir?')) {
-		        const url = `/removerGaranhao/${id}`;
-		        console.log("URL da requisição:", url); // Imprime a URL para depuração
+			// Confirmação inicial antes de excluir
+			if (confirm('Tem certeza que deseja excluir?')) {
+				const url = `/removerGaranhao/${id}`;
+				console.log("URL da requisição:", url); // Imprime a URL para depuração
 
-		        // Requisição DELETE para o backend para excluir o garanhão
-		        fetch(url, {
-		            method: 'DELETE',
-		            headers: {
-		                'Content-Type': 'application/json'
-		            }
-		        })
-		        .then(response => response.text().then(message => {
-		            console.log("Mensagem recebida:", message); // Log para ver a mensagem
+				// Requisição DELETE para o backend para excluir o garanhão
+				fetch(url, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				})
+					.then(response => response.text().then(message => {
+						console.log("Mensagem recebida:", message); // Log para ver a mensagem
 
-		            if (response.status === 200) {
-		                alert(message); // Mensagem de sucesso
-		            } else if (response.status === 409) {
-		                alert("Impossível excluir: " + message); // Mensagem de conflito
-		            } else {
-		                alert("Erro ao excluir o garanhão. Mensagem: " + message); // Outros erros
-		            }
-		        }))
-		        .catch(error => {
-		            console.error("Erro ao se comunicar com o servidor:", error);
-		            alert("Erro ao se comunicar com o servidor. Tente novamente mais tarde.");
-		        });
-		    }
+						if (response.status === 200) {
+							alert(message); // Mensagem de sucesso
+						} else if (response.status === 409) {
+							alert("Impossível excluir: " + message); // Mensagem de conflito
+						} else {
+							alert("Erro ao excluir o garanhão. Mensagem: " + message); // Outros erros
+						}
+					}))
+					.catch(error => {
+						console.error("Erro ao se comunicar com o servidor:", error);
+						alert("Erro ao se comunicar com o servidor. Tente novamente mais tarde.");
+					});
+			}
 		}
 
-        // Atualiza o valor máximo permitido no campo de input
-        const quantidadeInput = document.getElementById('quantidade');
-        const saldoAtualSpan = document.getElementById('saldo-atual-palhetas');
+		// Atualiza o valor máximo permitido no campo de input
+		const quantidadeInput = document.getElementById('quantidade');
+		const saldoAtualSpan = document.getElementById('saldo-atual-palhetas');
 
-        // Função para atualizar o limite do campo de quantidade
-        function atualizarMaximo() {
-            const saldoAtual = parseInt(saldoAtualSpan.textContent, 10);
-            quantidadeInput.max = saldoAtual; // Define o valor máximo permitido
-        }
+		// Função para atualizar o limite do campo de quantidade
+		function atualizarMaximo() {
+			const saldoAtual = parseInt(saldoAtualSpan.textContent, 10);
+			quantidadeInput.max = saldoAtual; // Define o valor máximo permitido
+		}
 
-        // Validação ao mudar o valor
-        quantidadeInput.addEventListener('input', (event) => {
-            const saldoAtual = parseInt(saldoAtualSpan.textContent, 10);
-            const valorDigitado = parseInt(event.target.value, 10);
+		// Validação ao mudar o valor
+		quantidadeInput.addEventListener('input', (event) => {
+			const saldoAtual = parseInt(saldoAtualSpan.textContent, 10);
+			const valorDigitado = parseInt(event.target.value, 10);
 
-            if (valorDigitado > saldoAtual) {
-                // Exibe um alerta ou corrige o valor automaticamente
-                event.target.value = saldoAtual;
-                alert('Você não pode selecionar mais do que o saldo restante.');
-            }
-        });
+			if (valorDigitado > saldoAtual) {
+				// Exibe um alerta ou corrige o valor automaticamente
+				event.target.value = saldoAtual;
+				alert('Você não pode selecionar mais do que o saldo restante.');
+			}
+		});
 
-        function mostrarCampoAdicional() {
-            const destino = document.getElementById("destino").value;
-            const campos = {
-                venda: "campoVenda",
-                uso_interno: "campoUsoInterno",
-                transferencia: "campoTransferencia",
-            };
+		function mostrarCampoAdicional() {
+			const destino = document.getElementById("destino").value;
+			const campos = {
+				venda: "campoVenda",
+				uso_interno: "campoUsoInterno",
+				transferencia: "campoTransferencia",
+			};
 
-            // Esconde todos os campos adicionais
-            Object.values(campos).forEach(id => document.getElementById(id).style.display = "none");
+			// Esconde todos os campos adicionais
+			Object.values(campos).forEach(id => document.getElementById(id).style.display = "none");
 
-            // Mostra o campo correspondente
-            if (campos[destino]) {
-                const campoAtivo = document.getElementById(campos[destino]);
-                campoAtivo.style.display = "block";
+			// Mostra o campo correspondente
+			if (campos[destino]) {
+				const campoAtivo = document.getElementById(campos[destino]);
+				campoAtivo.style.display = "block";
 
-                // Limpar vírgulas duplicadas ao alterar o valor do campo
-                campoAtivo.addEventListener("input", function () {
-                    this.value = limparValor(this.value);
-                });
-            }
-        }
+				// Limpar vírgulas duplicadas ao alterar o valor do campo
+				campoAtivo.addEventListener("input", function () {
+					this.value = limparValor(this.value);
+				});
+			}
+		}
 
-        // Função para limpar o valor
-        function limparValor(valor) {
-            return valor
-                .replace(/,+/g, ",") // Substitui múltiplas vírgulas consecutivas por uma só
-                .replace(/^,|,$/g, "") // Remove vírgulas do início e do fim da string
-                .trim(); // Remove espaços no início e no fim
-        }
+		// Função para limpar o valor
+		function limparValor(valor) {
+			return valor
+				.replace(/,+/g, ",") // Substitui múltiplas vírgulas consecutivas por uma só
+				.replace(/^,|,$/g, "") // Remove vírgulas do início e do fim da string
+				.trim(); // Remove espaços no início e no fim
+		}
 
-        // Exemplo de função para salvar no banco de dados
-        function salvarDados() {
-            const venda = limparValor(document.getElementById("campoVenda").value);
-            const usoInterno = limparValor(document.getElementById("campoUsoInterno").value);
-            const transferencia = limparValor(document.getElementById("campoTransferencia").value);
+		// Exemplo de função para salvar no banco de dados
+		function salvarDados() {
+			const venda = limparValor(document.getElementById("campoVenda").value);
+			const usoInterno = limparValor(document.getElementById("campoUsoInterno").value);
+			const transferencia = limparValor(document.getElementById("campoTransferencia").value);
 
-            console.log("Venda:", venda);
-            console.log("Uso Interno:", usoInterno);
-            console.log("Transferência:", transferencia);
+			console.log("Venda:", venda);
+			console.log("Uso Interno:", usoInterno);
+			console.log("Transferência:", transferencia);
 
-            // Aqui você faria o envio dos valores limpos para o banco de dados
-            // Exemplo:
-            // enviarParaBanco(venda, usoInterno, transferencia);
-        }
-        function mostrarCampoAdicional() {
-            // Obtém o valor do destino selecionado
-            const destinoSelecionado = document.querySelector('input[name="destino"]:checked').value;
+			// Aqui você faria o envio dos valores limpos para o banco de dados
+			// Exemplo:
+			// enviarParaBanco(venda, usoInterno, transferencia);
+		}
+		function mostrarCampoAdicional() {
+			// Obtém o valor do destino selecionado
+			const destinoSelecionado = document.querySelector('input[name="destino"]:checked').value;
 
-            // Seleciona o campo adicional
-            const campoAdicional = document.getElementById("campo-adicional");
+			// Seleciona o campo adicional
+			const campoAdicional = document.getElementById("campo-adicional");
 
-            // Exibe o campo adicional para qualquer destino selecionado
-            if (destinoSelecionado === "venda" || destinoSelecionado === "uso_interno" || destinoSelecionado === "transferencia") {
-                campoAdicional.style.display = "block"; // Mostra o campo adicional
-            } else {
-                campoAdicional.style.display = "none"; // Oculta o campo adicional
-            }
-        }
-        function imprimirFormulario() {
-            // Captura os valores dos campos do formulário
-            const nomeGaranhao = document.getElementById('nome_garanhao').value;
-            const corPalheta = document.querySelector('select[name="cor_palheta"]').value;
-            const botijao = document.getElementById('botijao').value;
-            const dataContagemInicial = document.getElementById('data_contagem_inicial').value;
-            const caneca = document.getElementById('caneca').value;
-            const dataCadastro = document.getElementById('data_cadastro').value;
-            const saldoInicialPalhetas = document.getElementById('saldo_inicial_palhetas').value;
-            const saldoAtualPalhetas = document.getElementById('saldo_atual_palhetas').value;
+			// Exibe o campo adicional para qualquer destino selecionado
+			if (destinoSelecionado === "venda" || destinoSelecionado === "uso_interno" || destinoSelecionado === "transferencia") {
+				campoAdicional.style.display = "block"; // Mostra o campo adicional
+			} else {
+				campoAdicional.style.display = "none"; // Oculta o campo adicional
+			}
+		}
+		function imprimirFormulario() {
+			// Captura os valores dos campos do formulário
+			const nomeGaranhao = document.getElementById('nome_garanhao').value;
+			const corPalheta = document.querySelector('select[name="cor_palheta"]').value;
+			const botijao = document.getElementById('botijao').value;
+			const dataContagemInicial = document.getElementById('data_contagem_inicial').value;
+			const caneca = document.getElementById('caneca').value;
+			const dataCadastro = document.getElementById('data_cadastro').value;
+			const saldoInicialPalhetas = document.getElementById('saldo_inicial_palhetas').value;
+			const saldoAtualPalhetas = document.getElementById('saldo_atual_palhetas').value;
 
-            // Abre uma nova janela para impressão
-            const janelaImpressao = window.open('', '', 'width=800,height=600');
+			// Abre uma nova janela para impressão
+			const janelaImpressao = window.open('', '', 'width=800,height=600');
 
-            // Adiciona o conteúdo formatado para a impressão
-            janelaImpressao.document.write(`
+			// Adiciona o conteúdo formatado para a impressão
+			janelaImpressao.document.write(`
 				<html>
 				    <head>
 				        <title>Impressão - Haras Rosa Mystica</title>
@@ -807,17 +865,18 @@
 
 			    `);
 
-            // Fecha o conteúdo e prepara para impressão
-            janelaImpressao.document.close();
-            janelaImpressao.focus();
+			// Fecha o conteúdo e prepara para impressão
+			janelaImpressao.document.close();
+			janelaImpressao.focus();
 
-            // Aguarda meio segundo antes de iniciar a impressão
-            setTimeout(function () {
-                janelaImpressao.print();
-                janelaImpressao.close();
-            }, 500);
-        }
-    </script>
+			// Aguarda meio segundo antes de iniciar a impressão
+			setTimeout(function () {
+				janelaImpressao.print();
+				janelaImpressao.close();
+			}, 500);
+		}
+
+	</script>
 </body>
 
 </html>

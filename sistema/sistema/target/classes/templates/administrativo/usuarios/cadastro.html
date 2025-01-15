@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<title>Cadastro de Usuários</title>
+	<style>
+		body {
+			font-family: "Asar", Sans-serif;
+			background-color: #C0C0C0;
+		}
+
+		.form-container {
+			background: #fff;
+			padding: 30px;
+			border-radius: 8px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			margin-top: 10px;
+			margin-bottom: 10px;
+			max-width: 900px;
+			width: 100%;
+			border-top: 4px solid #808080;
+			border-bottom: 4px solid #808080;
+		}
+
+		h2 {
+			font-size: 32px;
+			color: #333333;
+			font-weight: bold;
+			margin-bottom: 20px;
+			text-align: center;
+		}
+
+		.watermark {
+			position: fixed;
+			bottom: 10px;
+			right: 10px;
+			font-size: 14px;
+			color: rgba(0, 0, 0, 0.5);
+			pointer-events: none;
+		}
+
+		.form-row {
+			margin-bottom: 20px;
+		}
+
+		.form-group {
+			margin-bottom: 0;
+		}
+
+		.form-control {
+			border-radius: 8px;
+		}
+
+		.btn {
+			border-radius: 50px;
+		}
+
+		/* Botão primário */
+		.btn-light {
+			background-color: #1b1e21;
+			color: white;
+			border: none;
+		}
+
+		.btn-light i {
+			color: #ffffff;
+		}
+
+		.btn-light:hover {
+			background-color: #cf8311;
+		}
+
+		.btn-light:hover i {
+			color: #ffffff;
+		}
+
+		/* Botão de sucesso */
+		.btn-dark {
+			background-color: #cf8311;
+			color: white;
+			border: none;
+		}
+
+		.btn-dark i {
+			color: #ffffff;
+		}
+
+		.btn-dark:hover {
+			background-color: #1b1e21;
+		}
+
+		.btn-dark:hover i {
+			color: #ffffff;
+		}
+
+		.btn-sm {
+			font-size: 14px;
+			padding: 10px 20px;
+		}
+
+		.btn i {
+			margin-right: 8px;
+		}
+
+		.text-muted {
+			color: #6c757d !important;
+		}
+
+		label {
+			display: inline-block;
+			margin-bottom: .5rem;
+			font-weight: 600;
+		}
+
+		.custom-divider {
+			margin: 10px 0;
+			border-top: 1px solid #e1e1e1;
+		}
+
+		/* Navbar */
+		.navbar {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: .5rem 1rem;
+			background-color: #000000C4;
+			border-style: solid;
+			border-width: 0 0 4px;
+			border-color: #fc0;
+		}
+
+		.navbar-brand img {
+			width: 300px;
+			height: 100px;
+		}
+
+		.navbar-nav .nav-item .nav-link {
+			font-size: 1.2rem;
+			padding: 0.5rem 1rem;
+			font-family: "Asar", Sans-serif;
+			text-decoration: none;
+			color: #000;
+		}
+
+		.navbar-nav .nav-item .nav-link:hover {
+			color: #cf8311;
+		}
+
+		.navbar-collapse {
+			justify-content: center;
+		}
+
+		.navbar-dark .navbar-nav .nav-link {
+			color: #fff;
+		}
+
+		.form-inline .form-control {
+			font-size: 1rem;
+		}
+
+		.form-inline .btn {
+			font-size: 1rem;
+		}
+
+		.custom-link {
+			color: rgb(15, 15, 15);
+			/* Cor inicial */
+			font-size: 32px;
+			/* Tamanho da fonte */
+			text-decoration: none;
+			/* Remove o sublinhado do link */
+		}
+
+		.custom-link:hover {
+			color: #cf8311;
+			/* Cor do texto ao passar o mouse */
+		}
+
+		/* Remove o hover branco dos itens de menu */
+		.dropdown-item:hover {
+			background-color: transparent;
+			/* Nenhuma cor de fundo no hover */
+			color: #cf8311;
+			/* Cor do texto no hover (ajustável) */
+			text-decoration: none;
+			/* Remove sublinhado, se necessário */
+		}
+
+		.dropdown-item i {
+			margin-right: 8px;
+			font-size: 1.6rem;
+			/* Tamanho maior dos ícones */
+		}
+
+		/* Estilo base para os ícones */
+		.dropdown-item i {
+			font-size: 2rem;
+			/* Tamanho dos ícones */
+			transition: transform 0.3s ease, color 0.3s ease;
+		}
+
+		/* Hover para o ícone do usuário */
+		.dropdown-item i.fa-user:hover {
+			color: #cf8311;
+			/* Cor ao passar o mouse */
+			transform: scale(1.1);
+			/* Aumenta o tamanho no hover */
+		}
+
+		/* Hover para o ícone de sair */
+		.dropdown-item i.fa-right-from-bracket:hover {
+			color: #0000ff;
+			/* Azul no hover */
+			transform: rotate(15deg);
+			/* Rotaciona no hover */
+		}
+
+		.navbar-background {
+			background: linear-gradient(45deg, #363636, #000000);
+			/* Gradiente mais suave entre cinza e preto */
+			background-size: 400% 400%;
+			/* Movimento dinâmico do gradiente */
+			animation: gradientAnimation 8s ease infinite;
+			/* Animação suave no gradiente */
+			height: 138.86px;
+			/* Ajusta a altura do navbar para um visual mais espaçoso */
+			display: flex;
+			align-items: center;
+			/* Centraliza verticalmente os itens */
+			justify-content: space-between;
+			/* Espaço entre os itens */
+			padding: 0 20px;
+			/* Adiciona espaçamento nas laterais */
+			box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+			/* Sombra mais suave para um efeito de profundidade */
+			font-family: 'Roboto', sans-serif;
+			/* Fonte moderna e limpa */
+			position: relative;
+			/* Necessário para sobrepor outros elementos, se necessário */
+		}
+
+		/* Animação suave para o gradiente */
+		@keyframes gradientAnimation {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+	</style>
+</head>
+<link href="https://fonts.googleapis.com/css2?family=Asar&display=swap" rel="stylesheet">
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark navbar-background">
+		<div class="container">
+			<!-- Logo à esquerda -->
+			<a class="navbar-brand" href="/administrativo">
+				<img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png"
+					class="d-inline-block align-top" alt="">
+			</a>
+
+			<!-- Botão do menu responsivo -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+				aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<!-- Div vazia para centralizar o menu de navegação -->
+			<div class="d-none d-lg-flex flex-grow-1"></div>
+
+			<!-- Conteúdo centralizado -->
+			<div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
+				<a class="dropdown-item" href="/administrativo/usuarios/listar">
+					<i class="fa-solid fa-user" style="color: #ffffff;"></i>
+				</a>
+				<a class="dropdown-item" href="/sair">
+					<i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i>
+				</a>
+			</div>
+		</div>
+	</nav>
+	<div class="container d-flex justify-content-center align-items-center">
+		<div class="form-container" style="width: 100%; max-width: 900px;">
+			<form action="/administrativo/usuarios/salvar" th:object="${usuario}" method="POST">
+				<div class="d-flex align-items-center justify-content-between mb-3">
+					<a href="/administrativo/usuarios/listar" class="custom-link">
+						<i class="fa-regular fa-circle-left"></i>
+					</a>
+					<h2 class="m-0 text-center flex-grow-1">Cadastro de Usuário</h2>
+					<div style="width: 100px;"></div> <!-- Espaçador para alinhamento -->
+				</div>
+
+				<div class="custom-divider"></div>
+				<!-- Nome do Usuário -->
+				<div class="form-row">
+					<div class="col-12">
+						<label>Nome</label>
+						<input type="text" th:field="*{nome_usuario}" class="form-control" required />
+					</div>
+				</div>
+
+				<!-- E-mail do Usuário -->
+				<div class="form-row">
+					<div class="col-12">
+						<label>E-mail</label>
+						<input type="text" th:field="*{email}" class="form-control" required />
+					</div>
+				</div>
+
+				<!-- Senha do Usuário -->
+				<div class="form-row">
+					<div class="col-12">
+						<label>Senha</label>
+						<input type="text" th:field="*{senha}" class="form-control" required />
+					</div>
+				</div>
+
+				<!-- Tipo de Usuário -->
+				<div class="form-row">
+					<div class="col-12">
+						<label>Tipo de usuário</label>
+						<select th:field="*{tipo}" class="form-control" required>
+							<option value="ADMIN">Administrador</option>
+							<option value="USER">Usuário</option>
+						</select>
+					</div>
+				</div>
+				<div class="custom-divider"></div>
+
+				<div class="d-flex justify-content-between mt-3">
+					<a href="/administrativo/usuarios/listar" class="btn btn-light btn-sm text-white">
+						<i class="fa-solid fa-bars-staggered"></i> Lista
+					</a>
+					<button type="submit" class="btn btn-dark btn-sm">
+						<i class="fa-solid fa-plus"></i> <i class="fa-solid fa-user"></i> Cadastrar
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

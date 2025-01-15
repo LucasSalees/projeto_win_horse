@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    <title>Editar movimentação</title>
+    <link rel="icon"
+        href="https://imgs.search.brave.com/zy0sfkgKeppdWAXGyYDnopeaDcBoxZyy_1tEfu-gL8c/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvN2Q5NDZhNTVl/NmM5YzdiNDc3ZDMw/NGVmYzExZmMxNjY4/NDQzZmVhYWVkODQ2/NTVhMmYyNTJjMGE5/MTcwNTYwMS93d3cu/aGFyYXNyb3NhbXlz/dGljYS5jb20uYnIv"
+        type="image/x-icon">
+
+    <style>
+        body {
+            font-family: "Asar", Sans-serif;
+            background-color: #C0C0C0;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            margin-bottom: 10px;
+            max-width: 900px;
+            width: 100%;
+            border-top: 4px solid #808080;
+            border-bottom: 4px solid #808080;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #333333;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+
+        .form-row {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .saldo-info {
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 2.2;
+        }
+
+        .form-control {
+            border-radius: 8px;
+        }
+
+        .btn {
+            border-radius: 50px;
+        }
+
+        .btn-danger {
+            background-color: #B22222;
+            /* Cor de fundo personalizada */
+            color: white;
+            /* Cor do texto do botão */
+            border: none;
+            /* Remove borda */
+        }
+
+        /* Estilo do ícone dentro do botão */
+        .btn-danger i {
+            color: #ffffff;
+            /* Cor branca para o ícone */
+        }
+
+        /* Efeito no hover */
+        .btn-danger:hover {
+            background-color: #FF0000;
+            /* Cor de fundo diferente no hover */
+
+        }
+
+        .btn-danger:hover i {
+            color: #ffffff;
+            /* Cor do ícone no hover */
+        }
+
+        .btn-light {
+            background-color: #1b1e21;
+            /* Cor de fundo personalizada */
+            color: white;
+            /* Cor do texto do botão */
+            border: none;
+            /* Remove borda */
+        }
+
+        /* Estilo do ícone dentro do botão */
+        .btn-light i {
+            color: #ffffff;
+            /* Cor branca para o ícone */
+        }
+
+        /* Efeito no hover */
+        .btn-light:hover {
+            background-color: #cf8311;
+            /* Cor de fundo diferente no hover */
+
+        }
+
+        .btn-light:hover i {
+            color: #ffffff;
+            /* Cor do ícone no hover */
+        }
+
+        .btn-dark {
+            background-color: #cf8311;
+            /* Cor de fundo personalizada */
+            color: white;
+            /* Cor do texto do botão */
+            border: none;
+            /* Remove borda */
+        }
+
+        /* Estilo dos ícones dentro do botão */
+        .btn-dark i {
+            color: #ffffff;
+            /* Cor branca para os ícones */
+        }
+
+        /* Efeito no hover */
+        .btn-dark:hover {
+            background-color: #1b1e21;
+            /* Cor de fundo diferente no hover */
+
+        }
+
+        .btn-dark:hover i {
+            color: #ffffff;
+            /* Cor dos ícones no hover */
+        }
+
+        .btn-sm {
+            font-size: 14px;
+            padding: 10px 20px;
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .text-muted {
+            color: #6c757d !important;
+        }
+
+        .label-info {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 8px;
+        }
+
+        .saldo-info {
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 2.2;
+        }
+
+        .custom-divider {
+            margin: 10px 0;
+            border-top: 1px solid #e1e1e1;
+        }
+
+        .navbar {
+            position: relative;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            padding: .5rem 1rem;
+        }
+
+        /* Ajuste para o Navbar */
+        .navbar {
+            font-size: 1rem;
+            /* Define o tamanho da fonte */
+            width: 100%;
+            /* Largura do Navbar */
+            height: 138.86px;
+            /* Define a altura */
+            background-color: #000000C4;
+            /* Define a cor de fundo com opacidade */
+            border-style: solid;
+            border-width: 0 0 4px;
+            border-color: #fc0;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            font-size: 1.2rem;
+            /* Define o tamanho da fonte dos itens do menu */
+            padding: 0.5rem 1rem;
+            /* Ajusta o espaçamento dos itens */
+            font-family: "Asar", Sans-serif;
+            text-decoration: none;
+            /* Remove o sublinhado dos links */
+            color: #000;
+            /* Cor padrão dos links */
+            transition: color 0.3s ease;
+            /* Suaviza a transição de cor */
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #cf8311;
+            /* Cor ao passar o mouse */
+        }
+
+        .navbar-toggler {
+            border: none;
+        }
+
+        .navbar-brand img {
+            width: 300px;
+            height: 100px;
+            /* Ajuste o tamanho do logo */
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+            /* Alinha os itens à direita para centralizar */
+        }
+
+        .navbar-collapse {
+            justify-content: center;
+            /* Centraliza o conteúdo do menu */
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: #fff;
+            /* Cor dos itens de navegação */
+        }
+
+        /* Ajuste no campo de pesquisa */
+        .form-inline .form-control {
+            font-size: 1rem;
+            /* Tamanho da fonte do campo de pesquisa */
+        }
+
+        .form-inline .btn {
+            font-size: 1rem;
+            /* Tamanho da fonte do botão */
+        }
+
+        div.dt-container .dt-search input {
+            border: 1px solid #aaa;
+            border-radius: 50px;
+            padding: 5px;
+            background-color: transparent;
+            color: inherit;
+            margin-left: 3px;
+        }
+
+        .m-0 {
+            margin: 0 !important;
+            font-family: "Asar", Sans-serif;
+            color: #cf8311;
+        }
+
+        .custom-link {
+            color: rgb(15, 15, 15);
+            /* Cor inicial */
+            font-size: 32px;
+            /* Tamanho da fonte */
+            text-decoration: none;
+            /* Remove o sublinhado do link */
+        }
+
+        .custom-link:hover {
+            color: #cf8311;
+            /* Cor do texto ao passar o mouse */
+        }
+    </style>
+</head>
+<link href="https://fonts.googleapis.com/css2?family=Asar&display=swap" rel="stylesheet">
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <!-- Logo à esquerda -->
+            <a class="navbar-brand" href="#">
+                <img href="/administrativo/garanhoes/lista"
+                    src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png"
+                    class="d-inline-block align-top" alt="Logo">
+            </a>
+
+            <!-- Botão do menu responsivo -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+                aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Div vazia para centralizar o menu de navegação -->
+            <div class="d-none d-lg-flex flex-grow-1"></div>
+
+            <!-- Conteúdo centralizado -->
+            <div class="collapse navbar-collapse justify-content-center flex-grow-0" id="conteudoNavbarSuportado">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/administrativo">Ir para a página inicial <span
+                                class="sr-only">(página atual)</span></a>
+                    </li>
+                    <!--<li class="nav-item">
+	                    <a class="nav-link" href="#">Link</a>
+	                </li>
+	                <li class="nav-item dropdown">
+	                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                        Dropdown
+	                    </a>
+	                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	                        <a class="dropdown-item" href="#">Ação</a>
+	                        <a class="dropdown-item" href="#">Outra ação</a>
+	                        <div class="dropdown-divider"></div>
+	                        <a class="dropdown-item" href="#">Algo mais aqui</a>
+	                    </div>-->
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Campo de pesquisa à direita
+	        <form class="form-inline my-2 my-lg-0">
+	            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+	            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
+	        </form>-->
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="form-container" style="width: 100%; max-width: 900px;">
+            <form action="/administrativo/movimentacoes/editarMovimentacao" th:object="${movimentacao}" method="POST"
+                id="movimentacaoForm">
+
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <a href="/administrativo/movimentacoes/listar" class="custom-link">
+                        <i class="fa-regular fa-circle-left"></i>
+                    </a>
+                    <h2 class="m-0 text-center flex-grow-1">Editar Movimentações de Sêmen</h2>
+                    <div style="width: 100px;"></div> <!-- Espaçador para alinhamento -->
+                </div>
+
+                <div class="custom-divider"></div>
+
+
+
+                <div class="form-row">
+                    <div class="col-12 col-md-6">
+                        <label for="nome_garanhao" class="label-info">Nome do Garanhão</label>
+                        <input type="text" id="nome_garanhao" th:field="*{nome_garanhao}" class="form-control"
+                            readonly />
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="destino" class="label-info">Destino</label>
+                        <div id="destino" class="form-control">
+                            <label>
+                                <input required type="radio" name="destino" value="venda"
+                                    th:checked="${movimentacao.destino == 'venda'}" onclick="mostrarCampoAdicional()">
+                                Venda
+                            </label>
+
+                            <label>
+                                <input required type="radio" name="destino" value="uso_interno"
+                                    th:checked="${movimentacao.destino == 'uso_interno'}"
+                                    onclick="mostrarCampoAdicional()"> Uso Interno
+                            </label>
+
+                            <label>
+                                <input required type="radio" name="destino" value="transferencia"
+                                    th:checked="${movimentacao.destino == 'transferencia'}"
+                                    onclick="mostrarCampoAdicional()"> Transferência
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botijão, Data da Movimentação Inputs -->
+                <div class="form-row">
+                    <div class="col-12 col-md-6">
+                        <label for="botijao" class="label-info">Número do Botijão</label>
+                        <input type="text" id="botijao" th:field="*{botijao}" class="form-control" readonly />
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div>
+                            <label for="info-adicional" class="label-info">Informação Adicional</label>
+                            <input required type="text" th:field="*{endereco}" id="info-adicional" class="form-control"
+                                placeholder="Preencha as informações">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nome do Profissional and Escolha de Profissional -->
+                <div class="form-row">
+                    <div class="col-12 col-md-6">
+                        <label for="caneca" class="label-info">Número da Caneca</label>
+                        <input type="text" id="caneca" th:field="*{caneca}" class="form-control" readonly />
+                    </div>
+
+                    <!-- Escolha do Profissional -->
+                    <div class="col-12 col-md-6">
+                        <label for="profissional" class="label-info">Escolha um Profissional</label>
+                        <div id="profissional" required class="form-control">
+                            <label>
+                                <input required type="radio" name="profissional" value="Motoboy"
+                                    th:checked="${movimentacao.profissional == 'Motoboy'}"
+                                    onclick="atualizarCamposProfissional()"> Motoboy
+                            </label>
+                            <label>
+                                <input required type="radio" name="profissional" value="Veterinário"
+                                    th:checked="${movimentacao.profissional == 'Veterinário'}"
+                                    onclick="atualizarCamposProfissional()"> Veterinário
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caneca Input -->
+                <div class="form-row">
+                    <div class="col-12 col-md-6">
+                        <label for="cor_palheta" class="label-info">Cor da Palheta</label>
+                        <input type="text" id="cor_palheta" th:field="*{cor_palheta}" class="form-control" readonly />
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label for="nome_profissional" class="label-info">Nome do Profissional</label>
+                        <input type="text" required id="nome_profissional" th:field="*{nome_profissional}"
+                            class="form-control" />
+                    </div>
+                </div>
+
+                <!-- Quantidade de Palhetas -->
+                <div class="form-row">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group d-flex align-items-center">
+                            <label for="quantidade" class="label-info mb-0">Quantidade de Palhetas</label>
+                            <!--<div id="saldo-info" style="margin-left: 131px; font-size: 13px">
+                                Restam <span id="saldo-atual-palhetas">0</span> palhetas
+                            </div>-->
+                        </div>
+                        <input type="number" required id="quantidade" th:field="*{quantidade}" class="form-control" />
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label for="identificador_profissional" class="label-info">Identificador do Profissional</label>
+                        <input type="text" id="identificador_profissional" th:field="*{identificador_profissional}"
+                            class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-12 col-md-6">
+                        <label for="data_movimentacao" class="label-info">Data da Movimentação</label>
+                        <input type="text" id="data_movimentacao" th:field="*{data_movimentacao}" readonly="true"
+                            class="form-control" />
+                    </div>
+                </div>
+
+                <input type="hidden" th:field="*{id_movimentacao}" />
+
+                <div class="custom-divider"></div>
+
+                <div class="d-flex justify-content-between mt-3">
+
+
+                    <a th:href="@{/removerMovimentacao/{id_movimentacao}(id_movimentacao=${movimentacao.id_movimentacao})}"
+                        class="btn btn-danger btn-sm"
+                        onclick="return confirm('Tem certeza que deseja excluir esta movimentação?');">
+                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i> Excluir
+                    </a>
+
+
+                    <a href="#" id="btnImprimir" class="btn btn-dark btn-sm" onclick="imprimirFormulario()">
+                        <i class="fa-solid fa-print"></i> Imprimir
+                    </a>
+
+                    <button type="submit" class="btn btn-light btn-sm text-white">
+                        <i class="fa-solid fa-plus"></i> Editar Movimentação
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="watermark">LucasSales@2024</div>
+
+    <!-- Scripts JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Inicializa o Select2 para o campo de seleção de garanhão
+            $('#garanhaoSelect').select2();
+
+            // Evento de alteração do campo "Garanhão"
+            $('#garanhaoSelect').on('change', function () {
+                var idGaranhao = $(this).val();
+
+                // Verifica se um garanhão foi selecionado
+                if (idGaranhao) {
+                    // Faz uma requisição para obter os dados do garanhão selecionado
+                    $.ajax({
+                        url: "/administrativo/garanhoes/dados/" + idGaranhao, // URL para obter os dados do garanhão
+                        method: "GET",
+                        success: function (data) {
+                            // Preenche os campos com os dados retornados
+                            $("#botijao").val(data.botijao); // Preenche o campo Botijão
+                            $("#caneca").val(data.caneca);   // Preenche o campo Caneca
+                            $("#cor_palheta").val(data.cor_palheta); // Preenche o campo Cor da Palheta
+                            $("#saldo-atual-palhetas").text(data.saldo_atual_palhetas); // Atualiza o saldo restante
+                            $("#quantidade").attr('max', data.saldo_atual_palhetas); // Define o máximo de palhetas baseado no saldo
+                        }
+                    });
+                } else {
+                    // Limpa os campos se nenhum garanhão for selecionado
+                    $("#botijao, #caneca, #cor_palheta").val("");
+                    $("#saldo-atual-palhetas").text("0");
+                    $("#quantidade").attr('max', 0);
+                }
+            });
+        });
+        // Atualiza o valor máximo permitido no campo de input
+        const quantidadeInput = document.getElementById('quantidade');
+        const saldoAtualSpan = document.getElementById('saldo-atual-palhetas');
+
+        // Função para atualizar o limite do campo de quantidade
+        function atualizarMaximo() {
+            const saldoAtual = parseInt(saldoAtualSpan.textContent, 10);
+            quantidadeInput.max = saldoAtual; // Define o valor máximo permitido
+
+        }
+
+        // Validação ao mudar o valor
+        quantidadeInput.addEventListener('input', (event) => {
+            const saldoAtual = parseInt(saldoAtualSpan.textContent, 10);
+            const valorDigitado = parseInt(event.target.value, 10);
+
+            if (valorDigitado > saldoAtual) {
+                // Exibe um alerta ou corrige o valor automaticamente
+                event.target.value = saldoAtual;
+                alert('Você não pode selecionar mais do que o saldo restante.');
+            }
+        });
+
+        function mostrarCampoAdicional() {
+            // Obtém o valor do destino selecionado
+            const destinoSelecionado = document.querySelector('input[name="destino"]:checked').value;
+
+            // Seleciona o campo adicional
+            const campoAdicional = document.getElementById("campo-adicional");
+
+            // Exibe o campo adicional para qualquer destino selecionado
+            if (destinoSelecionado === "venda" || destinoSelecionado === "uso_interno" || destinoSelecionado === "transferencia") {
+                campoAdicional.style.display = "block"; // Mostra o campo adicional
+            } else {
+                campoAdicional.style.display = "none"; // Oculta o campo adicional
+            }
+        }
+        $(document).ready(function () {
+            // Atualiza os campos quando o tipo de profissional for alterado
+            function atualizarCamposProfissional() {
+                const profissional = document.querySelector('input[name="profissional"]:checked').value;
+                const nomeProfissional = document.getElementById("nome_profissional");
+                const identificadorProfissional = document.getElementById("identificador_profissional");
+
+                // Exibe os campos e atualiza os placeholders e máscaras conforme o tipo de profissional selecionado
+                if (profissional === "Veterinário") {
+                    nomeProfissional.placeholder = "Nome do Veterinário";
+                    identificadorProfissional.placeholder = "CRM do Veterinário";
+
+                    identificadorProfissional.setAttribute('maxlength', '7');
+                    identificadorProfissional.setAttribute('pattern', '[A-Za-z]{2}-[0-9]{5,6}');
+                    identificadorProfissional.title = "Digite o CRM do Veterinário";
+
+                    // Remove qualquer máscara anterior
+                    $('#identificador_profissional').unmask();
+
+                    // Aplica a máscara de CRM (duas letras seguidas de números)
+                    $('#identificador_profissional').mask('AA-000000', {
+                        translation: {
+                            'A': {
+                                pattern: /[A-Za-z]/, // Aceita letras (maiúsculas ou minúsculas)
+                                optional: false
+                            }
+                        }
+                    });
+
+                } else if (profissional === "Motoboy") {
+                    nomeProfissional.placeholder = "Nome do Motoboy";
+                    identificadorProfissional.placeholder = "CPF do Motoboy";
+
+                    identificadorProfissional.setAttribute('maxlength', '14'); // 14 caracteres com a máscara
+                    identificadorProfissional.setAttribute('pattern', '[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}'); // Atualizado para incluir pontos e hífen
+                    identificadorProfissional.title = "Digite o CPF do Motoboy";
+
+                    // Remove qualquer máscara anterior
+                    $('#identificador_profissional').unmask();
+
+                    // Aplica a máscara de CPF com pontuação
+                    $('#identificador_profissional').mask('000.000.000-00', { reverse: true });
+
+                } else {
+                    nomeProfissional.placeholder = "";
+                    identificadorProfissional.placeholder = "";
+                    identificadorProfissional.value = ""; // Limpa o campo se nada for selecionado
+                    // Remove a máscara
+                    $('#identificador_profissional').unmask();
+                }
+            }
+
+            // Adiciona a função de mudança de seleção ao clicar nos botões de escolha
+            $('input[name="profissional"]').on('change', atualizarCamposProfissional);
+
+            // Inicializa a máscara para quando a página carregar, sem limpar o valor existente
+            const identificadorProfissional = document.getElementById("identificador_profissional");
+            const valorInicial = identificadorProfissional.value;
+
+            atualizarCamposProfissional();
+
+            // Caso o campo seja limpo e o usuário comece a digitar novamente, a máscara deve ser reaplicada
+            $('#identificador_profissional').on('input', function () {
+                const profissional = document.querySelector('input[name="profissional"]:checked').value;
+
+                if (profissional === "Veterinário" && !$(this).val()) {
+                    $(this).mask('AA000000', {
+                        translation: {
+                            'A': {
+                                pattern: /[A-Za-z]/,
+                                optional: false
+                            }
+                        }
+                    });
+                } else if (profissional === "Motoboy" && !$(this).val()) {
+                    $(this).mask('000.000.000-00', { reverse: true });
+                }
+            });
+
+            // Restaurar o valor inicial, se existir
+            if (valorInicial) {
+                identificadorProfissional.value = valorInicial;
+            }
+        });
+
+        function imprimirFormulario() {
+            // Captura os valores dos campos do formulário
+            const nomeGaranhao = document.getElementById('nome_garanhao').value;
+            const botijao = document.getElementById('botijao').value;
+            const caneca = document.getElementById('caneca').value;
+            const corPalheta = document.getElementById('cor_palheta').value;
+            const quantidade = document.getElementById('quantidade').value;
+            const destino = document.querySelector('input[name="destino"]:checked').value; // Captura o valor do radio button
+            const infoAdicional = document.getElementById('info-adicional').value;
+            const dataMovimentacao = document.getElementById('data_movimentacao').value;
+            const profissional = document.querySelector('input[name="profissional"]:checked').value;
+            const nomeProfissional = document.getElementById('nome_profissional').value;
+            const identificadorProfissional = document.getElementById('identificador_profissional').value;
+
+            // Abre uma nova janela para impressão
+            const janelaImpressao = window.open('', '', 'width=800,height=600');
+
+            // Adiciona o conteúdo formatado para a impressão
+            janelaImpressao.document.write(`
+				<html>
+				    <head>
+				        <title>Impressão - Haras Rosa Mystica</title>
+				        <style>
+				            /* Estilo geral */
+				            body {
+				                font-family: 'Arial', sans-serif;
+				                margin: 0;
+				                padding: 0;
+				                color: #000;
+				                background-color: #fff;
+				            }
+
+				            /* Cabeçalho */
+				            .header {
+				                display: flex;
+				                align-items: center;
+				                justify-content: space-between;
+				                padding: 20px;
+				                border-bottom: 1px solid #000;
+				            }
+
+				            .header-img img {
+				                width: 120px;
+				                height: auto;
+				            }
+
+				            .header-title {
+				                font-size: 28px;
+				                font-weight: bold;
+				                text-transform: uppercase;
+				                color: #000;
+				                margin: 0 20px;
+				                text-align: center;
+				                flex-grow: 1;
+				            }
+
+				            /* Conteúdo */
+				            .content {
+				                width: 80%;
+				                margin: 20px auto;
+				            }
+
+				            table {
+				                width: 100%;
+				                border-collapse: collapse;
+				                margin: 20px auto;
+				                font-size: 14px;
+				                color: #000;
+				            }
+
+				            th, td {
+				                border: 1px solid #000;
+				                padding: 8px;
+				                text-align: left;
+				            }
+
+				            th {
+				                font-weight: bold;
+				                text-transform: uppercase;
+				            }
+
+				            /* Seção extra */
+				            .extra-section {
+				                margin-top: 20px;
+				                font-size: 14px;
+				                line-height: 1.8;
+				            }
+
+				            .extra-line {
+				                margin-bottom: 10px;
+				            }
+
+				            .extra-line span {
+				                display: inline-block;
+				                width: 150px;
+				                font-weight: bold;
+				            }
+
+				            /* Rodapé */
+				            .footer {
+				                text-align: center;
+				                font-size: 12px;
+				                color: #000;
+				                padding: 10px 0;
+				                border-top: 1px solid #000;
+				                position: relative;
+				            }
+
+				            .signature {
+				                display: flex;
+				                justify-content: space-between;
+				                align-items: center;
+				                gap: 20px;
+				                font-size: 12px;
+				            }
+
+				            .signature-block .label {
+				                text-align: center;
+				            }
+
+				            .label {
+				                margin-bottom: 20px;
+				            }
+
+				            /* Configurações para impressão */
+				            @media print {
+				                .footer {
+				                    position: fixed;
+				                    bottom: 0;
+				                    width: 100%;
+				                    border: none;
+				                }
+
+				                .header, .content {
+				                    page-break-inside: avoid;
+				                }
+				            }
+				        </style>
+				    </head>
+				    <body>
+				        <div class="header">
+				            <div class="header-img">
+				                <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_519,h_175/https://www.harasrosamystica.com.br/wp-content/uploads/2021/07/Logo-HRM-site.png" alt="Logo do Haras Rosa Mystica">
+				            </div>
+				            <h2 class="header-title">Detalhes da Movimentação</h2>
+				        </div>
+
+				        <div class="content">
+				            <table>
+				                <tr>
+				                    <td>Nome do Garanhão:</td>
+				                    <td>${nomeGaranhao}</td>
+				                </tr>
+				                <tr>
+				                    <td>Número do Botijão:</td>
+				                    <td>${botijao}</td>
+				                </tr>
+				                <tr>
+				                    <td>Número da Caneca:</td>
+				                    <td>${caneca}</td>
+				                </tr>
+				                <tr>
+				                    <td>Cor da Palheta:</td>
+				                    <td>${corPalheta}</td>
+				                </tr>
+				                <tr>
+				                    <td>Quantidade de Palhetas:</td>
+				                    <td>${quantidade}</td>
+				                </tr>
+				                <tr>
+				                    <td>Destino:</td>
+				                    <td>${destino}</td>
+				                </tr>
+				                <tr>
+				                    <td>Informação Adicional:</td>
+				                    <td>${infoAdicional}</td>
+				                </tr>
+				                <tr>
+				                    <td>Data da Movimentação:</td>
+				                    <td>${dataMovimentacao}</td>
+				                </tr>
+				                <tr>
+				                    <td>Profissional:</td>
+				                    <td>${profissional}</td>
+				                </tr>
+				                <tr>
+				                    <td>Nome do Profissional:</td>
+				                    <td>${nomeProfissional}</td>
+				                </tr>
+				                <tr>
+				                    <td>Identificador do Profissional:</td>
+				                    <td>${identificadorProfissional}</td>
+				                </tr>
+				            </table>
+
+				            <div class="extra-section">
+				                ${destino === 'venda' || destino === 'transferencia' ? `
+				                <div class="extra-line"><span>Observação:</span> ______________________________________________________</div>
+				                <div class="extra-line"><span></span> ______________________________________________________</div>
+				                <div class="extra-line"><span></span> ______________________________________________________</div>
+				                <div class="extra-line"><span></span> ______________________________________________________</div>
+				                <div class="extra-line"><span></span> ______________________________________________________</div>
+				                ` : ''}
+				            </div>
+				        </div>
+
+				        <div class="footer">
+				            <div class="signature">
+				                <div class="signature-block">
+				                    <div class="label">___________________________________________</div>
+				                    <div class="label">Assinatura do veterinário da reprodução</div>
+				                </div>
+				                <div class="signature-block">
+				                    <div class="label">___________________________________________</div>
+				                    <div class="label">
+				                        ${destino === 'venda' || destino === 'transferencia'
+                    ? 'Assinatura do responsável pela retirada'
+                    : 'Assinatura do responsável pela inseminação'}
+				                    </div>
+				                </div>
+				            </div>
+				            <div class="footer-text">
+				                © 2024 Haras Rosa Mystica - Todos os direitos reservados.
+				            </div>
+				        </div>
+				    </body>
+				</html>
+
+			    `);
+
+            // Fecha o conteúdo e prepara para impressão
+            janelaImpressao.document.close();
+            janelaImpressao.focus();
+
+            // Aguarda meio segundo antes de iniciar a impressão
+            setTimeout(function () {
+                janelaImpressao.print();
+                janelaImpressao.close();
+            }, 500);
+        }
+
+
+    </script>
+</body>
+
+</html>
